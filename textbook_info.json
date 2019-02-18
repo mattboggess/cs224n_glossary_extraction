@@ -1,0 +1,67 @@
+{
+	"open_stax_biology_2e": {
+		"chapter_start_pattern": ["style", ".*font-size:46px.*"],
+		"chapter_end_pattern": ["text", ".*KEY TERMS.*"],
+		"key_terms_start_pattern": ["text", ".*KEY TERMS.*"],
+		"key_terms_end_pattern": ["text", ".*CHAPTER SUMMARY.*"],
+		"chapter_text_pattern": ["style", ".*'LiberationSans.*1[1-2]px.*"],
+		"key_term_pattern": ["style", ".*'LiberationSans-Bold.*12px.*"]
+	},
+	"open_stax_anatomy_physiology": {
+		"chapter_start_pattern": ["style", ".*font-size:46px.*"],
+		"chapter_end_pattern": ["text", ".*KEY TERMS.*"],
+		"key_terms_start_pattern": ["text", ".*KEY TERMS.*"],
+		"key_terms_end_pattern": ["text", ".*CHAPTER REVIEW.*"],
+		"chapter_text_pattern": ["style", ".*'LiberationSerif.*12px.*"],
+		"key_term_pattern": ["style", ".*'LiberationSans-Bold.*12px.*"]
+	},
+	"open_stax_astronomy": {
+		"chapter_start_pattern": ["text", ".*Chapter Outline.*"],
+		"chapter_end_pattern": ["text", ".*KEY TERMS.*"],
+		"key_terms_start_pattern": ["text", ".*KEY TERMS.*"],
+		"key_terms_end_pattern": ["text", ".*SUMMARY.*"],
+		"chapter_text_pattern": ["style", ".*'NotoSans.*1[2-3]px.*"],
+		"key_term_pattern": ["style", ".*'NotoSans-Bold.*13px.*"]
+	},
+	"open_stax_chemistry_2e": {
+		"chapter_start_pattern": ["text", ".*Chapter Outline.*"],
+		"chapter_end_pattern": ["text", ".*Key Terms.*"],
+		"key_terms_start_pattern": ["text", ".*Key Terms.*"],
+		"key_terms_end_pattern": ["text", ".*Key Equations.*"],
+		"chapter_text_pattern": ["style", ".*'LiberationSerif.*1[2-3]px.*"],
+		"key_term_pattern": ["style", ".*'LiberationSerif-Bold.*13px.*"]
+	},
+	"open_stax_university_physics_v1": {
+		"chapter_start_pattern": ["text", ".*Chapter Outline.*"],
+		"chapter_end_pattern": ["text", ".*KEY TERMS.*"],
+		"key_terms_start_pattern": ["text", ".*KEY TERMS.*"],
+		"key_terms_end_pattern": ["text", ".*KEY EQUATIONS.*"],
+		"chapter_text_pattern": ["style", ".*'LiberationSerif.*12px.*"],
+		"key_term_pattern": ["style", ".*'LiberationSans-Bold.*12px.*"]
+	},
+	"open_stax_university_physics_v2": {
+		"chapter_start_pattern": ["text", ".*Chapter Outline.*"],
+		"chapter_end_pattern": ["text", ".*KEY TERMS.*"],
+		"key_terms_start_pattern": ["text", ".*KEY TERMS.*"],
+		"key_terms_end_pattern": ["text", ".*KEY EQUATIONS.*"],
+		"chapter_text_pattern": ["style", ".*'LiberationSerif.*12px.*"],
+		"key_term_pattern": ["style", ".*'LiberationSans-Bold.*12px.*"]
+	},
+	"open_stax_university_physics_v3": {
+		"chapter_start_pattern": ["text", ".*Chapter Outline.*"],
+		"chapter_end_pattern": ["text", ".*KEY TERMS.*"],
+		"key_terms_start_pattern": ["text", ".*KEY TERMS.*"],
+		"key_terms_end_pattern": ["text", ".*KEY EQUATIONS.*"],
+		"chapter_text_pattern": ["style", ".*'LiberationSerif.*12px.*"],
+		"key_term_pattern": ["style", ".*'LiberationSans-Bold.*12px.*"]
+	},
+	"open_stax_microbiology": {
+		"chapter_start_pattern": ["text", ".*Chapter Outline.*"],
+		"chapter_end_pattern": ["text", ".*SUMMARY.*"],
+		"key_terms_start_pattern": ["text", ".*Glossary.*"],
+		"key_terms_end_pattern": ["text", ".*Answer Key.*"],
+		"chapter_text_pattern": ["style", ".*'LiberationSerif.*1[2-3]px.*"],
+		"key_term_pattern": ["style", ".*'LiberationSerif-Bold.*8px.*"]
+	}
+}
+
