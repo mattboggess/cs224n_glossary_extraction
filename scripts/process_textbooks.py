@@ -4,17 +4,7 @@ import json
 import re
 import os
 from bs4 import BeautifulSoup
-
-TEXTBOOKS = ('open_stax_anatomy_physiology',
-             'open_stax_chemistry_2e',
-             'open_stax_astronomy',
-             'open_stax_biology_2e',
-             'open_stax_concepts_of_biology',
-             'open_stax_university_physics_v1',
-             'open_stax_university_physics_v2',
-             'open_stax_university_physics_v3')
-
-TEXTBOOKS = ('open_stax_biology_2e',)
+from collections import defaultdict
 
 def match_pattern(elem, pattern):
     re_pattern = re.compile(pattern[1])
@@ -34,6 +24,8 @@ def get_text_between_elements(spans, start_pattern, end_pattern, text_pattern):
             else:
                 if match_pattern(span, text_pattern):
                     text.append(span.text)
+                else:
+                    text.append('\n')
         else:
             if match_pattern(span, start_pattern):
                 between = True
@@ -43,49 +35,95 @@ def get_text_between_elements(spans, start_pattern, end_pattern, text_pattern):
 
 def extract_sentences(soup, pattern_info):
 
-
+    # extract chapter text
     spans = soup.find_all('span')
-    #pattern_info = textbook_info[textbook]
-    #chapter_pattern = re.compile('.*font-size:46px.*')
-    #chapter_starts = soup.find_all('span', style=chapter_pattern)
-    #key_term_starts = [p.parent for p in soup.find_all(text=)]
-
-    #text_style = re.compile(".*'LiberationSans.*1[1-2]px.*")
-    #text_pattern = ('style', text_style)
-    #start_pattern = ('style', chapter_pattern)
-    #end_pattern = ('text', re.compile('.*KEY TERMS.*'))
     text = get_text_between_elements(spans,
                                      pattern_info['chapter_start_pattern'],
                                      pattern_info['chapter_end_pattern'],
                                      pattern_info['chapter_text_pattern'])
-
     text = ' '.join(text)
     text = text.replace('\n', ' ')
-    # remove empty parens, short sentences, ...
+
+    # remove empty parens (missing figure references usually)
+    text = re.sub('\(\s*\)', '', text)
+
+    # split sentences, remove short < 3 words
     sentences = sent_tokenize(text)
+    sentences = [sent for sent in sentences if len(word_tokenize(sent)) > 3]
+
     return sentences
 
 
 def extract_key_terms(soup, pattern_info):
 
     spans = soup.find_all('span')
-
-    #text_style = re.compile(".*'LiberationSans-Bold.*12px.*")
-    #text_pattern = ('style', text_style)
-    #start_pattern = ('text', re.compile('.*KEY TERMS.*'))
-    #end_pattern = ('text', re.compile('.*CHAPTER SUMMARY.*'))
-
     terms = get_text_between_elements(spans,
                                       pattern_info['key_terms_start_pattern'],
                                       pattern_info['key_terms_end_pattern'],
                                       pattern_info['key_term_pattern'])
+    terms = ''.join(terms).split('\n')
 
-    terms = [term.replace('\n', '') for term in terms]
+    # handle parens
+    new_terms = []
+    for term in terms:
+        term = re.split('\(|\)', term)
+        if len(term) <= 2:
+            term = term[0].strip()
+        else:
+            term = term[0] + term[2] + '; ' + \
+                   term[1] + term[2]
 
-    # handle abbreviations here
-    return terms
+        new_terms.append(term)
+
+    new_terms = [term for term in new_terms if len(term) > 1]
+
+    return new_terms
 
 
+def tag_sentence(sentence, term, tags):
+    count = 0
+    for ix in range(len(sentence) - len(term)):
+        if sentence[ix:ix+len(term)] == term:
+            count += 1
+            if len(term) == 1:
+                tags[ix] = 'S'
+            else:
+                for i in range(len(term)):
+                    if i == 0:
+                        tags[ix + i] = 'B'
+                    elif i == len(term) - 1:
+                        tags[ix + i] = 'E'
+                    else:
+                        tags[ix + i] = 'I'
+    return tags, count
+
+
+def tag_corpus(sentences, key_terms):
+    term_counts = defaultdict(lambda: 0)
+    corpus_tags = []
+
+    for i, sentence in enumerate(sentences[1000:]):
+        if i % 100 == 0: print(i)
+
+        sentence = word_tokenize(sentence.lower())
+        sentence_tags = ['O'] * len(sentence)
+
+        for kt in key_terms:
+
+            # iterate through all representations of a term
+            terms = kt.lower().split(';')
+            for term in terms:
+
+                term = word_tokenize(term)
+
+                sentence_tags, term_count = tag_sentence(sentence, term,
+                                                         sentence_tags)
+
+                term_counts[kt] += term_count
+
+        corpus_tags.append(sentence_tags)
+
+    return corpus_tags, term_counts
 
 
 if __name__ == "__main__":
@@ -102,8 +140,8 @@ if __name__ == "__main__":
 
         # convert pdf to html using pdfminer
         print('Converting PDF to HTML')
-        input_dir = 'data/textbooks_pdf'
-        output_dir = 'data/textbooks_html'
+        input_dir = '../data/textbooks_pdf'
+        output_dir = '../data/textbooks_html'
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         if not os.path.exists('%s/%s.html' % (output_dir, textbook)):
@@ -112,8 +150,8 @@ if __name__ == "__main__":
                   '-t', 'html'])
 
         # load html for processing
-        input_dir = 'data/textbooks_html'
-        output_dir = 'data/textbooks_extracted'
+        input_dir = '../data/textbooks_html'
+        output_dir = '../data/textbooks_extracted'
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
@@ -136,8 +174,14 @@ if __name__ == "__main__":
             for term in key_terms:
                 f.write('%s\n' % term)
 
-        print('Creating Key Term Sentence Labels')
+        print('Creating Key Term Sentence Tags')
         # implement
+        labels, counts = tag_corpus(sentences, key_terms)
+        with open('%s/%s_sentence_tags.txt' % (output_dir, textbook), 'w') as f:
+            for label in labels:
+                f.write('%s\n' % ' '.join(label))
+        print(counts)
+        break
 
 
     # read in and process text
