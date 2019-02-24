@@ -32,4 +32,34 @@ def test_tag_sentence():
     assert tags1 == ['O', 'O', 'O', 'S', 'O', 'O', 'S', 'O', 'O']
     assert counts == 2
 
+    # test len>2 term
+    sentence = 'Fatty acid chains are important.'
+    term1 = 'fatty acid chains'
+    sentence = word_tokenize(sentence.lower())
+    term1 = word_tokenize(term1)
+    tags = ['O'] * len(sentence)
+
+    tags1, counts = tag_sentence(sentence, term1, tags)
+    assert tags1 == ['B', 'I', 'E', 'O', 'O', 'O']
+    assert counts == 1
+
+    # test nested terms
+    sentence = 'Applied science is awesome.'
+    term1 = 'science'
+    term2 = 'applied science'
+    sentence = word_tokenize(sentence.lower())
+    term1 = word_tokenize(term1)
+    term2 = word_tokenize(term2)
+    tags_orig = ['O'] * len(sentence)
+
+    out_tags, counts = tag_sentence(sentence, term1, tags_orig)
+    out_tags, counts = tag_sentence(sentence, term2, out_tags)
+    assert out_tags == ['B', 'E', 'O', 'O', 'O']
+    assert counts == 1
+
+    out_tags, counts = tag_sentence(sentence, term2, tags_orig)
+    out_tags, counts = tag_sentence(sentence, term1, out_tags)
+    assert out_tags == ['B', 'E', 'O', 'O', 'O']
+    assert counts == 1
+
 

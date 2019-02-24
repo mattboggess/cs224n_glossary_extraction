@@ -3,8 +3,10 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 import json
 import re
 import os
+import time
 from bs4 import BeautifulSoup
 from collections import defaultdict
+
 
 def match_pattern(elem, pattern):
     re_pattern = re.compile(pattern[1])
@@ -12,6 +14,7 @@ def match_pattern(elem, pattern):
         return re_pattern.match(elem.text)
     else:
         return re_pattern.match(elem.attrs[pattern[0]])
+
 
 def get_text_between_elements(spans, start_pattern, end_pattern, text_pattern):
 
@@ -86,7 +89,9 @@ def tag_sentence(sentence, term, tags):
         if sentence[ix:ix+len(term)] == term:
             count += 1
             if len(term) == 1:
-                tags[ix] = 'S'
+                # only put singleton if not subset of phrase
+                if tags[ix] == 'O':
+                    tags[ix] = 'S'
             else:
                 for i in range(len(term)):
                     if i == 0:
@@ -102,7 +107,7 @@ def tag_corpus(sentences, key_terms):
     term_counts = defaultdict(lambda: 0)
     corpus_tags = []
 
-    for i, sentence in enumerate(sentences[1000:]):
+    for i, sentence in enumerate(sentences):
         if i % 100 == 0: print(i)
 
         sentence = word_tokenize(sentence.lower())
@@ -113,12 +118,9 @@ def tag_corpus(sentences, key_terms):
             # iterate through all representations of a term
             terms = kt.lower().split(';')
             for term in terms:
-
                 term = word_tokenize(term)
-
                 sentence_tags, term_count = tag_sentence(sentence, term,
                                                          sentence_tags)
-
                 term_counts[kt] += term_count
 
         corpus_tags.append(sentence_tags)
@@ -138,13 +140,14 @@ if __name__ == "__main__":
     for textbook in textbooks:
         print('Processing Textbook: %s' % textbook)
 
+        start_time = time.time()
         # convert pdf to html using pdfminer
-        print('Converting PDF to HTML')
         input_dir = '../data/textbooks_pdf'
         output_dir = '../data/textbooks_html'
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         if not os.path.exists('%s/%s.html' % (output_dir, textbook)):
+            print('Converting PDF to HTML')
             call(['pdf2txt.py', '%s/%s.pdf' % (input_dir, textbook),
                   '-o', '%s/%s.html' % (output_dir, textbook),
                   '-t', 'html'])
@@ -174,14 +177,18 @@ if __name__ == "__main__":
             for term in key_terms:
                 f.write('%s\n' % term)
 
-        print('Creating Key Term Sentence Tags')
-        # implement
-        labels, counts = tag_corpus(sentences, key_terms)
-        with open('%s/%s_sentence_tags.txt' % (output_dir, textbook), 'w') as f:
-            for label in labels:
-                f.write('%s\n' % ' '.join(label))
-        print(counts)
-        break
+        if not os.path.exists('%s/%s_sentence_tags.txt' % (output_dir,
+                                                           textbook)):
+            print('Tagging Sentences')
+            # implement
+            labels, counts = tag_corpus(sentences, key_terms)
+
+            with open('%s/%s_sentence_tags.txt' % (output_dir, textbook), 'w') as f:
+                for label in labels:
+                    f.write('%s\n' % ' '.join(label))
+
+            with open('%s/%s_key_term_counts.json' % (output_dir, textbook), 'w') as f:
+                json.dump(counts, f)
 
 
     # read in and process text
