@@ -31,20 +31,20 @@ for book in textbooks:
 
     with open(tfname, "r") as fin:
         data = fin.read()
+        i = 0
         for sent in data.split("\n"):
             if re.search("^$", sent):
                 continue
             tags.append(sent)
-    break
 
 print (len(sentences))
 print (len(tags))
 
-assert(len(sentences) == len(tags))
-
 ## sanity check
+assert(len(sentences) == len(tags))
 for sent, tag in zip(sentences, tags):
-    print (len(sent), len(tag))
+    sent = sent.split(" ")
+    tag = tag.split(" ")
     assert(len(sent) == len(tag))
             
 ## re-shuffle and split 80-20%
