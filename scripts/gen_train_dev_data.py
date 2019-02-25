@@ -5,6 +5,7 @@ import nltk
 import random
 import numpy as np
 import re
+import os
 
 dataDir = "../data"
 textbooks = ("open_stax_anatomy_physiology",
@@ -56,6 +57,13 @@ dev_size = 0.2
 length = len(sentences)
 train_size = int(length*dev_size)
 debug_size = 10
+
+for x in ("full", "small"):
+    for y in ("train", "dev", "test"):
+        if not os.path.exists(dataDir + "/" + x):
+            os.makedirs(dataDir + "/" + x + "/" + y)
+        elif not os.path.exists(dataDir + "/" + x + "/" + y):
+            os.mkdir(dataDir + "/" + x + "/" + y)
 
 with open(dataDir + "/full/train/sentences.txt", "w") as fout:
     fout.write("\n".join([sentences[x] for x in indices[0:train_size]]))
