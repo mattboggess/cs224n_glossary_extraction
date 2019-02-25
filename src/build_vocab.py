@@ -27,7 +27,7 @@ def save_vocab_to_txt_file(vocab, txt_path):
     with open(txt_path, "w") as f:
         for token in vocab:
             f.write(token + '\n')
-            
+
 
 def save_dict_to_json(d, json_path):
     """Saves dict to json file
@@ -89,8 +89,8 @@ if __name__ == '__main__':
     # Add pad tokens
     if PAD_WORD not in words: words.append(PAD_WORD)
     if PAD_TAG not in tags: tags.append(PAD_TAG)
-    
-    # add word for unknown words 
+
+    # add word for unknown words
     words.append(UNK_WORD)
 
     # Save vocabularies to file

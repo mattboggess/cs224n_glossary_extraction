@@ -39,7 +39,7 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
     for _ in range(num_steps):
         # fetch the next evaluation batch
         data_batch, labels_batch = next(data_iterator)
-        
+
         # compute model output
         output_batch = model(data_batch)
         loss = loss_fn(output_batch, labels_batch)
@@ -51,11 +51,11 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
         # compute all metrics on this batch
         summary_batch = {metric: metrics[metric](output_batch, labels_batch)
                          for metric in metrics}
-        summary_batch['loss'] = loss.data[0]
+        summary_batch['loss'] = loss.item()
         summ.append(summary_batch)
 
     # compute mean of all metrics in summary
-    metrics_mean = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]} 
+    metrics_mean = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]}
     metrics_string = " ; ".join("{}: {:05.3f}".format(k, v) for k, v in metrics_mean.items())
     logging.info("- Eval metrics : " + metrics_string)
     return metrics_mean
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     # Set the random seed for reproducible experiments
     torch.manual_seed(230)
     if params.cuda: torch.cuda.manual_seed(230)
-        
+
     # Get the logger
     utils.set_logger(os.path.join(args.model_dir, 'evaluate.log'))
 
@@ -97,10 +97,10 @@ if __name__ == '__main__':
 
     # Define the model
     model = net.Net(params).cuda() if params.cuda else net.Net(params)
-    
+
     loss_fn = net.loss_fn
     metrics = net.metrics
-    
+
     logging.info("Starting evaluation")
 
     # Reload weights from the saved file
