@@ -55,6 +55,11 @@
 		"chapter_text_pattern": ["style", ".*'LiberationSerif.*12px.*"],
 		"key_term_pattern": ["style", ".*Bold.*"]
 	},
+	"life_biology": {
+		"chapter_start_pattern": ["text", ".*CHAPTER OUTLINE.*"],
+		"chapter_end_pattern": ["text", ".*CHAPTER SUMMARY.*"],
+		"chapter_text_pattern": ["style", ".*1[0-1]px.*"]
+	},
 	"open_stax_microbiology": {
 		"chapter_start_pattern": ["text", ".*Chapter Outline.*"],
 		"chapter_end_pattern": ["text", "Summary"],

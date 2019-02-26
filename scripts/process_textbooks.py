@@ -4,6 +4,7 @@ import json
 import re
 import os
 import time
+import pandas as pd
 from bs4 import BeautifulSoup
 from collections import defaultdict
 
@@ -50,9 +51,14 @@ def extract_sentences(soup, pattern_info):
     # remove empty parens (missing figure references usually)
     text = re.sub('\(\s*\)', '', text)
 
+    # fix multi-line spanning words
+    text = re.sub('-\s+', '', text)
+
     # split sentences, remove short < 3 words
     sentences = sent_tokenize(text)
     sentences = [sent for sent in sentences if len(word_tokenize(sent)) > 3]
+    sentences = [sent for sent in sentences if len(word_tokenize(sent)) < 50]
+    sentences = [' '.join(word_tokenize(sent)) for sent in sentences]
 
     return sentences
 
@@ -82,6 +88,20 @@ def extract_key_terms(soup, pattern_info):
 
     return new_terms
 
+def extract_key_terms_life(input_dir):
+    terms = pd.read_excel('%s/life_biology_glossary.xlsx' % input_dir,
+                          skiprows=4, header=None)
+
+    new_terms = []
+    for i in range(terms.shape[0]):
+        term = terms.iloc[i, 0]
+        acronym = terms.iloc[i, 2]
+        if type(acronym) == str:
+            term = term + ';' + acronym[1:-1]
+        new_terms.append(term)
+
+    return new_terms
+
 
 def tag_sentence(sentence, term, tags):
     count = 0
@@ -108,9 +128,8 @@ def tag_corpus(sentences, key_terms):
     corpus_tags = []
 
     for i, sentence in enumerate(sentences):
-        if i % 100 == 0: print(i)
 
-        sentence = word_tokenize(sentence.lower())
+        sentence = sentence.lower().split(' ')
         sentence_tags = ['O'] * len(sentence)
 
         for kt in key_terms:
@@ -135,6 +154,7 @@ if __name__ == "__main__":
         textbook_info = json.load(f)
     textbooks = list(textbook_info.keys())
 
+    stats = []
 
     # convert textbook pdfs to text for parsing
     for textbook in textbooks:
@@ -171,7 +191,10 @@ if __name__ == "__main__":
 
         # extract and write key terms
         print('Extracting Key Terms')
-        key_terms = extract_key_terms(soup, textbook_info[textbook])
+        if textbook == 'life_biology':
+            key_terms = extract_key_terms_life(input_dir)
+        else:
+            key_terms = extract_key_terms(soup, textbook_info[textbook])
 
         with open('%s/%s_key_terms.txt' % (output_dir, textbook), 'w') as f:
             for term in key_terms:
@@ -183,36 +206,21 @@ if __name__ == "__main__":
             # implement
             labels, counts = tag_corpus(sentences, key_terms)
 
+            # check the term counts
+            num_terms = float(len(counts.keys()))
+            num_zero = len([key for key in counts.keys() if counts[key] == 0])
+            print('%d out of %d terms have 0 matches' % (num_zero, num_terms))
+
             with open('%s/%s_sentence_tags.txt' % (output_dir, textbook), 'w') as f:
                 for label in labels:
                     f.write('%s\n' % ' '.join(label))
 
             with open('%s/%s_key_term_counts.json' % (output_dir, textbook), 'w') as f:
-                json.dump(counts, f)
+                json.dump(counts, f, indent=2)
 
+        stats.append([textbook, len(sentences), len(key_terms)])
 
-    # read in and process text
-#    input_dir = 'data/textbooks_text'
-#    output_dir = 'data/textbooks_processed'
-#    for textbook in TEXTBOOKS:
-#        with open('%s/%s.txt' % (input_dir, textbook)) as f:
-#            text = f.readlines()
-#        text = ' '.join(text)
-#        text = text.replace('\n', '')
-#
-#        # extract sentences
-#        sentences = sent_tokenize(text)
-#        sentences = [sent for sent in sentences if len(sent.split(' ')) >= 5 and not
-#                     sent[0].isdigit()]
-#        with open('%s/%s_sentences.txt' % (output_dir, textbook), 'w') as f:
-#            for sentence in sentences:
-#                f.write('%s\n' % sentence)
-#
-#        print('Extracted %d sentences from %s' % (len(sentences), textbook))
-#        break
-
-
-        # extract key terms
-
-    # create key term labels for each sentence
+    stats.append(['Total', sum(s[1] for s in stats), sum(s[2] for s in stats)])
+    stats = pd.DataFrame(stats, columns=['Textbook', '# Sentences', '# Key Terms'])
+    stats.to_csv('%s/summary_statistics.csv' % output_dir, index=False)
 
