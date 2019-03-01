@@ -6,7 +6,7 @@ import sys
 import torch
 from torch.autograd import Variable
 
-import utils 
+import utils
 
 
 class DataLoader(object):
@@ -27,30 +27,32 @@ class DataLoader(object):
         # loading dataset_params
         json_path = os.path.join(data_dir, 'dataset_params.json')
         assert os.path.isfile(json_path), "No json file found at {}, run build_vocab.py".format(json_path)
-        self.dataset_params = utils.Params(json_path)        
-        
+        self.dataset_params = utils.Params(json_path)
+
         # loading vocab (we require this to map words to their indices)
         vocab_path = os.path.join(data_dir, 'words.txt')
         self.vocab = {}
         with open(vocab_path) as f:
             for i, l in enumerate(f.read().splitlines()):
                 self.vocab[l] = i
-        
+        self.id2vocab = {v: k for k, v in self.vocab.items()}
+
         # setting the indices for UNKnown words and PADding symbols
         self.unk_ind = self.vocab[self.dataset_params.unk_word]
         self.pad_ind = self.vocab[self.dataset_params.pad_word]
-                
+
         # loading tags (we require this to map tags to their indices)
         tags_path = os.path.join(data_dir, 'tags.txt')
         self.tag_map = {}
         with open(tags_path) as f:
             for i, t in enumerate(f.read().splitlines()):
                 self.tag_map[t] = i
+        self.id2tag = {v: k for k, v in self.tag_map.items()}
 
         # adding dataset parameters to param (e.g. vocab size, )
         params.update(json_path)
 
-    def load_sentences_labels(self, sentences_file, labels_file, d):
+    def load_sentences_labels(self, sentences_file, labels_file, terms_file, d):
         """
         Loads sentences and labels from their corresponding files. Maps tokens and tags to their indices and stores
         them in the provided dict d.
@@ -58,26 +60,32 @@ class DataLoader(object):
         Args:
             sentences_file: (string) file with sentences with tokens space-separated
             labels_file: (string) file with NER tags for the sentences in labels_file
+            terms_file: (string) file with key terms for the sentences in sentences_file
             d: (dict) a dictionary in which the loaded data is stored
         """
 
         sentences = []
         labels = []
+        terms = []
 
         with open(sentences_file) as f:
             for sentence in f.read().splitlines():
                 # replace each token by its index if it is in vocab
                 # else use index of UNK_WORD
-                s = [self.vocab[token] if token in self.vocab 
+                s = [self.vocab[token] if token in self.vocab
                      else self.unk_ind
                      for token in sentence.split(' ')]
                 sentences.append(s)
-        
+
         with open(labels_file) as f:
             for sentence in f.read().splitlines():
                 # replace each label by its index
                 l = [self.tag_map[label] for label in sentence.split(' ')]
-                labels.append(l)        
+                labels.append(l)
+
+        with open(terms_file) as f:
+            for term in f.read().splitlines():
+                terms.append(term)
 
         # checks to ensure there is a tag for each token
         assert len(labels) == len(sentences)
@@ -87,6 +95,7 @@ class DataLoader(object):
         # storing sentences and labels in dict d
         d['data'] = sentences
         d['labels'] = labels
+        d['terms'] = terms
         d['size'] = len(sentences)
 
     def load_data(self, types, data_dir):
@@ -102,13 +111,15 @@ class DataLoader(object):
 
         """
         data = {}
-        
+
         for split in ['train', 'val', 'test']:
             if split in types:
                 sentences_file = os.path.join(data_dir, split, "sentences.txt")
                 labels_file = os.path.join(data_dir, split, "labels.txt")
+                terms_file = os.path.join(data_dir, split, "terms.txt")
                 data[split] = {}
-                self.load_sentences_labels(sentences_file, labels_file, data[split])
+                self.load_sentences_labels(sentences_file, labels_file,
+                                           terms_file, data[split])
 
         return data
 
@@ -163,5 +174,5 @@ class DataLoader(object):
 
             # convert them to Variables to record operations in the computational graph
             batch_data, batch_labels = Variable(batch_data), Variable(batch_labels)
-    
+
             yield batch_data, batch_labels

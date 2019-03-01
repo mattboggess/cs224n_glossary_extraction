@@ -12,11 +12,11 @@ from tqdm import trange
 import utils
 import model.net as net
 from model.data_loader import DataLoader
-from evaluate import evaluate
+import evaluate
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data_dir', default='data/small', help="Directory containing the dataset")
+parser.add_argument('--data_dir', default='../data/small', help="Directory containing the dataset")
 parser.add_argument('--model_dir', default='experiments/base_model', help="Directory containing params.json")
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before \
@@ -67,8 +67,11 @@ def train(model, optimizer, loss_fn, data_iterator, metrics, params, num_steps):
             labels_batch = labels_batch.data.cpu().numpy()
 
             # compute all metrics on this batch
-            summary_batch = {metric:metrics[metric](output_batch, labels_batch)
-                             for metric in metrics}
+            summary_batch = {metric: evaluate.compute_ner_metric(output_batch,
+                                                                 labels_batch,
+                                                                 metric,
+                                                                 data_loader)
+                             for metric in metrics['NER Metrics']}
             summary_batch['loss'] = loss.item()
             summ.append(summary_batch)
 
@@ -116,9 +119,10 @@ def train_and_evaluate(model, train_data, val_data, optimizer, loss_fn, metrics,
         # Evaluate for one epoch on validation set
         num_steps = (params.val_size + 1) // params.batch_size
         val_data_iterator = data_loader.data_iterator(val_data, params, shuffle=False)
-        val_metrics = evaluate(model, loss_fn, val_data_iterator, metrics, params, num_steps)
+        val_metrics = evaluate.evaluate(model, loss_fn, val_data_iterator, metrics,
+                                        params, num_steps, val_data['terms'], data_loader)
 
-        val_acc = val_metrics['accuracy']
+        val_acc = val_metrics['Term F1']
         is_best = val_acc >= best_val_acc
 
         # Save weights
@@ -130,7 +134,7 @@ def train_and_evaluate(model, train_data, val_data, optimizer, loss_fn, metrics,
 
         # If best_eval, best_save_path
         if is_best:
-            logging.info("- Found new best accuracy")
+            logging.info("- Found new best Term F1")
             best_val_acc = val_acc
 
             # Save best val metrics in a json file in the model directory
@@ -181,7 +185,7 @@ if __name__ == '__main__':
 
     # fetch loss function and metrics
     loss_fn = net.loss_fn
-    metrics = net.metrics
+    metrics = evaluate.metrics
 
     # Train the model
     logging.info("Starting training for {} epoch(s)".format(params.num_epochs))

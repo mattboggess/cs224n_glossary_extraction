@@ -4,11 +4,11 @@ import os
 import json
 
 dataDir = "../data"
-textbooks = ("open_stax_anatomy_physiology",
+textbooks = ("open_stax_microbiology",
+             "open_stax_anatomy_physiology",
              "open_stax_astronomy",
              "open_stax_biology_2e",
              "open_stax_chemistry_2e",
-             "open_stax_microbiology",
              "open_stax_university_physics_v3",
              "life_biology")
 
@@ -19,6 +19,20 @@ for split in ['train', 'val', 'test']:
     data[split]['sentences'] = []
     data[split]['terms'] = []
     data[split]['labels'] = []
+
+# manually defined small dataset to use for debugging
+# hand-picked to include various types of examples
+small_terms =  ['plague',
+                'World Health Organization ; WHO',
+                'disease',
+                'fungi',
+                'phylogeny',
+                'horizontal gene transfer',
+                'deoxyribonucleic acid ; DNA',
+                'ribonucleic acid ; RNA',
+                'communicable',
+                'leprosy']
+small_indices = [98, 108, 90, 91, 201, 196, 197, 34, 46, 47]
 
 # load in and accumulate the data
 for book in textbooks:
@@ -88,4 +102,7 @@ for x in ("full", "small"):
                 if x == 'full':
                     fout.write('\n'.join([s for s in data[y][data_type]]))
                 else:
-                    fout.write('\n'.join([s for s in data[y][data_type]][:small_size]))
+                    if data_type == 'terms':
+                        fout.write('\n'.join(small_terms))
+                    else:
+                        fout.write('\n'.join([data['train'][data_type][i] for i in small_indices]))
