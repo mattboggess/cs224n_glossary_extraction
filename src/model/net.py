@@ -61,7 +61,7 @@ class Net(nn.Module):
         """
         #                                -> batch_size x seq_len
         # apply the embedding layer that maps each token to its embedding
-        s = self.embedding(s)            # dim: batch_size x seq_len x embedding_dim
+        s = self.embedding(s['word'])            # dim: batch_size x seq_len x embedding_dim
 
         # run the LSTM along the sentences of length seq_len
         s, _ = self.lstm(s)              # dim: batch_size x seq_len x lstm_hidden_dim
@@ -98,7 +98,7 @@ def loss_fn(outputs, labels):
     """
 
     # reshape labels to give a flat vector of length batch_size*seq_len
-    labels = labels.view(-1)
+    labels = labels.contiguous().view(-1)
 
     # since PADding tokens have label -1, we can generate a mask to exclude the loss from those terms
     mask = (labels >= 0).float()

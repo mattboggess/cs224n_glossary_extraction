@@ -47,7 +47,8 @@ def train(model, optimizer, loss_fn, data_iterator, metrics, params, num_steps):
     t = trange(num_steps)
     for i in t:
         # fetch the next training batch
-        train_batch, labels_batch = next(data_iterator)
+        train_batch = next(data_iterator)
+        labels_batch = train_batch['labels']
 
         # compute model output and loss
         output_batch = model(train_batch)

@@ -8,6 +8,59 @@ from torch.autograd import Variable
 
 import utils
 
+def pad_sents(sents, pad_token):
+    """ Pad list of sentences according to the longest sentence in the batch.
+    @param sents (list[list[int]]): list of sentences, where each sentence
+                                    is represented as a list of words
+    @param pad_token (int): padding token
+    @returns sents_padded (list[list[int]]): list of sentences where sentences shorter
+        than the max length sentence are padded out with the pad_token, such that
+        each sentences in the batch now has equal length.
+        Output shape: (batch_size, max_sentence_length)
+    """
+    sents_padded = []
+
+    max_len = max(len(s) for s in sents)
+    batch_size = len(sents)
+
+    for s in sents:
+        padded = [pad_token] * max_len
+        padded[:len(s)] = s
+        sents_padded.append(padded)
+
+    return sents_padded
+
+def pad_sents_char(sents, char_pad_token):
+    """ Pad list of sentences according to the longest sentence in the batch and max_word_length.
+        @param sents (list[list[list[int]]]): list of sentences, result of `words2charindices()`
+        from `vocab.py`
+        @param char_pad_token (int): index of the character-padding token
+        @returns sents_padded (list[list[list[int]]]): list of sentences where sentences/words shorter
+            than the max length sentence/word are padded out with the appropriate pad token, such that
+            each sentence in the batch now has same number of words and each word has an equal
+            number of characters
+            Output shape: (batch_size, max_sentence_length, max_word_length)
+    """
+    # Words longer than 21 characters should be truncated
+    max_word_length = 21
+
+    max_sent_len = max([len(sent) for sent in sents])
+    pad_word = [char_pad_token] * max_word_length
+
+    sents_padded = []
+    for sent in sents:
+        new_sent = []
+        for word in sent:
+            if len(word) > max_word_length:
+                new_sent.append(word[:max_word_length])
+            else:
+                num_word_pad = max_word_length - len(word)
+                new_sent.append(word + [char_pad_token] * num_word_pad)
+
+        num_sent_pad = max_sent_len - len(sent)
+        sents_padded.append(new_sent + [pad_word] * num_sent_pad)
+
+    return sents_padded
 
 class DataLoader(object):
     """
@@ -31,31 +84,50 @@ class DataLoader(object):
 
         # loading vocab (we require this to map words to their indices)
         vocab_path = os.path.join(data_dir, 'words.txt')
-        self.vocab = {}
+        self.vocab2id = {}
         with open(vocab_path) as f:
             for i, l in enumerate(f.read().splitlines()):
-                self.vocab[l] = i
-        self.id2vocab = {v: k for k, v in self.vocab.items()}
+                self.vocab2id[l] = i
+        self.id2vocab = {v: k for k, v in self.vocab2id.items()}
 
         # setting the indices for UNKnown words and PADding symbols
-        self.unk_ind = self.vocab[self.dataset_params.unk_word]
-        self.pad_ind = self.vocab[self.dataset_params.pad_word]
+        self.unk_ind = self.vocab2id[self.dataset_params.unk_word]
+        self.pad_ind = self.vocab2id[self.dataset_params.pad_word]
+
+        # loading glove mappings
 
         # loading tags (we require this to map tags to their indices)
         tags_path = os.path.join(data_dir, 'tags.txt')
-        self.tag_map = {}
+        self.tag2id = {}
         with open(tags_path) as f:
             for i, t in enumerate(f.read().splitlines()):
-                self.tag_map[t] = i
-        self.id2tag = {v: k for k, v in self.tag_map.items()}
+                self.tag2id[t] = i
+        self.id2tag = {v: k for k, v in self.tag2id.items()}
+
+        # adding character representation (provided in a5)
+        self.char_list = list("""ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,;.!?:'\"/\\|_@#$%^&*~`+-=<>()[]""")
+
+        self.char2id = dict() # Converts characters to integers
+        self.char2id['<pad>'] = 0
+        self.char2id['{'] = 1
+        self.char2id['}'] = 2
+        self.char2id['<unk>'] = 3
+        for i, c in enumerate(self.char_list):
+            self.char2id[c] = len(self.char2id)
+        self.char_unk = self.char2id['<unk>']
+        self.start_of_word = self.char2id["{"]
+        self.end_of_word = self.char2id["}"]
+        assert self.start_of_word+1 == self.end_of_word
+        print(self.char2id)
+
+        self.id2char = {v: k for k, v in self.char2id.items()} # Converts integers to characters
 
         # adding dataset parameters to param (e.g. vocab size, )
         params.update(json_path)
 
     def load_sentences_labels(self, sentences_file, labels_file, terms_file, d):
         """
-        Loads sentences and labels from their corresponding files. Maps tokens and tags to their indices and stores
-        them in the provided dict d.
+        Loads sentences, labels, and terms from their corresponding files.
 
         Args:
             sentences_file: (string) file with sentences with tokens space-separated
@@ -70,17 +142,12 @@ class DataLoader(object):
 
         with open(sentences_file) as f:
             for sentence in f.read().splitlines():
-                # replace each token by its index if it is in vocab
-                # else use index of UNK_WORD
-                s = [self.vocab[token] if token in self.vocab
-                     else self.unk_ind
-                     for token in sentence.split(' ')]
+                s = [token for token in sentence.split(' ')]
                 sentences.append(s)
 
         with open(labels_file) as f:
             for sentence in f.read().splitlines():
-                # replace each label by its index
-                l = [self.tag_map[label] for label in sentence.split(' ')]
+                l = [label for label in sentence.split(' ')]
                 labels.append(l)
 
         with open(terms_file) as f:
@@ -123,6 +190,89 @@ class DataLoader(object):
 
         return data
 
+    def words2charindices(self, sents):
+        """ Convert list of sentences of words into list of list of list of character indices.
+        @param sents (list[list[str]]): sentence(s) in words
+        @return word_ids (list[list[list[int]]]): sentence(s) in indices
+        """
+        word_ids = []
+        for sent in sents:
+            sent_ids = []
+            for word in sent:
+                ch_ids = [self.char2id.get(ch, self.char_unk) for ch in word]
+                ch_ids = [self.start_of_word] + ch_ids + [self.end_of_word]
+                sent_ids.append(ch_ids)
+            word_ids.append(sent_ids)
+
+        return word_ids
+
+    def tags2indices(self, sents):
+        """ Convert list of sentences of tags into list of list of indices.
+           @param sents (list[list[str]]): sentence(s) in words
+           @return word_ids (list[list[int]]): sentence(s) in indices
+        """
+        return [[self.tag2id[t] for t in s] for s in sents]
+
+    def indices2tags(self, sents):
+        """ Convert list of sentences of tags into list of list of indices.
+           @param sents (list[list[str]]): sentence(s) in words
+           @return word_ids (list[list[int]]): sentence(s) in indices
+        """
+        return [[self.id2tag[t] for t in s] for s in sents]
+
+    def words2indices(self, sents):
+        """ Convert list of sentences of words into list of list of indices.
+           @param sents (list[list[str]]): sentence(s) in words
+           @return word_ids (list[list[int]]): sentence(s) in indices
+        """
+        return [[self.vocab2id.get(w, self.dataset_params.unk_word) for w in s] for s in sents]
+
+    def indices2words(self, word_ids):
+        """ Convert list of indices into words.
+            @param word_ids (list[int]): list of word ids
+            @return sents (list[str]): list of words
+        """
+        return [self.id2vocab[w_id] for w_id in word_ids]
+
+    def to_input_tensor(self, sents, embed_type):
+        """ Convert list of sentences (words) into tensor with necessary padding for
+           shorter sentences.
+
+           @param sents (List[List[str]]): list of sentences (words)
+
+           @returns sents_var: tensor of (max_sentence_length, batch_size)
+        """
+        if embed_type == 'char':
+            return self.to_input_tensor_char(sents)
+        elif embed_type == 'word':
+            word_ids = self.words2indices(sents)
+            sents_t = pad_sents(word_ids, self.vocab2id['<pad>'])
+            sents_var = torch.tensor(sents_t, dtype=torch.long)
+            return sents_var
+        elif embed_type == 'tag':
+            tag_ids = self.tags2indices(sents)
+            sents_t = pad_sents(tag_ids, -1)
+            sents_var = torch.tensor(sents_t, dtype=torch.long)
+            return sents_var
+        elif embed_type == 'glove':
+            # TODO
+            return 'hi'
+        else:
+            raise ValueError('Unsupported Embedding Type: %s' % embed_type)
+
+    def to_input_tensor_char(self, sents):
+        """ Convert list of sentences (words) into tensor with necessary padding for
+            shorter sentences.
+
+            @param sents (List[List[str]]): list of sentences (words)
+
+            @returns sents_var: tensor of (max_sentence_length, batch_size, max_word_length)
+        """
+        char_ids = self.words2charindices(sents)
+        sents_padded = pad_sents_char(char_ids, self.char2id['<pad>'])
+        sents_t = torch.tensor(sents_padded, dtype=torch.long)
+        return sents_t.permute(1, 0, 2)
+
     def data_iterator(self, data, params, shuffle=False):
         """
         Returns a generator that yields batches data with labels. Batch size is params.batch_size. Expires after one
@@ -147,32 +297,44 @@ class DataLoader(object):
 
         # one pass over data
         for i in range((data['size']+1)//params.batch_size):
+
+            batch = {}
+
             # fetch sentences and tags
             batch_sentences = [data['data'][idx] for idx in order[i*params.batch_size:(i+1)*params.batch_size]]
             batch_tags = [data['labels'][idx] for idx in order[i*params.batch_size:(i+1)*params.batch_size]]
+            batch['sentences'] = batch_sentences
 
-            # compute length of longest sentence in batch
-            batch_max_len = max([len(s) for s in batch_sentences])
+            # compute all desired embedding representation inputs
+            for embed_type in params.embed_types:
+                batch[embed_type] = self.to_input_tensor(batch_sentences, embed_type)
+                if params.cuda:
+                    batch[embed_type] = batch[embed_type].cuda()
+                batch[embed_type] = Variable(batch[embed_type])
 
-            # prepare a numpy array with the data, initialising the data with pad_ind and all labels with -1
-            # initialising labels to -1 differentiates tokens with tags from PADding tokens
-            batch_data = self.pad_ind*np.ones((len(batch_sentences), batch_max_len))
-            batch_labels = -1*np.ones((len(batch_sentences), batch_max_len))
-
-            # copy the data to the numpy array
-            for j in range(len(batch_sentences)):
-                cur_len = len(batch_sentences[j])
-                batch_data[j][:cur_len] = batch_sentences[j]
-                batch_labels[j][:cur_len] = batch_tags[j]
-
-            # since all data are indices, we convert them to torch LongTensors
-            batch_data, batch_labels = torch.LongTensor(batch_data), torch.LongTensor(batch_labels)
-
-            # shift tensors to GPU if available
+            # convert the tags to a label tensor
+            batch['labels'] = self.to_input_tensor(batch_tags, 'tag')
             if params.cuda:
-                batch_data, batch_labels = batch_data.cuda(), batch_labels.cuda()
+                batch['labels'] = batch['labels'].cuda()
+            batch['labels'] = Variable(batch['labels'])
+
+            ## prepare a numpy array with the data, initialising the data with pad_ind and all labels with -1
+            ## initialising labels to -1 differentiates tokens with tags from PADding tokens
+            #batch_data = self.pad_ind*np.ones((len(batch_sentences), batch_max_len))
+            #batch_labels = -1*np.ones((len(batch_sentences), batch_max_len))
+
+            ## copy the data to the numpy array
+            #for j in range(len(batch_sentences)):
+            #    cur_len = len(batch_sentences[j])
+            #    batch_data[j][:cur_len] = batch_sentences[j]
+            #    batch_labels[j][:cur_len] = batch_tags[j]
+
+            ## since all data are indices, we convert them to torch LongTensors
+            #batch_data, batch_labels = torch.LongTensor(batch_data), torch.LongTensor(batch_labels)
+
 
             # convert them to Variables to record operations in the computational graph
-            batch_data, batch_labels = Variable(batch_data), Variable(batch_labels)
+            # batch_data, batch_labels = Variable(batch_data), Variable(batch_labels)
 
-            yield batch_data, batch_labels
+            # yield batch_data, batch_labels
+            yield batch

@@ -41,7 +41,8 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps, terms,
     # compute metrics over the dataset
     for _ in range(num_steps):
         # fetch the next evaluation batch
-        data_batch, labels_batch = next(data_iterator)
+        data_batch = next(data_iterator)
+        labels_batch = data_batch['labels']
 
         # compute model output
         output_batch = model(data_batch)
@@ -50,10 +51,10 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps, terms,
         # extract data from torch Variable, move to cpu, convert to numpy arrays
         output_batch = output_batch.data.cpu().numpy()
         labels_batch = labels_batch.data.cpu().numpy()
-        data_batch = data_batch.data.cpu().numpy()
 
-        cand_terms = get_candidate_terms(output_batch, data_batch, cand_terms,
-                                         data_loader)
+        # extract terms classified by the model
+        cand_terms = get_candidate_terms(output_batch[labels_batch.ravel() >= 0, :], data_batch['sentences'],
+                                         cand_terms, data_loader)
 
         # compute all metrics on this batch
         summary_batch = {metric: compute_ner_metric(output_batch, labels_batch,
@@ -66,6 +67,8 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps, terms,
     metrics_eval = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]}
 
     # compute term metrics
+    print(cand_terms)
+    print(terms)
     for metric in metrics['Term Metrics']:
         metrics_eval[metric] = compute_term_metric(terms, cand_terms,
                                                    metric)
@@ -79,7 +82,7 @@ def get_candidate_terms(outputs, data, terms, data_loader):
 
     predicted_labels = np.argmax(outputs, axis=1)
     probs = np.exp(np.max(outputs, axis=1))
-    data = [data_loader.id2vocab[word_id].lower() for word_id in data.ravel()]
+    data = [word.lower() for sent in data for word in sent]
 
     i = 0
     while i < len(data):
@@ -127,7 +130,6 @@ def compute_ner_metric(outputs, labels, metric, data_loader=None):
 
     # reshape labels to give a flat vector of length batch_size*seq_len
     labels = labels.ravel()
-
 
     # np.argmax gives us the class predicted for each token by the model
     outputs = np.argmax(outputs, axis=1)
