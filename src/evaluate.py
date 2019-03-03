@@ -67,8 +67,6 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps, terms,
     metrics_eval = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]}
 
     # compute term metrics
-    print(cand_terms)
-    print(terms)
     for metric in metrics['Term Metrics']:
         metrics_eval[metric] = compute_term_metric(terms, cand_terms,
                                                    metric)
@@ -261,7 +259,7 @@ if __name__ == '__main__':
     logging.info("- done.")
 
     # Define the model
-    model = net.Net(params).cuda() if params.cuda else net.Net(params)
+    model = net.Baseline(params).cuda() if params.cuda else net.Baseline(params)
 
     loss_fn = net.loss_fn
 

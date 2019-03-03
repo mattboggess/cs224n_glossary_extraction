@@ -2,6 +2,7 @@ import random
 import numpy as np
 import os
 import sys
+import json
 
 import torch
 from torch.autograd import Variable
@@ -52,7 +53,7 @@ def pad_sents_char(sents, char_pad_token):
         new_sent = []
         for word in sent:
             if len(word) > max_word_length:
-                new_sent.append(word[:max_word_length])
+                gew_sent.append(word[:max_word_length])
             else:
                 num_word_pad = max_word_length - len(word)
                 new_sent.append(word + [char_pad_token] * num_word_pad)
@@ -95,6 +96,13 @@ class DataLoader(object):
         self.pad_ind = self.vocab2id[self.dataset_params.pad_word]
 
         # loading glove mappings
+        self.glove2id = {}
+        glove_path = os.path.join(data_dir, 'glove_indices.json')
+        with open(glove_path) as f:
+            glove_ix = json.load(f)
+        for word in self.vocab2id.keys():
+            self.glove2id[word] = glove_ix.get(word, glove_ix[self.dataset_params.unk_word])
+        self.id2glove = {v: k for k, v in self.glove2id.items()}
 
         # loading tags (we require this to map tags to their indices)
         tags_path = os.path.join(data_dir, 'tags.txt')
@@ -104,23 +112,13 @@ class DataLoader(object):
                 self.tag2id[t] = i
         self.id2tag = {v: k for k, v in self.tag2id.items()}
 
-        # adding character representation (provided in a5)
-        self.char_list = list("""ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,;.!?:'\"/\\|_@#$%^&*~`+-=<>()[]""")
-
-        self.char2id = dict() # Converts characters to integers
-        self.char2id['<pad>'] = 0
-        self.char2id['{'] = 1
-        self.char2id['}'] = 2
-        self.char2id['<unk>'] = 3
-        for i, c in enumerate(self.char_list):
-            self.char2id[c] = len(self.char2id)
-        self.char_unk = self.char2id['<unk>']
-        self.start_of_word = self.char2id["{"]
-        self.end_of_word = self.char2id["}"]
-        assert self.start_of_word+1 == self.end_of_word
-        print(self.char2id)
-
-        self.id2char = {v: k for k, v in self.char2id.items()} # Converts integers to characters
+        # adding character representation
+        char_path = os.path.join(data_dir, 'words.txt')
+        self.char2id = {}
+        with open(char_path) as f:
+            for i, l in enumerate(f.read().splitlines()):
+                self.char2id[l] = i
+        self.id2char = {v: k for k, v in self.char2id.items()}
 
         # adding dataset parameters to param (e.g. vocab size, )
         params.update(json_path)
@@ -200,7 +198,6 @@ class DataLoader(object):
             sent_ids = []
             for word in sent:
                 ch_ids = [self.char2id.get(ch, self.char_unk) for ch in word]
-                ch_ids = [self.start_of_word] + ch_ids + [self.end_of_word]
                 sent_ids.append(ch_ids)
             word_ids.append(sent_ids)
 
@@ -220,12 +217,15 @@ class DataLoader(object):
         """
         return [[self.id2tag[t] for t in s] for s in sents]
 
-    def words2indices(self, sents):
+    def words2indices(self, sents, embed_type):
         """ Convert list of sentences of words into list of list of indices.
            @param sents (list[list[str]]): sentence(s) in words
            @return word_ids (list[list[int]]): sentence(s) in indices
         """
-        return [[self.vocab2id.get(w, self.dataset_params.unk_word) for w in s] for s in sents]
+        if embed_type == 'word':
+            return [[self.vocab2id.get(w, self.vocab2id[self.dataset_params.unk_word]) for w in s] for s in sents]
+        elif embed_type == 'glove':
+            return [[self.glove2id.get(w, self.glove2id[self.dataset_params.unk_word]) for w in s] for s in sents]
 
     def indices2words(self, word_ids):
         """ Convert list of indices into words.
@@ -245,7 +245,7 @@ class DataLoader(object):
         if embed_type == 'char':
             return self.to_input_tensor_char(sents)
         elif embed_type == 'word':
-            word_ids = self.words2indices(sents)
+            word_ids = self.words2indices(sents, 'word')
             sents_t = pad_sents(word_ids, self.vocab2id['<pad>'])
             sents_var = torch.tensor(sents_t, dtype=torch.long)
             return sents_var
@@ -255,8 +255,10 @@ class DataLoader(object):
             sents_var = torch.tensor(sents_t, dtype=torch.long)
             return sents_var
         elif embed_type == 'glove':
-            # TODO
-            return 'hi'
+            word_ids = self.words2indices(sents, 'glove')
+            sents_t = pad_sents(word_ids, self.glove2id['<pad>'])
+            sents_var = torch.tensor(sents_t, dtype=torch.long)
+            return sents_var
         else:
             raise ValueError('Unsupported Embedding Type: %s' % embed_type)
 
