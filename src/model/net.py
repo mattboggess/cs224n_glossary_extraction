@@ -27,26 +27,37 @@ class Baseline(nn.Module):
 
         # word embedding
         if 'glove' in params.embed_types:
-            self.embed_type = 'glove'
+            self.word_embed_type = 'glove'
             self.embed_size = params.glove_embedding_size
-            self.embedding = nn.Embedding(params.glove_vocab_size,
+            self.word_embedding = nn.Embedding(params.glove_vocab_size,
                                           params.glove_embedding_size)
 
             # load in glove weights & fix
             glove_weights = np.load(params.glove_path)['glove']
-            self.embedding.load_state_dict({'weight': torch.tensor(glove_weights)})
-            self.embedding.weight.requires_grad = False
+            self.word_embedding.load_state_dict({'weight': torch.tensor(glove_weights)})
+            self.word_embedding.weight.requires_grad = False
         else:
-            self.embed_type = 'word'
+            self.word_embed_type = 'word'
             self.embed_size = params.embedding_size
-            self.embedding = nn.Embedding(params.vocab_size, params.embedding_dim)
+            self.word_embedding = nn.Embedding(params.vocab_size, params.embedding_dim)
+
+        # char embedding
+        self.char_embed = False
+        if 'char' in params.embed_types:
+            self.char_embed = True
+            self.embed_size += params.char_embedding_dim
+            self.char_embedding = nn.Embedding(params.char_vocab_size, params.char_embedding_dim)
+            self.conv = nn.Conv1d(params.char_embedding_dim, params.cnn_num_filters,
+                                  params.cnn_window_size, bias=True)
+
+        self.dropout = nn.Dropout(params.dropout_rate)
 
         self.lstm = nn.LSTM(self.embed_size, params.lstm_hidden_dim,
                             batch_first=True, bidirectional=True)
 
         self.fc = nn.Linear(2 * params.lstm_hidden_dim, params.number_of_tags)
 
-    def forward(self, s):
+    def forward(self, batch):
         """
         This function defines how we use the components of our network to operate on an input batch.
 
@@ -62,12 +73,35 @@ class Baseline(nn.Module):
 
         Note: the dimensions after each step are provided
         """
-        #                                -> batch_size x seq_len
-        # apply the embedding layer that maps each token to its embedding
-        s = self.embedding(s[self.embed_type])            # dim: batch_size x seq_len x embedding_dim
 
+        # word embeddings
+        word_embed = self.word_embedding(batch[self.word_embed_type])            # dim: batch_size x seq_len x embedding_dim
+
+        # char embeddings
+        if self.char_embed:
+            char_embed = self.char_embedding(batch['char'])
+            char_embed = self.dropout(char_embed)
+
+            char_embed = char_embed.permute(0, 1, 3, 2)
+            conv_shape = (char_embed.shape[0] * char_embed.shape[1],
+                          char_embed.shape[2],
+                          char_embed.shape[3])
+            conv_input = char_embed.reshape(conv_shape)
+            conv_output = self.conv(conv_input)
+            conv_output = conv_output.max(dim=2)[0]
+            conv_output = conv_output.reshape((char_embed.shape[0],
+                                               char_embed.shape[1],
+                                               conv_output.shape[1]))
+            conv_output = conv_output.permute(1, 0, 2)
+            embedding = torch.cat((word_embed, conv_output), -1)
+        else:
+            embedding = word_embed
+
+        embedding = self.dropout(embedding)
         # run the LSTM along the sentences of length seq_len
-        s, _ = self.lstm(s)              # dim: batch_size x seq_len x lstm_hidden_dim
+        s, _ = self.lstm(embedding)              # dim: batch_size x seq_len x lstm_hidden_dim
+
+        s = self.dropout(s)
 
         # make the Variable contiguous in memory (a PyTorch artefact)
         s = s.contiguous()

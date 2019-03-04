@@ -9,59 +9,6 @@ from torch.autograd import Variable
 
 import utils
 
-def pad_sents(sents, pad_token):
-    """ Pad list of sentences according to the longest sentence in the batch.
-    @param sents (list[list[int]]): list of sentences, where each sentence
-                                    is represented as a list of words
-    @param pad_token (int): padding token
-    @returns sents_padded (list[list[int]]): list of sentences where sentences shorter
-        than the max length sentence are padded out with the pad_token, such that
-        each sentences in the batch now has equal length.
-        Output shape: (batch_size, max_sentence_length)
-    """
-    sents_padded = []
-
-    max_len = max(len(s) for s in sents)
-    batch_size = len(sents)
-
-    for s in sents:
-        padded = [pad_token] * max_len
-        padded[:len(s)] = s
-        sents_padded.append(padded)
-
-    return sents_padded
-
-def pad_sents_char(sents, char_pad_token):
-    """ Pad list of sentences according to the longest sentence in the batch and max_word_length.
-        @param sents (list[list[list[int]]]): list of sentences, result of `words2charindices()`
-        from `vocab.py`
-        @param char_pad_token (int): index of the character-padding token
-        @returns sents_padded (list[list[list[int]]]): list of sentences where sentences/words shorter
-            than the max length sentence/word are padded out with the appropriate pad token, such that
-            each sentence in the batch now has same number of words and each word has an equal
-            number of characters
-            Output shape: (batch_size, max_sentence_length, max_word_length)
-    """
-    # Words longer than 21 characters should be truncated
-    max_word_length = 21
-
-    max_sent_len = max([len(sent) for sent in sents])
-    pad_word = [char_pad_token] * max_word_length
-
-    sents_padded = []
-    for sent in sents:
-        new_sent = []
-        for word in sent:
-            if len(word) > max_word_length:
-                gew_sent.append(word[:max_word_length])
-            else:
-                num_word_pad = max_word_length - len(word)
-                new_sent.append(word + [char_pad_token] * num_word_pad)
-
-        num_sent_pad = max_sent_len - len(sent)
-        sents_padded.append(new_sent + [pad_word] * num_sent_pad)
-
-    return sents_padded
 
 class DataLoader(object):
     """
@@ -113,7 +60,7 @@ class DataLoader(object):
         self.id2tag = {v: k for k, v in self.tag2id.items()}
 
         # adding character representation
-        char_path = os.path.join(data_dir, 'words.txt')
+        char_path = os.path.join(data_dir, 'chars.txt')
         self.char2id = {}
         with open(char_path) as f:
             for i, l in enumerate(f.read().splitlines()):
@@ -197,7 +144,7 @@ class DataLoader(object):
         for sent in sents:
             sent_ids = []
             for word in sent:
-                ch_ids = [self.char2id.get(ch, self.char_unk) for ch in word]
+                ch_ids = [self.char2id.get(ch, self.char2id[self.dataset_params.unk_word]) for ch in word]
                 sent_ids.append(ch_ids)
             word_ids.append(sent_ids)
 
@@ -340,3 +287,57 @@ class DataLoader(object):
 
             # yield batch_data, batch_labels
             yield batch
+
+def pad_sents(sents, pad_token):
+    """ Pad list of sentences according to the longest sentence in the batch.
+    @param sents (list[list[int]]): list of sentences, where each sentence
+                                    is represented as a list of words
+    @param pad_token (int): padding token
+    @returns sents_padded (list[list[int]]): list of sentences where sentences shorter
+        than the max length sentence are padded out with the pad_token, such that
+        each sentences in the batch now has equal length.
+        Output shape: (batch_size, max_sentence_length)
+    """
+    sents_padded = []
+
+    max_len = max(len(s) for s in sents)
+    batch_size = len(sents)
+
+    for s in sents:
+        padded = [pad_token] * max_len
+        padded[:len(s)] = s
+        sents_padded.append(padded)
+
+    return sents_padded
+
+def pad_sents_char(sents, char_pad_token):
+    """ Pad list of sentences according to the longest sentence in the batch and max_word_length.
+        @param sents (list[list[list[int]]]): list of sentences, result of `words2charindices()`
+        from `vocab.py`
+        @param char_pad_token (int): index of the character-padding token
+        @returns sents_padded (list[list[list[int]]]): list of sentences where sentences/words shorter
+            than the max length sentence/word are padded out with the appropriate pad token, such that
+            each sentence in the batch now has same number of words and each word has an equal
+            number of characters
+            Output shape: (batch_size, max_sentence_length, max_word_length)
+    """
+    # Words longer than 21 characters should be truncated
+    max_word_length = 21
+
+    max_sent_len = max([len(sent) for sent in sents])
+    pad_word = [char_pad_token] * max_word_length
+
+    sents_padded = []
+    for sent in sents:
+        new_sent = []
+        for word in sent:
+            if len(word) > max_word_length:
+                new_sent.append(word[:max_word_length])
+            else:
+                num_word_pad = max_word_length - len(word)
+                new_sent.append(word + [char_pad_token] * num_word_pad)
+
+        num_sent_pad = max_sent_len - len(sent)
+        sents_padded.append(new_sent + [pad_word] * num_sent_pad)
+
+    return sents_padded
