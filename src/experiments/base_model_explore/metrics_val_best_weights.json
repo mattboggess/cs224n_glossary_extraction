@@ -1,0 +1,11 @@
+{
+    "Term Precision": 1.0,
+    "NER F1": 0.962962962962963,
+    "NER Accuracy": 0.9956521739130435,
+    "NER Recall": 1.0,
+    "NER Precision": 0.9285714285714286,
+    "Term F1": 1.0,
+    "Term Accuracy": 1.0,
+    "Term Recall": 1.0,
+    "loss": 0.041105300188064575
+}
