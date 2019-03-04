@@ -87,41 +87,35 @@ class Net(nn.Module):
         """
         #                                -> batch_size x seq_len
         # apply the embedding layer that maps each token to its embedding
-        #print (s.size())
         s = self.embedding(s)            # dim: batch_size x seq_len x defm_embed_size
 
         # run through cnn 
-        #print (s.size())
         s = s.permute(0,2,1)  # dim: batch_size x defm_embed_size x seq_len
         s = self.cnn(s)       # dim: batch_size x defm_cnn_num_filters x seq_len
-        #print (s.size())
 
         # run through pooling layer
-        s = self.maxpool_layer(s) # dim: batch_size x defm_cnn_num_filters/defm_pool_stride x seq_len
-        #print (s.size())
+        s = self.maxpool_layer(s) # dim: batch_size x defm_cnn_num_filters x seq_len/defm_pool_stride
         
         # apply dropout
         self.dropout(s)
         
-        s = s.permute(0,2,1)  # dim: batch_size x seq_len x defm_cnn_num_filters/defm_pool_stride
-        #print (s.size())
+        s = s.permute(0,2,1)  # dim: batch_size x seq_len/defm_pool_stride x defm_cnn_num_filters
         # run the LSTM along the sentences of length seq_len
-        _, (s,__) = self.lstm(s)              # dim: batch_size x 2 x defm_lstm_hidden_dim
-        #print (s.size())
+        _, (s,__) = self.lstm(s)              # dim: 2 x batch_size x defm_lstm_hidden_dim
 
         # make the Variable contiguous in memory (a PyTorch artefact)
         s = s.contiguous()
 
         # reshape the Variable so that each row contains one token
+        s = s.permute(1,0,2) # dim: batch_size x 2 x defm_lstm_hidden_dim
+        s = s.contiguous()
         s = s.view(-1, s.shape[2]*2)       # dim: batch_size x 2*lstm_hidden_dim
-        #print (s.size())
 
         # apply dropout
         self.dropout(s)
 
         # apply the fully connected layer and obtain the output (before softmax) for each token
         s = self.fc(s)                   # dim: batch_size x 1
-        #print (s.size())
 
         # apply sigmoid function
         s = torch.sigmoid(s)
