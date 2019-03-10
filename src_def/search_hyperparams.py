@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--parent_dir', default='experiments/learning_rate',
                     help='Directory containing params.json')
 parser.add_argument('--data_dir', default='data/small', help="Directory containing the dataset")
-
+parser.add_argument("--is_def", default=False, action="store_true")
 
 def launch_training_job(parent_dir, data_dir, job_name, params):
     """Launch training of the model with a set of hyperparameters in parent_dir/job_name
@@ -33,7 +33,11 @@ def launch_training_job(parent_dir, data_dir, job_name, params):
     params.save(json_path)
 
     # Launch training with this config
-    cmd = "{python} train.py --model_dir={model_dir} --data_dir {data_dir}".format(python=PYTHON, model_dir=model_dir,
+    if args.is_def:
+        cmd_ = "train.py --is_def"
+    else:
+        cmd_ = "train.py"
+    cmd = "{python} {} --model_dir={model_dir} --data_dir {data_dir}".format(cmd_, python=PYTHON, model_dir=model_dir,
                                                                                    data_dir=data_dir)
     print(cmd)
     check_call(cmd, shell=True)
@@ -47,7 +51,9 @@ if __name__ == "__main__":
     params = utils.Params(json_path)
 
     # Perform hypersearch over one parameter
-    learning_rates = [1e-4, 1e-3, 1e-2]
+    #learning_rates = [1e-4, 1e-3, 1e-2]
+    learning_rates = []
+    batch_sizes = [2, 4, 8, 16, 32, 64, 128]
 
     for learning_rate in learning_rates:
         # Modify the relevant parameter in params
@@ -56,3 +62,12 @@ if __name__ == "__main__":
         # Launch job (name has to be unique)
         job_name = "learning_rate_{}".format(learning_rate)
         launch_training_job(args.parent_dir, args.data_dir, job_name, params)
+
+    for batch_size in batch_sizes:
+        # Modify the relevant parameter in params
+        params.batch_size = batch_size
+
+        # Launch job (name has to be unique)
+        job_name = "batch_size_{}".format(batch_size)
+        launch_training_job(args.parent_dir, args.data_dir, job_name, params)
+        

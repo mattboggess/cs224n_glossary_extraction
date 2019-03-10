@@ -6,62 +6,10 @@ import json
 
 import torch
 from torch.autograd import Variable
+from pytorch_pretrained_bert import BertTokenizer
 
 import utils
 
-def pad_sents(sents, pad_token):
-    """ Pad list of sentences according to the longest sentence in the batch.
-    @param sents (list[list[int]]): list of sentences, where each sentence
-                                    is represented as a list of words
-    @param pad_token (int): padding token
-    @returns sents_padded (list[list[int]]): list of sentences where sentences shorter
-        than the max length sentence are padded out with the pad_token, such that
-        each sentences in the batch now has equal length.
-        Output shape: (batch_size, max_sentence_length)
-    """
-    sents_padded = []
-
-    max_len = max(len(s) for s in sents)
-    batch_size = len(sents)
-
-    for s in sents:
-        padded = [pad_token] * max_len
-        padded[:len(s)] = s
-        sents_padded.append(padded)
-
-    return sents_padded
-
-def pad_sents_char(sents, char_pad_token):
-    """ Pad list of sentences according to the longest sentence in the batch and max_word_length.
-        @param sents (list[list[list[int]]]): list of sentences, result of `words2charindices()`
-        from `vocab.py`
-        @param char_pad_token (int): index of the character-padding token
-        @returns sents_padded (list[list[list[int]]]): list of sentences where sentences/words shorter
-            than the max length sentence/word are padded out with the appropriate pad token, such that
-            each sentence in the batch now has same number of words and each word has an equal
-            number of characters
-            Output shape: (batch_size, max_sentence_length, max_word_length)
-    """
-    # Words longer than 21 characters should be truncated
-    max_word_length = 21
-
-    max_sent_len = max([len(sent) for sent in sents])
-    pad_word = [char_pad_token] * max_word_length
-
-    sents_padded = []
-    for sent in sents:
-        new_sent = []
-        for word in sent:
-            if len(word) > max_word_length:
-                gew_sent.append(word[:max_word_length])
-            else:
-                num_word_pad = max_word_length - len(word)
-                new_sent.append(word + [char_pad_token] * num_word_pad)
-
-        num_sent_pad = max_sent_len - len(sent)
-        sents_padded.append(new_sent + [pad_word] * num_sent_pad)
-
-    return sents_padded
 
 class DataLoader(object):
     """
@@ -113,12 +61,18 @@ class DataLoader(object):
         self.id2tag = {v: k for k, v in self.tag2id.items()}
 
         # adding character representation
-        char_path = os.path.join(data_dir, 'words.txt')
+        char_path = os.path.join(data_dir, 'chars.txt')
         self.char2id = {}
         with open(char_path) as f:
             for i, l in enumerate(f.read().splitlines()):
                 self.char2id[l] = i
         self.id2char = {v: k for k, v in self.char2id.items()}
+
+        # Bert mappings
+        self.bert_tokenizer = BertTokenizer.from_pretrained('bert-base-cased',
+                                                            do_lower_case=False,
+                                                            never_split=['[CLS]', '[SEP]',
+                                                                         '<unk>', '<pad>'])
 
         # adding dataset parameters to param (e.g. vocab size, )
         params.update(json_path)
@@ -197,7 +151,7 @@ class DataLoader(object):
         for sent in sents:
             sent_ids = []
             for word in sent:
-                ch_ids = [self.char2id.get(ch, self.char_unk) for ch in word]
+                ch_ids = [self.char2id.get(ch, self.char2id[self.dataset_params.unk_word]) for ch in word]
                 sent_ids.append(ch_ids)
             word_ids.append(sent_ids)
 
@@ -259,6 +213,13 @@ class DataLoader(object):
             sents_t = pad_sents(word_ids, self.glove2id['<pad>'])
             sents_var = torch.tensor(sents_t, dtype=torch.long)
             return sents_var
+        elif embed_type == 'bert':
+            word_ids, word_mask = self.bert_tokenize(sents)
+            sents_t = pad_sents(word_ids, self.bert_tokenizer.convert_tokens_to_ids(['[PAD]'])[0])
+            word_mask = pad_sents(word_mask, 0)
+            sents_var = torch.tensor(sents_t, dtype=torch.long)
+            berts_mask = torch.tensor(word_mask, dtype=torch.long)
+            return sents_var, berts_mask
         else:
             raise ValueError('Unsupported Embedding Type: %s' % embed_type)
 
@@ -274,6 +235,25 @@ class DataLoader(object):
         sents_padded = pad_sents_char(char_ids, self.char2id['<pad>'])
         sents_t = torch.tensor(sents_padded, dtype=torch.long)
         return sents_t.permute(1, 0, 2)
+
+    def bert_tokenize(self, sents):
+        bert_sents = []
+        bert_masks = []
+        for sent in sents:
+            bert_sent = []
+            bert_mask = []
+            sent = ['[CLS]'] + sent + ['[SEP]']
+            for token in sent:
+                bert_tokens = self.bert_tokenizer.tokenize(token)
+                bert_tokenids = self.bert_tokenizer.convert_tokens_to_ids(bert_tokens)
+                bert_sent += bert_tokenids
+                if token == '[CLS]' or token == '[SEP]':
+                    bert_mask += [0]
+                else:
+                    bert_mask += ([1] + [-1] * (len(bert_tokenids) - 1))
+            bert_sents.append(bert_sent)
+            bert_masks.append(bert_mask)
+        return bert_sents, bert_masks
 
     def data_iterator(self, data, params, shuffle=False):
         """
@@ -309,10 +289,20 @@ class DataLoader(object):
 
             # compute all desired embedding representation inputs
             for embed_type in params.embed_types:
-                batch[embed_type] = self.to_input_tensor(batch_sentences, embed_type)
-                if params.cuda:
-                    batch[embed_type] = batch[embed_type].cuda()
-                batch[embed_type] = Variable(batch[embed_type])
+                if embed_type == 'bert':
+                    sents, mask = self.to_input_tensor(batch_sentences, embed_type)
+                    batch[embed_type] = sents
+                    batch[embed_type + '_mask'] = mask
+                    if params.cuda:
+                        batch[embed_type] = batch[embed_type].cuda()
+                        batch[embed_type + '_mask'] = batch[embed_type + '_mask'].cuda()
+                    batch[embed_type] = Variable(batch[embed_type])
+                else:
+                    batch[embed_type] = self.to_input_tensor(batch_sentences, embed_type)
+                    if params.cuda:
+                        batch[embed_type] = batch[embed_type].cuda()
+                    batch[embed_type] = Variable(batch[embed_type])
+
 
             # convert the tags to a label tensor
             batch['labels'] = self.to_input_tensor(batch_tags, 'tag')
@@ -340,3 +330,57 @@ class DataLoader(object):
 
             # yield batch_data, batch_labels
             yield batch
+
+def pad_sents(sents, pad_token, max_len=None):
+    """ Pad list of sentences according to the longest sentence in the batch.
+    @param sents (list[list[int]]): list of sentences, where each sentence
+                                    is represented as a list of words
+    @param pad_token (int): padding token
+    @returns sents_padded (list[list[int]]): list of sentences where sentences shorter
+        than the max length sentence are padded out with the pad_token, such that
+        each sentences in the batch now has equal length.
+        Output shape: (batch_size, max_sentence_length)
+    """
+    sents_padded = []
+
+    if not max_len:
+        max_len = max(len(s) for s in sents)
+
+    for s in sents:
+        padded = [pad_token] * max_len
+        padded[:len(s)] = s
+        sents_padded.append(padded)
+
+    return sents_padded
+
+def pad_sents_char(sents, char_pad_token):
+    """ Pad list of sentences according to the longest sentence in the batch and max_word_length.
+        @param sents (list[list[list[int]]]): list of sentences, result of `words2charindices()`
+        from `vocab.py`
+        @param char_pad_token (int): index of the character-padding token
+        @returns sents_padded (list[list[list[int]]]): list of sentences where sentences/words shorter
+            than the max length sentence/word are padded out with the appropriate pad token, such that
+            each sentence in the batch now has same number of words and each word has an equal
+            number of characters
+            Output shape: (batch_size, max_sentence_length, max_word_length)
+    """
+    # Words longer than 21 characters should be truncated
+    max_word_length = 21
+
+    max_sent_len = max([len(sent) for sent in sents])
+    pad_word = [char_pad_token] * max_word_length
+
+    sents_padded = []
+    for sent in sents:
+        new_sent = []
+        for word in sent:
+            if len(word) > max_word_length:
+                new_sent.append(word[:max_word_length])
+            else:
+                num_word_pad = max_word_length - len(word)
+                new_sent.append(word + [char_pad_token] * num_word_pad)
+
+        num_sent_pad = max_sent_len - len(sent)
+        sents_padded.append(new_sent + [pad_word] * num_sent_pad)
+
+    return sents_padded

@@ -1,0 +1,13 @@
+{
+    "learning_rate": 1e-3,
+    "batch_size": 10,
+    "num_epochs": 50,
+
+    "lstm_hidden_dim": 200,
+    "embedding_size": 50,
+    "dropout_rate": 0.5,
+
+    "embed_types": ["glove"],
+
+    "save_summary_steps": 100
+}
