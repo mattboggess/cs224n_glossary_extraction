@@ -120,6 +120,7 @@ def train_and_evaluate(model, train_data, val_data, optimizer, loss_fn, metrics,
         val_metrics = evaluate(model, loss_fn, val_data_iterator, metrics, params, num_steps)
 
         val_acc = val_metrics['f1score']
+        print ("- Current epoch f1 score = %s, best f1 score = %s" %(val_acc, best_val_acc))
         is_best = val_acc >= best_val_acc
 
         # Save weights
