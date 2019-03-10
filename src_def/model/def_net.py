@@ -180,9 +180,11 @@ def f1metric(outputs, labels):
     x = np.logical_xor(outputs, labels)
     fn = np.sum(np.logical_and(x, labels))
     fp = np.sum(np.logical_and(x, outputs))
-    p = tp/(tp+fp)
-    r = tp/(tp+fn)
-    f1 = 2*(p*r)/(p+r)
+    p = r = f1 = 0.0
+    if tp != 0:
+        p = tp/(tp+fp)
+        r = tp/(tp+fn)
+        f1 = 2*(p*r)/(p+r)
     #print ("labels={}, outputs={}, tp={}, tn={}, fp={}, fn={}, p={}, r={}, f1={}".format(len(labels), len(outputs), tp, tn, fp, fn, p, r, f1))
     return (p,r,f1)
     
