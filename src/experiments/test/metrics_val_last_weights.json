@@ -1,0 +1,11 @@
+{
+    "loss": 0.01078935875557363,
+    "Term accuracy": 1.0,
+    "NER f1": 1.0,
+    "NER recall": 1.0,
+    "NER precision": 1.0,
+    "NER accuracy": 1.0,
+    "Term precision": 1.0,
+    "Term recall": 1.0,
+    "Term f1": 1.0
+}
