@@ -297,7 +297,10 @@ if __name__ == '__main__':
     logging.info("- done.")
 
     # Define the model
-    model = net.Baseline(params).cuda() if params.cuda else net.Baseline(params)
+    if params.model_type == 'bert':
+        model = net.BertNER(params).cuda() if params.cuda else net.BertNER(params)
+    else:
+        model = net.HoveyMa(params).cuda() if params.cuda else net.HoveyMa(params)
 
     loss_fn = net.loss_fn
 
@@ -315,7 +318,7 @@ if __name__ == '__main__':
 
     # save best false positive, true positive, and false negative list for error analysis
     for list_type in ['false_pos', 'true_pos', 'false_neg']:
-        fp_path = os.path.join(model_dir, '%s_test.txt' % list_type)
+        fp_path = os.path.join(args.model_dir, '%s_test.txt' % list_type)
         with open(fp_path, 'w') as f:
             for fp in sorted(term_info[list_type]):
                 f.write('%s, %.3f\n' % (fp[0], fp[1]))

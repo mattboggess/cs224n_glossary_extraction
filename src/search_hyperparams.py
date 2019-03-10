@@ -47,12 +47,16 @@ if __name__ == "__main__":
     params = utils.Params(json_path)
 
     # Perform hypersearch over one parameter
-    learning_rates = [1e-4, 1e-3, 1e-2]
+    learning_rates = [5e-5, 3e-5, 2e-5]
+    batch_sizes = [16, 32]
 
-    for learning_rate in learning_rates:
-        # Modify the relevant parameter in params
-        params.learning_rate = learning_rate
+    for batch_size in batch_sizes:
+        params.batch_size = batch_size
 
-        # Launch job (name has to be unique)
-        job_name = "learning_rate_{}".format(learning_rate)
-        launch_training_job(args.parent_dir, args.data_dir, job_name, params)
+        for learning_rate in learning_rates:
+            # Modify the relevant parameter in params
+            params.learning_rate = learning_rate
+
+            # Launch job (name has to be unique)
+            job_name = "learning_rate_{}_batch_size_{}".format(learning_rate, batch_size)
+            launch_training_job(args.parent_dir, args.data_dir, job_name, params)
