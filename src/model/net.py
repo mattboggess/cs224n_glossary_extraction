@@ -6,31 +6,24 @@ import torch.nn as nn
 import torch.nn.functional as F
 from pytorch_pretrained_bert import BertModel
 
-class Baseline(nn.Module):
+class HoveyMa(nn.Module):
     """
-    Baseline that uses just word embeddings fed into a BiLSTM and then into a softmax output.
+    Re-implementation of Hovey & Ma 2016 w/o the CRF layer.
     """
 
     def __init__(self, params):
         """
-        We define an recurrent network that predicts the NER tags for each token in the sentence. The components
-        required are:
-
-        - an embedding layer: this layer maps each index in range(params.vocab_size) to a params.embedding_dim vector
-        - lstm: applying the LSTM on the sequential input returns an output for each token in the sentence
-        - fc: a fully connected layer that converts the LSTM output for each token to a distribution over NER tags
-
         Args:
             params: (Params) contains vocab_size, embedding_dim, lstm_hidden_dim
         """
-        super(Baseline, self).__init__()
+        super(HoveyMa, self).__init__()
 
         # word embedding
         if 'glove' in params.embed_types:
             self.word_embed_type = 'glove'
             self.embed_size = params.glove_embedding_size
             self.word_embedding = nn.Embedding(params.glove_vocab_size,
-                                          params.glove_embedding_size)
+                                               params.glove_embedding_size)
 
             # load in glove weights & fix
             glove_weights = np.load(params.glove_path)['glove']
@@ -38,24 +31,24 @@ class Baseline(nn.Module):
             self.word_embedding.weight.requires_grad = False
         else:
             self.word_embed_type = 'word'
-            self.embed_size = params.embedding_size
-            self.word_embedding = nn.Embedding(params.vocab_size, params.embedding_dim)
+            self.embed_size = params.word_embedding_size
+            self.word_embedding = nn.Embedding(params.vocab_size, params.word_embedding_size)
 
         # char embedding
         self.char_embed = False
         if 'char' in params.embed_types:
             self.char_embed = True
-            self.embed_size += params.char_embedding_dim
-            self.char_embedding = nn.Embedding(params.char_vocab_size, params.char_embedding_dim)
-            self.conv = nn.Conv1d(params.char_embedding_dim, params.cnn_num_filters,
+            self.embed_size += params.cnn_num_filters
+            self.char_embedding = nn.Embedding(params.char_vocab_size, params.char_embedding_size)
+            self.conv = nn.Conv1d(params.char_embedding_size, params.cnn_num_filters,
                                   params.cnn_window_size, bias=True)
 
         self.dropout = nn.Dropout(params.dropout_rate)
 
-        self.lstm = nn.LSTM(self.embed_size, params.lstm_hidden_dim,
+        self.lstm = nn.LSTM(self.embed_size, params.lstm_hidden_size,
                             batch_first=True, bidirectional=True)
 
-        self.fc = nn.Linear(2 * params.lstm_hidden_dim, params.number_of_tags)
+        self.fc = nn.Linear(2 * params.lstm_hidden_size, params.number_of_tags)
 
     def forward(self, batch):
         """
@@ -121,12 +114,18 @@ class BertNER(nn.Module):
 
     def __init__(self, params):
         super(BertNER, self).__init__()
-        self.bert = BertModel.from_pretrained('bert-base-cased')
+        self.bert = BertModel.from_pretrained(params.bert_type)
         self.dropout = nn.Dropout(self.bert.config.hidden_dropout_prob)
         self.fc = nn.Linear(self.bert.config.hidden_size, params.number_of_tags)
 
     def forward(self, batch):
-        s, _ = self.bert(batch['bert'], output_all_encoded_layers=False)
+        attention_mask = batch['bert_mask']
+        attention_ix = attention_mask == -1
+        attention_mask[attention_ix] = 1
+        s, _ = self.bert(batch['bert'], attention_mask=attention_mask,
+                         output_all_encoded_layers=False)
+        attention_mask[attention_ix] = -1
+
         s = self.dropout(s)
 
         # make the Variable contiguous in memory (a PyTorch artefact)
@@ -143,21 +142,17 @@ class BertNER(nn.Module):
         return F.log_softmax(s, dim=1)   # dim: batch_size*seq_len x num_tags
 
 
-def loss_fn(outputs, labels, bert_mask=None):
+def loss_fn(outputs, labels):
     """
-    Compute the cross entropy loss given outputs from the model and labels for all tokens. Exclude loss terms
-    for PADding tokens.
+    Compute the cross entropy loss given outputs from the model and labels for all tokens. Assumes
+    pad tokens have been screened out.
 
     Args:
         outputs: (Variable) dimension batch_size*seq_len x num_tags - log softmax output of the model
-        labels: (Variable) dimension batch_size x seq_len where each element is either a label in [0, 1, ... num_tag-1],
-                or -1 in case it is a PADding token.
+        labels: (Variable) dimension batch_size x seq_len where each element a label in [0, 1, ... num_tag-1],
 
     Returns:
         loss: (Variable) cross entropy loss for all tokens in the batch
-
-    Note: you may use a standard loss function from http://pytorch.org/docs/master/nn.html#loss-functions. This example
-          demonstrates how you can easily define a custom loss function.
     """
 
 

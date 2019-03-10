@@ -12,8 +12,8 @@ from model.data_loader import DataLoader
 from sklearn.metrics import precision_score, recall_score, f1_score
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data_dir', default='data/small', help="Directory containing the dataset")
-parser.add_argument('--model_dir', default='experiments/base_model', help="Directory containing params.json")
+parser.add_argument('--data_dir', default='../data/ner_test_data', help="Directory containing the dataset")
+parser.add_argument('--model_dir', default='experiments/test', help="Directory containing params.json")
 parser.add_argument('--restore_file', default='best', help="name of the file in --model_dir \
                      containing weights to load")
 
@@ -68,9 +68,9 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps, terms,
                                          cand_terms, data_loader)
 
         # compute all metrics on this batch
-        summary_batch = {metric: compute_ner_metric(output_batch, labels_batch,
-                                                    metric, data_loader)
-                         for metric in metrics['NER Metrics']}
+        outputs, labels = compute_ner_labels(output_batch, labels_batch, data_loader)
+        summary_batch = {'NER ' + metric: compute_metric(outputs, labels, metric)
+                         for metric in metrics}
         summary_batch['loss'] = loss.item()
         summ.append(summary_batch)
 
@@ -78,16 +78,18 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps, terms,
     metrics_eval = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]}
 
     # compute term metrics
-    for metric in metrics['Term Metrics']:
-        metrics_eval[metric] = compute_term_metric(terms, cand_terms,
-                                                   metric)
+    outputs, labels, term_info = compute_term_labels(terms, cand_terms)
+    for metric in metrics:
+        metrics_eval['Term ' + metric] = compute_metric(outputs, labels, metric)
 
     metrics_string = " ; ".join("{}: {:05.3f}".format(k, v) for k, v in metrics_eval.items())
     logging.info("- Eval metrics : " + metrics_string)
-    return metrics_eval
+    return metrics_eval, term_info
 
 
 def get_candidate_terms(outputs, data, terms, data_loader):
+    """ Extracts all candidate terms for the given outputs.
+    """
 
     predicted_labels = np.argmax(outputs, axis=1)
     probs = np.exp(np.max(outputs, axis=1))
@@ -118,23 +120,31 @@ def get_candidate_terms(outputs, data, terms, data_loader):
                 prob.append(probs[i])
                 cand_term = ' '.join(cand_term)
                 if cand_term in terms.keys():
-                    terms[cand_term].append(prob)
+                    terms[cand_term].append(sum(prob) / len(prob))
                 else:
-                    terms[cand_term] = [prob]
+                    terms[cand_term] = [sum(prob) / len(prob)]
         i += 1
+
     return terms
 
 
-def compute_ner_metric(outputs, labels, metric, data_loader=None, bert_mask=None):
-    """
-    Compute the accuracy, given the outputs and labels for all tokens. Exclude PADding terms.
+def compute_ner_labels(outputs, labels, data_loader=None):
+    """Converts tag level outputs and labels to token level outputs and labels. A 1 in the newly
+    returned output corresponds to a predicted key term and a 0 otherwise. This ignores partial
+    key phrase matching and thus key phrases are condensed into a single value in both the
+    predicted outputs and the actual labels.
+
 
     Args:
         outputs: (np.ndarray) dimension batch_size*seq_len x num_tags - log softmax output of the model
         labels: (np.ndarray) dimension batch_size x seq_len where each element is either a label in
-                [0, 1, ... num_tag-1], or -1 in case it is a PADding token.
+                [0, 1, ... num_tag-1], padding already excluded
 
-    Returns: (float) accuracy in [0,1]
+    Returns:
+        outputs: (np.ndarray) dimension batch_size*seq_len 1 or 0 corresponding to predicted key
+        term or phrase or not
+        labels: (np.ndarray) dimension batch_size*seq_len 1 or 0 corresponding to key
+        term/phrase or not
     """
 
     # reshape labels to give a flat vector of length batch_size*seq_len
@@ -176,20 +186,27 @@ def compute_ner_metric(outputs, labels, metric, data_loader=None, bert_mask=None
                 token_outputs.append(0)
         i += 1
 
-    # compare outputs with labels and divide by number of tokens (excluding PADding tokens)
-    if metric == 'NER Accuracy':
-        return np.sum(np.array(token_outputs)==np.array(token_labels))/float(len(token_labels))
-    elif metric == 'NER Precision':
-        return precision_score(token_labels, token_outputs, average='binary')
-    elif metric == 'NER Recall':
-        return recall_score(token_labels, token_outputs, average='binary')
-    elif metric == 'NER F1':
-        return f1_score(token_labels, token_outputs, average='binary')
-    else:
-        raise ValueError('Unsupported metric: %s' % metric)
+    return token_outputs, token_labels
 
-def compute_term_metric(terms, candidate_terms, metric, data_loader=None):
-    """ Currently candidates are any words tagged at least once """
+
+def compute_term_labels(terms, candidate_terms):
+    """ Converts the actual key terms and a list of candidate terms provided by the model into
+        a list of predicted outputs and labels to facilitate computation of metrics.
+        Currently candidates are any words tagged at least once
+
+        Args:
+            terms: list list of all key terms in the corpus
+            candidate_terms: (dictionary) dictionary mapping all terms tagged at least once by the
+                model to a list of confidence scores for each of those taggings
+
+        Returns:
+            outputs: (list) list of predicted key term labels for union of candidate terms and terms
+            labels: (list) list of actual key term labels for union of candidate terms and terms
+            term_info: (dict) dictionary containing list of term average confidence scores split
+                into false positives, true positives, and false negatives
+
+    """
+
 
     terms = [term.lower() for term in terms]
     # handle multiple representations
@@ -210,30 +227,40 @@ def compute_term_metric(terms, candidate_terms, metric, data_loader=None):
                 candidate_terms[term] = candidate_terms[acronym]
                 candidate_terms.pop(acronym)
 
+    # extract out false positive, true positives, and false negatives with confidence score
+    terms = set(terms)
+    cand_terms = set(candidate_terms.keys())
+    term_info = {'false_pos': [], 'true_pos': [], 'false_neg': []}
+    for term in terms.intersection(cand_terms):
+        term_info['true_pos'].append((term, sum(candidate_terms[term]) / len(candidate_terms[term])))
+    for term in cand_terms.difference(terms):
+        term_info['false_pos'].append((term, sum(candidate_terms[term]) / len(candidate_terms[term])))
+    for term in terms.difference(cand_terms):
+        term_info['false_neg'].append((term, 0))
 
-    # label for the union of candidate and actual terms
-    all_words = set(terms).union(set(candidate_terms.keys()))
+    # label for the union of candidate and actual terms to compute metrics
+    all_words = terms.union(cand_terms)
     labels = np.array([1 if word in terms else 0 for word in all_words])
     outputs = np.array([1 if word in candidate_terms.keys() else 0 for word in all_words])
 
-    # compare outputs with labels and divide by number of tokens (excluding PADding tokens)
-    if metric == 'Term Accuracy':
-        return np.sum(outputs==labels)/float(len(all_words))
-    elif metric == 'Term Precision':
+    return outputs, labels, term_info
+
+def compute_metric(outputs, labels, metric):
+
+    if metric == 'accuracy':
+        return np.sum(np.array(outputs) == np.array(labels))/float(len(outputs))
+    elif metric == 'precision':
         return precision_score(labels, outputs, average='binary')
-    elif metric == 'Term Recall':
+    elif metric == 'recall':
         return recall_score(labels, outputs, average='binary')
-    elif metric == 'Term F1':
+    elif metric == 'f1':
         return f1_score(labels, outputs, average='binary')
     else:
         raise ValueError('Unsupported metric: %s' % metric)
 
 
 # maintain all metrics required in this dictionary- these are used in the training and evaluation loops
-metrics = {
-    'NER Metrics': ['NER Accuracy', 'NER F1', 'NER Precision', 'NER Recall'],
-    'Term Metrics': ['Term Accuracy', 'Term F1', 'Term Precision', 'Term Recall']
-}
+metrics = ['accuracy', 'precision', 'recall', 'f1']
 
 if __name__ == '__main__':
     """
@@ -281,7 +308,15 @@ if __name__ == '__main__':
 
     # Evaluate
     num_steps = (params.test_size + 1) // params.batch_size
-    test_metrics = evaluate(model, loss_fn, test_data_iterator, metrics,
-                            params, num_steps, test_data['terms'], data_loader)
+    test_metrics, term_info  = evaluate(model, loss_fn, test_data_iterator, metrics,
+                                        params, num_steps, test_data['terms'], data_loader)
     save_path = os.path.join(args.model_dir, "metrics_test_{}.json".format(args.restore_file))
     utils.save_dict_to_json(test_metrics, save_path)
+
+    # save best false positive, true positive, and false negative list for error analysis
+    for list_type in ['false_pos', 'true_pos', 'false_neg']:
+        fp_path = os.path.join(model_dir, '%s_test.txt' % list_type)
+        with open(fp_path, 'w') as f:
+            for fp in sorted(term_info[list_type]):
+                f.write('%s, %.3f\n' % (fp[0], fp[1]))
+

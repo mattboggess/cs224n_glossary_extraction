@@ -80,11 +80,9 @@ def train(model, optimizer, loss_fn, data_iterator, metrics, params, num_steps):
             labels_batch = labels_batch.data.cpu().numpy()
 
             # compute all metrics on this batch
-            summary_batch = {metric: evaluate.compute_ner_metric(output_batch,
-                                                                 labels_batch,
-                                                                 metric,
-                                                                 data_loader)
-                             for metric in metrics['NER Metrics']}
+            outputs, labels = evaluate.compute_ner_labels(output_batch, labels_batch, data_loader)
+            summary_batch = {'NER ' + metric: evaluate.compute_metric(outputs, labels, metric)
+                             for metric in evaluate.metrics}
             summary_batch['loss'] = loss.item()
             summ.append(summary_batch)
 
@@ -132,10 +130,10 @@ def train_and_evaluate(model, train_data, val_data, optimizer, loss_fn, metrics,
         # Evaluate for one epoch on validation set
         num_steps = (params.val_size + 1) // params.batch_size
         val_data_iterator = data_loader.data_iterator(val_data, params, shuffle=False)
-        val_metrics = evaluate.evaluate(model, loss_fn, val_data_iterator, metrics,
-                                        params, num_steps, val_data['terms'], data_loader)
+        val_metrics, term_info = evaluate.evaluate(model, loss_fn, val_data_iterator, metrics,
+                                                   params, num_steps, val_data['terms'], data_loader)
 
-        val_acc = val_metrics['Term F1']
+        val_acc = val_metrics['Term f1']
         is_best = val_acc >= best_val_acc
 
         # Save weights
@@ -153,6 +151,13 @@ def train_and_evaluate(model, train_data, val_data, optimizer, loss_fn, metrics,
             # Save best val metrics in a json file in the model directory
             best_json_path = os.path.join(model_dir, "metrics_val_best_weights.json")
             utils.save_dict_to_json(val_metrics, best_json_path)
+
+            # save best false positive, true positive, and false negative list for error analysis
+            for list_type in ['false_pos', 'true_pos', 'false_neg']:
+                fp_path = os.path.join(model_dir, '%s_val.txt' % list_type)
+                with open(fp_path, 'w') as f:
+                    for fp in sorted(term_info[list_type]):
+                        f.write('%s, %.3f\n' % (fp[0], fp[1]))
 
         # Save latest val metrics in a json file in the model directory
         last_json_path = os.path.join(model_dir, "metrics_val_last_weights.json")
@@ -193,12 +198,12 @@ if __name__ == '__main__':
     logging.info("- done.")
 
     # Define the model and optimizer
-    if 'bert' in params.embed_types:
+    if params.model_type == 'bert':
         model = net.BertNER(params).cuda() if params.cuda else net.BertNER(params)
     else:
-        model = net.Baseline(params).cuda() if params.cuda else net.Baseline(params)
+        model = net.HoveyMa(params).cuda() if params.cuda else net.HoveyMa(params)
 
-    if 'bert' in params.embed_types:
+    if params.model_type == 'bert':
         optimizer = BertAdam(model.parameters(), lr=params.learning_rate)
     else:
         optimizer = optim.Adam(model.parameters(), lr=params.learning_rate)
