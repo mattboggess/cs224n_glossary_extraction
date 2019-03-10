@@ -13,11 +13,12 @@ import utils
 import model.net as net
 from model.data_loader import DataLoader
 import evaluate
+from pytorch_pretrained_bert import BertAdam
 
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_dir', default='../data/small', help="Directory containing the dataset")
-parser.add_argument('--model_dir', default='experiments/base_model_explore', help="Directory containing params.json")
+parser.add_argument('--model_dir', default='experiments/base_model', help="Directory containing params.json")
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before \
                     training")  # 'best' or 'train'
@@ -50,8 +51,19 @@ def train(model, optimizer, loss_fn, data_iterator, metrics, params, num_steps):
         train_batch = next(data_iterator)
         labels_batch = train_batch['labels']
 
-        # compute model output and loss
+        # compute model forward pass
         output_batch = model(train_batch)
+
+        # remove padding & bert sub-words
+        labels_batch = labels_batch.contiguous().view(-1)
+        labels_mask = labels_batch >= 0
+        if 'bert_mask' in train_batch.keys():
+            output_batch = output_batch[train_batch['bert_mask'].contiguous().view(-1) == 1, :]
+        else:
+            output_batch = output_batch[labels_mask, :]
+        labels_batch = labels_batch[labels_mask]
+
+        # compute loss
         loss = loss_fn(output_batch, labels_batch)
 
         # clear previous gradients, compute gradients of all variables wrt loss
@@ -181,8 +193,15 @@ if __name__ == '__main__':
     logging.info("- done.")
 
     # Define the model and optimizer
-    model = net.Baseline(params).cuda() if params.cuda else net.Baseline(params)
-    optimizer = optim.Adam(model.parameters(), lr=params.learning_rate)
+    if 'bert' in params.embed_types:
+        model = net.BertNER(params).cuda() if params.cuda else net.BertNER(params)
+    else:
+        model = net.Baseline(params).cuda() if params.cuda else net.Baseline(params)
+
+    if 'bert' in params.embed_types:
+        optimizer = BertAdam(model.parameters(), lr=params.learning_rate)
+    else:
+        optimizer = optim.Adam(model.parameters(), lr=params.learning_rate)
 
     # fetch loss function and metrics
     loss_fn = net.loss_fn

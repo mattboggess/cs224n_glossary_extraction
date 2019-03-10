@@ -6,6 +6,7 @@ import json
 
 import torch
 from torch.autograd import Variable
+from pytorch_pretrained_bert import BertTokenizer
 
 import utils
 
@@ -66,6 +67,12 @@ class DataLoader(object):
             for i, l in enumerate(f.read().splitlines()):
                 self.char2id[l] = i
         self.id2char = {v: k for k, v in self.char2id.items()}
+
+        # Bert mappings
+        self.bert_tokenizer = BertTokenizer.from_pretrained('bert-base-cased',
+                                                            do_lower_case=False,
+                                                            never_split=['[CLS]', '[SEP]',
+                                                                         '<unk>', '<pad>'])
 
         # adding dataset parameters to param (e.g. vocab size, )
         params.update(json_path)
@@ -206,6 +213,13 @@ class DataLoader(object):
             sents_t = pad_sents(word_ids, self.glove2id['<pad>'])
             sents_var = torch.tensor(sents_t, dtype=torch.long)
             return sents_var
+        elif embed_type == 'bert':
+            word_ids, word_mask = self.bert_tokenize(sents)
+            sents_t = pad_sents(word_ids, self.bert_tokenizer.convert_tokens_to_ids(['[PAD]'])[0])
+            word_mask = pad_sents(word_mask, 0)
+            sents_var = torch.tensor(sents_t, dtype=torch.long)
+            berts_mask = torch.tensor(word_mask, dtype=torch.long)
+            return sents_var, berts_mask
         else:
             raise ValueError('Unsupported Embedding Type: %s' % embed_type)
 
@@ -221,6 +235,25 @@ class DataLoader(object):
         sents_padded = pad_sents_char(char_ids, self.char2id['<pad>'])
         sents_t = torch.tensor(sents_padded, dtype=torch.long)
         return sents_t.permute(1, 0, 2)
+
+    def bert_tokenize(self, sents):
+        bert_sents = []
+        bert_masks = []
+        for sent in sents:
+            bert_sent = []
+            bert_mask = []
+            sent = ['[CLS]'] + sent + ['[SEP]']
+            for token in sent:
+                bert_tokens = self.bert_tokenizer.tokenize(token)
+                bert_tokenids = self.bert_tokenizer.convert_tokens_to_ids(bert_tokens)
+                bert_sent += bert_tokenids
+                if token == '[CLS]' or token == '[SEP]':
+                    bert_mask += [0]
+                else:
+                    bert_mask += ([1] + [-1] * (len(bert_tokenids) - 1))
+            bert_sents.append(bert_sent)
+            bert_masks.append(bert_mask)
+        return bert_sents, bert_masks
 
     def data_iterator(self, data, params, shuffle=False):
         """
@@ -256,10 +289,20 @@ class DataLoader(object):
 
             # compute all desired embedding representation inputs
             for embed_type in params.embed_types:
-                batch[embed_type] = self.to_input_tensor(batch_sentences, embed_type)
-                if params.cuda:
-                    batch[embed_type] = batch[embed_type].cuda()
-                batch[embed_type] = Variable(batch[embed_type])
+                if embed_type == 'bert':
+                    sents, mask = self.to_input_tensor(batch_sentences, embed_type)
+                    batch[embed_type] = sents
+                    batch[embed_type + '_mask'] = mask
+                    if params.cuda:
+                        batch[embed_type] = batch[embed_type].cuda()
+                        batch[embed_type + '_mask'] = batch[embed_type + '_mask'].cuda()
+                    batch[embed_type] = Variable(batch[embed_type])
+                else:
+                    batch[embed_type] = self.to_input_tensor(batch_sentences, embed_type)
+                    if params.cuda:
+                        batch[embed_type] = batch[embed_type].cuda()
+                    batch[embed_type] = Variable(batch[embed_type])
+
 
             # convert the tags to a label tensor
             batch['labels'] = self.to_input_tensor(batch_tags, 'tag')
@@ -288,7 +331,7 @@ class DataLoader(object):
             # yield batch_data, batch_labels
             yield batch
 
-def pad_sents(sents, pad_token):
+def pad_sents(sents, pad_token, max_len=None):
     """ Pad list of sentences according to the longest sentence in the batch.
     @param sents (list[list[int]]): list of sentences, where each sentence
                                     is represented as a list of words
@@ -300,8 +343,8 @@ def pad_sents(sents, pad_token):
     """
     sents_padded = []
 
-    max_len = max(len(s) for s in sents)
-    batch_size = len(sents)
+    if not max_len:
+        max_len = max(len(s) for s in sents)
 
     for s in sents:
         padded = [pad_token] * max_len

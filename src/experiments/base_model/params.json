@@ -1,12 +1,14 @@
 {
-    "learning_rate": 1e-3,
+    "learning_rate": 2e-5,
     "batch_size": 10,
-    "num_epochs": 10,
+    "num_epochs": 100,
 
     "lstm_hidden_dim": 200,
+    "embedding_size": 50,
     "embedding_dim": 50,
+    "dropout_rate": 0.5,
 
-    "embed_types": ["glove"],
+    "embed_types": ["bert"],
 
     "save_summary_steps": 100
 }

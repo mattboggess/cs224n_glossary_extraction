@@ -4,7 +4,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+from pytorch_pretrained_bert import BertModel
 
 class Baseline(nn.Module):
     """
@@ -117,7 +117,33 @@ class Baseline(nn.Module):
         return F.log_softmax(s, dim=1)   # dim: batch_size*seq_len x num_tags
 
 
-def loss_fn(outputs, labels):
+class BertNER(nn.Module):
+
+    def __init__(self, params):
+        super(BertNER, self).__init__()
+        self.bert = BertModel.from_pretrained('bert-base-cased')
+        self.dropout = nn.Dropout(self.bert.config.hidden_dropout_prob)
+        self.fc = nn.Linear(self.bert.config.hidden_size, params.number_of_tags)
+
+    def forward(self, batch):
+        s, _ = self.bert(batch['bert'], output_all_encoded_layers=False)
+        s = self.dropout(s)
+
+        # make the Variable contiguous in memory (a PyTorch artefact)
+        s = s.contiguous()
+
+        # reshape the Variable so that each row contains one token
+        s = s.view(-1, s.shape[2])       # dim: batch_size*seq_len x lstm_hidden_dim
+
+        # apply the fully connected layer and obtain the output (before softmax) for each token
+        s = self.fc(s)                   # dim: batch_size*seq_len x num_tags
+
+        # apply log softmax on each token's output (this is recommended over applying softmax
+        # since it is numerically more stable)
+        return F.log_softmax(s, dim=1)   # dim: batch_size*seq_len x num_tags
+
+
+def loss_fn(outputs, labels, bert_mask=None):
     """
     Compute the cross entropy loss given outputs from the model and labels for all tokens. Exclude loss terms
     for PADding tokens.
@@ -134,18 +160,8 @@ def loss_fn(outputs, labels):
           demonstrates how you can easily define a custom loss function.
     """
 
-    # reshape labels to give a flat vector of length batch_size*seq_len
-    labels = labels.contiguous().view(-1)
 
-    # since PADding tokens have label -1, we can generate a mask to exclude the loss from those terms
-    mask = (labels >= 0).float()
+    num_tokens = len(labels)
 
-    # indexing with negative values is not supported. Since PADded tokens have label -1, we convert them to a positive
-    # number. This does not affect training, since we ignore the PADded tokens with the mask.
-    labels = labels % outputs.shape[1]
-
-    num_tokens = int(torch.sum(mask).item())
-
-    # compute cross entropy loss for all tokens (except PADding tokens), by multiplying with mask.
-    return -torch.sum(outputs[range(outputs.shape[0]), labels]*mask)/num_tokens
+    return -torch.sum(outputs[range(outputs.shape[0]), labels])/num_tokens
 

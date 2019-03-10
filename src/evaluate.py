@@ -44,8 +44,19 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps, terms,
         data_batch = next(data_iterator)
         labels_batch = data_batch['labels']
 
-        # compute model output
+        # compute model forward pass
         output_batch = model(data_batch)
+
+        # remove padding & bert sub-words
+        labels_batch = labels_batch.contiguous().view(-1)
+        labels_mask = labels_batch >= 0
+        if 'bert_mask' in data_batch.keys():
+            output_batch = output_batch[data_batch['bert_mask'].contiguous().view(-1) == 1, :]
+        else:
+            output_batch = output_batch[labels_mask, :]
+        labels_batch = labels_batch[labels_mask]
+
+        # compute loss
         loss = loss_fn(output_batch, labels_batch)
 
         # extract data from torch Variable, move to cpu, convert to numpy arrays
@@ -53,7 +64,7 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps, terms,
         labels_batch = labels_batch.data.cpu().numpy()
 
         # extract terms classified by the model
-        cand_terms = get_candidate_terms(output_batch[labels_batch.ravel() >= 0, :], data_batch['sentences'],
+        cand_terms = get_candidate_terms(output_batch, data_batch['sentences'],
                                          cand_terms, data_loader)
 
         # compute all metrics on this batch
@@ -114,7 +125,7 @@ def get_candidate_terms(outputs, data, terms, data_loader):
     return terms
 
 
-def compute_ner_metric(outputs, labels, metric, data_loader=None):
+def compute_ner_metric(outputs, labels, metric, data_loader=None, bert_mask=None):
     """
     Compute the accuracy, given the outputs and labels for all tokens. Exclude PADding terms.
 
