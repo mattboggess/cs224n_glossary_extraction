@@ -86,7 +86,7 @@ class DataLoader(object):
                 labels.append(l)        
 
         # checks to ensure there is a tag for each token
-        assert len(labels) == len(sentences)
+        assert (len(labels) == len(sentences))
         if not self.is_def:
             for i in range(len(labels)):
                 assert len(labels[i]) == len(sentences[i])
