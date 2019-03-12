@@ -35,7 +35,7 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
 
     # summary for current eval loop
     summ = []
-    tagged_sentences = []
+    sentences = []
     labels = []
 
     # compute metrics over the dataset
@@ -56,9 +56,8 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
                          for metric in metrics}
         summary_batch['loss'] = loss.item()
         summ.append(summary_batch)
-        for x, y in zip(data_batch, labels_batch):
-            tagged_sent = " ".join([data_loader.voacbi2c[_] for _ in x]) + '<' + str(y) + '/>'
-            tagged_sentences.append(tagged_sent)
+        sentences.append(data_batch)
+        labels.append(labels_batch)
 
     # compute mean of all metrics in summary
     metrics_mean = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]}
@@ -66,9 +65,8 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
     logging.info("- Eval metrics : " + metrics_string)
 
     # write out tagged sentences
-    ofname = os.path.join(args.model_dir, 'output_tagged_sentences.txt')
-    with open(ofname, 'w') as fout:
-        fout.write("\n".join(tagged_sentences))
+    out_fpath = os.path.join(args.model_dir, 'output_tagged_sentences.txt')
+
     
     return metrics_mean
 
