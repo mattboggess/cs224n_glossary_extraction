@@ -35,6 +35,8 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
 
     # summary for current eval loop
     summ = []
+    sentences = []
+    labels = []
 
     # compute metrics over the dataset
     for _ in range(num_steps):
@@ -54,11 +56,18 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
                          for metric in metrics}
         summary_batch['loss'] = loss.item()
         summ.append(summary_batch)
+        sentences.append(data_batch)
+        labels.append(labels_batch)
 
     # compute mean of all metrics in summary
     metrics_mean = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]}
     metrics_string = " ; ".join("{}: {:05.3f}".format(k, v) for k, v in metrics_mean.items())
     logging.info("- Eval metrics : " + metrics_string)
+
+    # write out tagged sentences
+    out_fpath = os.path.join(args.model_dir, 'output_tagged_sentences.txt')
+
+    
     return metrics_mean
 
 
