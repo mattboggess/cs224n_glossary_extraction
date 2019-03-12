@@ -49,51 +49,6 @@ for book in books:
                 data[split]['sentences'].append(" ".join(nltk.word_tokenize(sent)))
                 data[split]['labels'].append(str(is_good))
 
-## Add wikipedia data to train set
-dataDir = '../data/wcl_datasets_v1.2/wikipedia/'
-dataFiles = ('wiki_good.txt',
-             'wiki_bad.txt')
-
-for fname in dataFiles:
-    is_good = 0
-    if re.search("_good.txt$", fname):
-        is_good = 1
-    fname = dataDir + '/' + fname
-    print ("Reading file {}".format(fname))
-    with open(fname, 'r') as fin:
-        text = fin.read()
-        text = text.split("\n")
-        for i in range(int(len(text)/2)):
-            target = text[i*2+1].split(" ")[0].split(":")[0]
-            if not is_good:
-                target = target.replace("!", "")
-            sent1 = text[i*2].replace("TARGET", target)
-            tokens = nltk.word_tokenize(sent1)
-            data['train']['sentences'].append(" ".join(tokens[1:]))
-            data['train']['labels'].append(str(is_good))
-
-## Add W00 data to train set
-dataDir = '../data/W00_dataset'
-dataFiles = ('annotated.word',
-             'annotated.tag')
-
-# Read all sentences
-fname = dataDir + '/' + dataFiles[0]
-with open(fname, 'r') as fin:
-    text = fin.read()
-    [data['train']['sentences'].append(x) for x in text.split("\n") if not re.search("^$", x)]
-
-# Read tag data
-fname = dataDir + '/' + dataFiles[1]
-with open(fname, 'r') as fin:
-    text = fin.read()
-    for x in text.split("\n"):
-        if (re.search("^$", x)):
-            continue
-        if re.search("TERM",x):
-            data['train']['labels'].append(str(1))
-        else:
-            data['train']['labels'].append(str(0))
 
 ## sanity check
 for x in ("train", "test"):
@@ -156,12 +111,12 @@ indices = list(indices)
 # full
 with open(odataDir + "/full/test/sentences.txt", "w") as fout:
     fout.write("\n".join([data['test']['sentences'][x] for x in indices]))
-with open(odataDir + "/full/test/labels.txt", "w") as fout:
+with open(odataDir + "/full/val/labels.txt", "w") as fout:
     fout.write("\n".join([data['test']['labels'][x] for x in indices]))
 
 # small
 with open(odataDir + "/small/test/sentences.txt", "w") as fout:
     fout.write("\n".join([data['test']['sentences'][x] for x in indices[0:small_size]]))
-with open(odataDir + "/small/test/labels.txt", "w") as fout:
+with open(odataDir + "/small/val/labels.txt", "w") as fout:
     fout.write("\n".join([data['test']['labels'][x] for x in indices[0:small_size]]))
 

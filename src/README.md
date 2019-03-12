@@ -80,7 +80,7 @@ python synthesize_results.py --parent_dir experiments/learning_rate
 ```
 
 6. __Evaluation on the test set__ Once you've run many experiments and selected your best model and hyperparameters based on the performance on the development set, you can finally evaluate the performance of your model on the test set. Run
-```
+``` 
 python evaluate.py --data_dir data/small --model_dir experiments/base_model
 ```
 

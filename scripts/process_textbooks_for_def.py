@@ -1,10 +1,11 @@
+#!/usr/bin/env python
+
 from subprocess import call
 from nltk.tokenize import sent_tokenize, word_tokenize
 import json
 import re
 import os
 import time
-#import pandas as pd
 from bs4 import BeautifulSoup
 
 def match_pattern(elem, pattern):
@@ -14,33 +15,62 @@ def match_pattern(elem, pattern):
     else:
         return re_pattern.match(elem.attrs[pattern[0]])
 
-def get_text_between_elements(spans, start_pattern, end_pattern, text_pattern, definiendum_pattern):
+def get_text_between_elements(span, text_pattern, definiendum_pattern=None):
     text = []
-    between = False
-    for span in spans:
-        if between:
-            if match_pattern(span, end_pattern):
-                between = False
-            else:
-                if match_pattern(span, definiendum_pattern):
-                    text.append("<" + span.text.strip() + "/>")
-                elif match_pattern(span, text_pattern):
-                    text.append(span.text)
-        else:
-            if match_pattern(span, start_pattern):
-                between = True
-                
+    if match_pattern(span, definiendum_pattern):
+        text.append("<" + span.text.strip() + "/>")
+    elif match_pattern(span, text_pattern):
+        text.append(span.text)
     return text
 
 def extract_sentences(soup, pattern_info):
 
     # extract chapter text
-    spans = soup.find_all('span')
-    text = get_text_between_elements(spans,
-                                     pattern_info['chapter_start_pattern'],
-                                     pattern_info['chapter_end_pattern'],
-                                     pattern_info['chapter_text_pattern'],
-                                     pattern_info['definiendum_pattern'])
+    # between : keep track of inside/outside chapter
+    # skip : keep track of sections to skip
+    text = []
+    between = False
+    skip = False
+
+    divs = soup.find_all('div')
+    for div in divs:
+        # start of skip section
+        if between and not skip and 'div_exclude_pattern' in pattern_info and \
+                match_pattern(div, pattern_info['div_exclude_pattern'][0]):
+            x = "%s" %(div)
+            s = BeautifulSoup(x, 'lxml')
+            spans = s.find_all('span')
+            for span in spans:
+                if match_pattern(span, pattern_info['div_exclude_pattern'][1]):
+                    skip = True
+        if skip and match_pattern(div, pattern_info['div_include_pattern'][0]):
+            x = "%s" %(div)
+            s = BeautifulSoup(x, 'lxml')
+            spans = s.find_all('span')
+            for span in spans:
+                if match_pattern(span, pattern_info['div_include_pattern'][1]):
+                    skip = False
+        if skip:
+            continue
+
+        x = "%s" %(div)
+        s = BeautifulSoup(x, 'lxml')
+        spans = s.find_all('span')
+        for span in spans:
+            if not between:
+                # look for start chapter
+                if match_pattern(span, pattern_info['chapter_start_pattern']):
+                    between = True
+                    continue
+            if between:
+                # end of chapter
+                if match_pattern(span, pattern_info['chapter_end_pattern']):
+                    between = False
+                    continue
+                # extract text
+                text.extend(get_text_between_elements(span,
+                                                      pattern_info['chapter_text_pattern'],
+                                                      pattern_info['definiendum_pattern']))
 
     text = ' '.join(text)
     text = text.replace('\n', ' ')
@@ -89,11 +119,16 @@ def merge_keyterm_in_list(x):
 def extract_def_sentences_and_key_terms (sentences, textbook_info):
     
     # extract definition/non-definition sentences
-    # return (def_sentences, nondef_sentences, key_terms)
+    # return (def_sentences, nondef_sentences, key_terms, tagged_sentences)
+    #   def_sentences: Definition sentences
+    #   nondef_sentences: Non definition sentences
+    #   key_terms: Key terms extracted from sentences
+    #   tagged_sentences: defintion sentences with definiendum tagged
     
     def_sentences = []
     nondef_sentences = []
     key_terms = []
+    tagged_sentences = []
 
     ipattern = re.compile(textbook_info['definiendum_include_pattern'])
     epattern = re.compile(textbook_info['definiendum_exclude_pattern'])
@@ -115,13 +150,14 @@ def extract_def_sentences_and_key_terms (sentences, textbook_info):
         m1 = merge_keyterm_in_list(epattern.findall(sent))
         m = list(set(m0) - set(m1))
         #print (m0, m1, m)
+        tagged_sentences.append(sent)
         sent = sent.replace("<", "").replace("/>", "")
         if len(m) > 0:
             def_sentences.append(sent)
             key_terms.extend(m)
         else:
             nondef_sentences.append(sent)
-    return (def_sentences, nondef_sentences, key_terms)
+    return (def_sentences, nondef_sentences, key_terms, tagged_sentences)
 
 if __name__ == "__main__":
     
@@ -143,7 +179,7 @@ if __name__ == "__main__":
         #textbook = 'open_stax_university_physics_v1'
         #textbook = 'open_stax_university_physics_v2'
         #textbook = 'open_stax_university_physics_v3'
-        #textbook = 'life_biology'
+        textbook = 'life_biology'
         #textbook = 'open_stax_microbiology'
         print ("Processing Textbook: {}".format(textbook))
         with open('%s/%s.html' %(input_dir, textbook), 'r') as fin:
@@ -156,7 +192,7 @@ if __name__ == "__main__":
         # extract definition/non-definition sentences
         xxx = extract_def_sentences_and_key_terms(sentences, 
                                                   textbook_info[textbook])
-        def_sentences, nondef_sentences, key_terms = xxx
+        def_sentences, nondef_sentences, key_terms, tagged_sentences = xxx
 
         # write out def/nodef sentences
         fname = '%s/%s_def.txt' %(output_dir, textbook)
@@ -171,9 +207,17 @@ if __name__ == "__main__":
             for sentence in nondef_sentences:
                 fout.write('%s\n' % sentence)
 
+        # write out key terms
         fname = '%s/%s_key_terms.txt' %(output_dir, textbook)
         print ("Writing {}".format(fname))
         with open(fname, 'w') as fout:
             for term in key_terms:
                 fout.write('%s\n' % term)
         
+        # write out tagged_sentences
+        fname = '%s/%s_tagged_sentences.txt' %(output_dir, textbook)
+        print ("Writing {}".format(fname))
+        with open(fname, 'w') as fout:
+            for sent in tagged_sentences:
+                fout.write('%s\n' % sent)
+        exit()
