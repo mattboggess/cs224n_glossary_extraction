@@ -82,7 +82,7 @@
 		"chapter_start_pattern": ["text", ".*CHAPTER OUTLINE.*"],
 		"chapter_end_pattern": ["text", ".*CHAPTER SUMMARY.*"],
 		"chapter_text_pattern": ["style", ".*1[0-1]px.*"],
-		"definiendum_pattern": ["style", ".*'MHOJLB\\+HelveticaNeueLT\\-Bold'.*10px.*"],
+		"definiendum_pattern": ["style", ".*\\+HelveticaNeueLT\\-Bold'.*10px.*"],
 		"definiendum_include_pattern": "<([\\w\\s\\(\\)\\-\\']+)/>",
 		"definiendum_exclude_pattern": "<(^[0-9.]+.*)/>"
 	},
