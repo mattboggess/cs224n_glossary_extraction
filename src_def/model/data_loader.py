@@ -48,9 +48,11 @@ class DataLoader(object):
         # loading tags (we require this to map tags to their indices)
         tags_path = os.path.join(data_dir, 'tags.txt')
         self.tag_map = {}
+        self.inv_tag_map = {}
         with open(tags_path) as f:
             for i, t in enumerate(f.read().splitlines()):
                 self.tag_map[t] = i
+                self.inv_tag_map[i] = t
 
         # adding dataset parameters to param (e.g. vocab size, )
         params.update(json_path)

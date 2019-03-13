@@ -56,8 +56,11 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
                          for metric in metrics}
         summary_batch['loss'] = loss.item()
         summ.append(summary_batch)
-        for x, y in zip(data_batch, labels_batch):
-            tagged_sent = " ".join([data_loader.voacbi2c[_] for _ in x]) + '<' + str(y) + '/>'
+        data_batch = data_batch.data.cpu().numpy().tolist()
+        output_batch = output_batch > 0.5
+        for x, y in zip(data_batch, output_batch):
+            y = int(y[0])
+            tagged_sent = " ".join([data_loader.vocabi2c[_] for _ in x]) + '<' + str(data_loader.inv_tag_map[y]) + '/>'
             tagged_sentences.append(tagged_sent)
 
     # compute mean of all metrics in summary
