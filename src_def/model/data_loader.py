@@ -2,6 +2,7 @@ import random
 import numpy as np
 import os
 import sys
+import json
 
 import torch
 from torch.autograd import Variable
@@ -13,7 +14,7 @@ class DataLoader(object):
     """
     Handles all aspects of the data. Stores the dataset_params, vocabulary and tags with their mappings to indices.
     """
-    def __init__(self, data_dir, params, is_def=False):
+    def __init__(self, data_dir, params, is_def=True):
         """
         Loads dataset_params, vocabulary and tags. Ensure you have run `build_vocab.py` on data_dir before using this
         class.
@@ -34,26 +35,47 @@ class DataLoader(object):
         
         # loading vocab (we require this to map words to their indices)
         vocab_path = os.path.join(data_dir, 'words.txt')
-        self.vocab = {}
-        self.vocabi2c = {}
+        self.vocab2id = {}
+        self.id2vocab = {}
         with open(vocab_path) as f:
             for i, l in enumerate(f.read().splitlines()):
-                self.vocab[l] = i
-                self.vocabi2c[i] = l
+                self.vocab2id[l] = i
+                self.id2vocab[i] = l
         
         # setting the indices for UNKnown words and PADding symbols
-        self.unk_ind = self.vocab[self.dataset_params.unk_word]
-        self.pad_ind = self.vocab[self.dataset_params.pad_word]
+        self.unk_ind = self.vocab2id[self.dataset_params.unk_word]
+        self.pad_ind = self.vocab2id[self.dataset_params.pad_word]
+
+        # loading glove mappings and create vocab <--> glove id mapping
+        glove_path = os.path.join(data_dir, 'glove_indices.json')
+        self.glove2id = {}
+        with open(glove_path) as f:
+            glove_ix = json.load(f)
+        # map words to their glove indices if existent, otherwise to the unknown glove vector
+        for word in self.vocab2id.keys():
+            self.glove2id[word] = glove_ix.get(word, glove_ix[self.dataset_params.unk_word])
+        self.id2glove = {v: k for k, v in self.glove2id.items()}
+
+        if 'glove' in params.embed_types:
+            self.vocab = self.glove2id
+            self.vocabi2c = self.id2glove
+            self.unk_ind = self.glove2id[self.dataset_params.unk_word]
+            self.pad_ind = self.glove2id[self.dataset_params.pad_word]
+        else:
+            self.vocab = self.vocab2id
+            self.vocabi2c = self.id2vocab
                 
         # loading tags (we require this to map tags to their indices)
         tags_path = os.path.join(data_dir, 'tags.txt')
         self.tag_map = {}
-        self.inv_tag_map = {}
+        self.inv_tag_map= {}
         with open(tags_path) as f:
             for i, t in enumerate(f.read().splitlines()):
                 self.tag_map[t] = i
                 self.inv_tag_map[i] = t
 
+        # for definition model, force tags to be 0|1 for
+        # (negative|positive) samples
         if self.is_def:
             self.tag_map['0'] = 0
             self.tag_map['1'] = 1
