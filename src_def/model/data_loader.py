@@ -54,6 +54,12 @@ class DataLoader(object):
                 self.tag_map[t] = i
                 self.inv_tag_map[i] = t
 
+        if self.is_def:
+            self.tag_map['0'] = 0
+            self.tag_map['1'] = 1
+            self.inv_tag_map[0] = '0'
+            self.inv_tag_map[1] = '1'
+
         # adding dataset parameters to param (e.g. vocab size, )
         params.update(json_path)
 

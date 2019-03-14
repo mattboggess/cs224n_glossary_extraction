@@ -175,6 +175,7 @@ def accuracy(outputs, labels):
     # threshold the output
     #??fixme?? How to get threshold here
     outputs = outputs > 0.5
+    labels = labels == 1
 
     # compare outputs with labels and divide by number of sentences
     return np.sum(outputs==labels)/float(labels.shape[0])
@@ -191,7 +192,7 @@ def f1metric(outputs, labels):
     """
 
     outputs = outputs > 0.5
-    labels = labels == 0 ;# ??fixme??
+    labels = labels == 1
     tn = np.sum(np.logical_or(outputs, labels) == 0)
     tp = np.sum(np.logical_and(outputs, labels) == 1)
     x = np.logical_xor(outputs, labels)
