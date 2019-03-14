@@ -56,22 +56,24 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
                          for metric in metrics}
         summary_batch['loss'] = loss.item()
         summ.append(summary_batch)
-        data_batch = data_batch.data.cpu().numpy().tolist()
-        output_batch = output_batch > 0.5
-        for x, y in zip(data_batch, output_batch):
-            y = int(y[0])
-            tagged_sent = " ".join([data_loader.vocabi2c[_] for _ in x]) + '<' + str(data_loader.inv_tag_map[y]) + '/>'
-            tagged_sentences.append(tagged_sent)
-
+        if __name__ == '__main__':
+            data_batch = data_batch.data.cpu().numpy().tolist()
+            output_batch = output_batch > 0.5
+            for x, y in zip(data_batch, output_batch):
+                y = int(y[0])
+                tagged_sent = " ".join([data_loader.vocabi2c[_] for _ in x]) + '<' + str(data_loader.inv_tag_map[y]) + '/>'
+                tagged_sentences.append(tagged_sent)
+                
     # compute mean of all metrics in summary
     metrics_mean = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]}
     metrics_string = " ; ".join("{}: {:05.3f}".format(k, v) for k, v in metrics_mean.items())
     logging.info("- Eval metrics : " + metrics_string)
 
-    # write out tagged sentences
-    ofname = os.path.join(args.model_dir, 'output_tagged_sentences.txt')
-    with open(ofname, 'w') as fout:
-        fout.write("\n".join(tagged_sentences))
+    if __name__ == '__main__':    
+        # write out tagged sentences
+        ofname = os.path.join(args.model_dir, 'output_tagged_sentences.txt')
+        with open(ofname, 'w') as fout:
+            fout.write("\n".join(tagged_sentences))
     
     return metrics_mean
 

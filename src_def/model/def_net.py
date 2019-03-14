@@ -51,8 +51,8 @@ class Net(nn.Module):
             
             # load in glove weights & fix
             glove_weights = np.load(params.glove_path)['glove']
-            self.word_embedding.load_state_dict({'weight': torch.tensor(glove_weights)})
-            self.word_embedding.weight.requires_grad = False
+            self.embedding.load_state_dict({'weight': torch.tensor(glove_weights)})
+            self.embedding.weight.requires_grad = False
         else:
             self.word_embed_type = 'word'
             self.defm_embed_size = params.defm_embed_size
@@ -191,7 +191,7 @@ def f1metric(outputs, labels):
     """
 
     outputs = outputs > 0.5
-    labels = labels > 0
+    labels = labels == 0 ;# ??fixme??
     tn = np.sum(np.logical_or(outputs, labels) == 0)
     tp = np.sum(np.logical_and(outputs, labels) == 1)
     x = np.logical_xor(outputs, labels)
@@ -202,7 +202,7 @@ def f1metric(outputs, labels):
         p = tp/(tp+fp)
         r = tp/(tp+fn)
         f1 = 2*(p*r)/(p+r)
-    #print ("labels={}, outputs={}, tp={}, tn={}, fp={}, fn={}, p={}, r={}, f1={}".format(len(labels), len(outputs), tp, tn, fp, fn, p, r, f1))
+   #print ("labels={}, outputs={}, tp={}, tn={}, fp={}, fn={}, p={}, r={}, f1={}".format(len(labels), len(outputs), tp, tn, fp, fn, p, r, f1))
     return (p,r,f1)
     
 
