@@ -1,0 +1,777 @@
+3' utr, 0.000
+5' cap, 0.000
+5' utr, 0.000
+7-methylguanosine cap, 0.000
+a horizon, 0.000
+abiotic, 0.000
+above-ground biomass, 0.000
+abscission, 0.000
+abstract, 0.000
+acanthostega, 0.000
+acid rain, 0.000
+acoelomate, 0.000
+acromegaly, 0.000
+actinopterygii, 0.000
+adaptive evolution, 0.000
+addison’s disease, 0.000
+adventitious, 0.000
+adventitious root, 0.000
+age structure, 0.000
+aggregate fruit, 0.000
+aleurone, 0.000
+allele frequency, 0.000
+allopatric speciation, 0.000
+allosteric inhibition, 0.000
+alteration, 0.000
+alternation of generations, 0.000
+alzheimer’s disease, 0.000
+aminoacyl trna synthetase, 0.000
+ammonia, 0.000
+ammonotelic, 0.000
+amniote, 0.000
+amphibia, 0.000
+anabolic, 0.000
+anaerobic, 0.000
+anaerobic cellular respiration, 0.000
+analogy, 0.000
+analytical model, 0.000
+androecium, 0.000
+androgen, 0.000
+annelida, 0.000
+anoxic, 0.000
+anterior pituitary, 0.000
+anthophyta, 0.000
+anthropoid, 0.000
+anti-diuretic hormone ; adh, 0.000
+antibiotic resistance, 0.000
+antioxidant, 0.000
+antiporter, 0.000
+anura, 0.000
+anus, 0.000
+apex consumer, 0.000
+apical bud, 0.000
+apoda, 0.000
+applied science, 0.000
+appositional growth, 0.000
+arbuscular mycorrhizae, 0.000
+arthropoda, 0.000
+ascending limb, 0.000
+ascomycota, 0.000
+asexual reproduction, 0.000
+assortative mating, 0.000
+asymmetrical, 0.000
+atherosclerosis, 0.000
+australopithecus, 0.000
+autism spectrum disorder ; asd, 0.000
+autoimmunity, 0.000
+autosome, 0.000
+autosomes, 0.000
+b cell, 0.000
+b horizon, 0.000
+balanced chemical equation, 0.000
+barcoding, 0.000
+bark, 0.000
+basal angiosperms, 0.000
+basal taxon, 0.000
+basic science, 0.000
+basidiomycota, 0.000
+batesian mimicry, 0.000
+bedrock, 0.000
+behavior, 0.000
+behavioral biology, 0.000
+behavioral isolation, 0.000
+bicarbonate buffer system, 0.000
+biochemistry, 0.000
+biological carbon pump, 0.000
+biological macromolecule, 0.000
+biological nitrogen fixation, 0.000
+biology, 0.000
+biotic, 0.000
+bipolar neuron, 0.000
+biramous, 0.000
+black death, 0.000
+blending theory of inheritance, 0.000
+blood urea nitrogen ; bun, 0.000
+body plan, 0.000
+bone remodeling, 0.000
+bowman's capsule, 0.000
+bulb, 0.000
+bush meat, 0.000
+c horizon, 0.000
+ca-mrsa, 0.000
+caat box, 0.000
+caecilian, 0.000
+cambrian explosion, 0.000
+camouflage, 0.000
+candela, 0.000
+canopy, 0.000
+capillary action, 0.000
+capillary bed, 0.000
+carbaminohemoglobin, 0.000
+carotenoid, 0.000
+carrier protein, 0.000
+casineria, 0.000
+casparian strip, 0.000
+catabolic, 0.000
+cdna library, 0.000
+cell necrosis, 0.000
+cell-cycle checkpoint, 0.000
+cell-mediated immune response, 0.000
+cell-surface receptor, 0.000
+central vacuole, 0.000
+cephalochordata, 0.000
+channel, 0.000
+chemical reaction, 0.000
+chemical reactivity, 0.000
+chemical synapse, 0.000
+chiasmata, 0.000
+chlorophyll a, 0.000
+chlorophyll b, 0.000
+chondrichthyes, 0.000
+chordata, 0.000
+chromosomal theory of inheritance, 0.000
+chromosome inversion, 0.000
+chronic infection, 0.000
+chylomicron, 0.000
+chytridiomycota, 0.000
+cilium, 0.000
+circadian, 0.000
+cis-acting element, 0.000
+cladistics, 0.000
+class, 0.000
+clathrates, 0.000
+clay, 0.000
+climate, 0.000
+cline, 0.000
+cloaca, 0.000
+clone, 0.000
+closed circulatory system, 0.000
+club mosses, 0.000
+cnidaria, 0.000
+colinear, 0.000
+columnar epithelia, 0.000
+commensalism, 0.000
+competitive inhibition, 0.000
+complement system, 0.000
+compound leaf, 0.000
+conceptual model, 0.000
+conclusion, 0.000
+condensin, 0.000
+conditioned behavior, 0.000
+cone, 0.000
+conispiral, 0.000
+consensus, 0.000
+conspecifics, 0.000
+contig, 0.000
+contractile vacuole, 0.000
+control, 0.000
+coral reef, 0.000
+core enzyme, 0.000
+cortex, 0.000
+craniata, 0.000
+crocodilia, 0.000
+crop, 0.000
+cross reactivity, 0.000
+cross-pollination, 0.000
+cryogenian period, 0.000
+cushing’s disease, 0.000
+cutaneous respiration, 0.000
+cuticle, 0.000
+cutting, 0.000
+cyclin-dependent kinase ; cdk, 0.000
+cypris, 0.000
+cytochrome complex, 0.000
+cytopathic, 0.000
+dehydration synthesis, 0.000
+denaturation, 0.000
+denature, 0.000
+dendritic cell, 0.000
+denitrification, 0.000
+density-dependent regulation, 0.000
+dentary, 0.000
+dermal tissue, 0.000
+descending limb, 0.000
+determinate cleavage, 0.000
+detrital food web, 0.000
+deuteromycota, 0.000
+diabetes insipidus, 0.000
+diacylglycerol ; dag, 0.000
+diapsid, 0.000
+dicer, 0.000
+dicot, 0.000
+digestion, 0.000
+dihybrid, 0.000
+dimer, 0.000
+dimerization, 0.000
+diplontic, 0.000
+discussion, 0.000
+divergent evolution, 0.000
+dna barcoding, 0.000
+dna methylation, 0.000
+dominant lethal, 0.000
+dorsal cavity, 0.000
+double circulation, 0.000
+double fertilization, 0.000
+down-regulation, 0.000
+downstream, 0.000
+ecdysozoa, 0.000
+echinodermata, 0.000
+ecosystem diversity, 0.000
+ecosystem dynamics, 0.000
+ecosystem services, 0.000
+ediacaran period, 0.000
+elastic recoil, 0.000
+elastic work, 0.000
+electrochemical gradient, 0.000
+electron transfer, 0.000
+electrophoresis, 0.000
+emergent vegetation, 0.000
+emerging disease, 0.000
+endemic, 0.000
+endemic species, 0.000
+endergonic, 0.000
+endocrine cell, 0.000
+endomembrane system, 0.000
+endosymbiosis, 0.000
+energy budget, 0.000
+enhancer, 0.000
+enterocoely, 0.000
+envelope, 0.000
+enzyme-linked receptor, 0.000
+ependymal, 0.000
+epicotyl, 0.000
+epidemic, 0.000
+epigenetic, 0.000
+essential nutrient, 0.000
+estrogen, 0.000
+estuary, 0.000
+ethology, 0.000
+ethylene, 0.000
+eukaryote-first hypothesis, 0.000
+eukaryotic initiation factor-2 ; eif-2, 0.000
+eumetazoa, 0.000
+evolutionary fitness, 0.000
+exergonic, 0.000
+exotic species, 0.000
+expressed sequence tag ; est, 0.000
+extant, 0.000
+extinct, 0.000
+f2, 0.000
+fact, 0.000
+facultative anaerobes, 0.000
+fallout, 0.000
+falsifiable, 0.000
+family, 0.000
+fern, 0.000
+fev1/fvc ratio, 0.000
+fibrous connective tissue, 0.000
+fibrous root system, 0.000
+filament, 0.000
+fixed action pattern, 0.000
+flat bone, 0.000
+flow-resistive, 0.000
+flower, 0.000
+fluid mosaic model, 0.000
+follicle stimulating hormone ; fsh, 0.000
+food chain, 0.000
+food web, 0.000
+foraging, 0.000
+foreign dna, 0.000
+foundation species, 0.000
+free energy, 0.000
+free nerve ending, 0.000
+frog, 0.000
+fruit, 0.000
+ftsz, 0.000
+functional vital capacity ; fvc, 0.000
+fusiform, 0.000
+g-protein, 0.000
+gastric inhibitory peptide, 0.000
+gastric phase, 0.000
+gene transfer agent ; gta, 0.000
+genetic diagnosis, 0.000
+genetic recombination, 0.000
+genetic structure, 0.000
+genetic testing, 0.000
+genetic variance, 0.000
+genome annotation, 0.000
+genome fusion, 0.000
+genus, 0.000
+geographical variation, 0.000
+germ cells, 0.000
+gill circulation, 0.000
+gizzard, 0.000
+glabrous, 0.000
+glia, 0.000
+gliding movement, 0.000
+global climate change, 0.000
+glomeromycota, 0.000
+glomerular filtration, 0.000
+glomerulus, 0.000
+glucose-sparing effect, 0.000
+glut protein, 0.000
+good genes hypothesis, 0.000
+gorilla, 0.000
+gradual speciation model, 0.000
+grafting, 0.000
+gram negative, 0.000
+gram positive, 0.000
+granum, 0.000
+grazing food web, 0.000
+greenhouse gases, 0.000
+gross primary productivity, 0.000
+growth factor, 0.000
+growth hormone-inhibiting hormone ; ghih, 0.000
+growth hormone-releasing hormone ; ghrh, 0.000
+guanine diphosphate ; gdp, 0.000
+guard cells, 0.000
+gyrus, 0.000
+habitat isolation, 0.000
+hagfish, 0.000
+haplontic, 0.000
+haustoria, 0.000
+haze-effect cooling, 0.000
+heme group, 0.000
+herbaceous, 0.000
+heritability, 0.000
+heterospecifics, 0.000
+heterothallic, 0.000
+histone acetylation, 0.000
+holistic ecosystem model, 0.000
+holoblastic, 0.000
+hominoid, 0.000
+homo, 0.000
+homo sapiens sapiens, 0.000
+homologous chromosomes, 0.000
+homologous recombination, 0.000
+homologous structures, 0.000
+homothallic, 0.000
+honest signal, 0.000
+hormonal stimuli, 0.000
+hornworts, 0.000
+horsetail, 0.000
+host, 0.000
+host dna, 0.000
+hox gene, 0.000
+human beta chorionic gonadotropin ; β-hcg, 0.000
+humoral stimuli, 0.000
+hybrid, 0.000
+hydrolysis, 0.000
+hydrothermal vent, 0.000
+hylobatidae, 0.000
+hylonomus, 0.000
+hypersensitivities, 0.000
+hypothesis, 0.000
+hypothesis-based science, 0.000
+imprinting, 0.000
+inbreeding, 0.000
+indeterminate cleavage, 0.000
+inducible operon, 0.000
+infertility, 0.000
+inhibitor, 0.000
+initiation complex, 0.000
+initiation site, 0.000
+initiator trna, 0.000
+innate behavior, 0.000
+inner cell mass, 0.000
+inorganic compound, 0.000
+insectivorous plant, 0.000
+integral protein, 0.000
+integument, 0.000
+intercellular signaling, 0.000
+interferon, 0.000
+internal receptor, 0.000
+interspecific competition, 0.000
+intestinal phase, 0.000
+intine, 0.000
+intracellular signaling, 0.000
+introduction, 0.000
+island biogeography, 0.000
+isotope, 0.000
+j-shaped growth curve, 0.000
+jasmonates, 0.000
+keystone species, 0.000
+kin selection, 0.000
+kingdom, 0.000
+kozak’s rules, 0.000
+labyrinth, 0.000
+lac operon, 0.000
+lancelet, 0.000
+large 60s ribosomal subunit, 0.000
+latency, 0.000
+lateral line, 0.000
+law of dominance, 0.000
+law of independent assortment, 0.000
+law of segregation, 0.000
+layering, 0.000
+lens, 0.000
+life cycle, 0.000
+life history, 0.000
+life table, 0.000
+ligase, 0.000
+light microscope, 0.000
+light-dependent reaction, 0.000
+linkage, 0.000
+litmus paper, 0.000
+liverworts, 0.000
+lobes of the kidney, 0.000
+logistic growth, 0.000
+loose  connective tissue; areolar connective tissue, 0.000
+lophotrochozoa, 0.000
+lower limb, 0.000
+lung capacity, 0.000
+lung volume, 0.000
+lymphocyte, 0.000
+lysis buffer, 0.000
+madreporite, 0.000
+major depression, 0.000
+mammal, 0.000
+mark and recapture, 0.000
+marsupial, 0.000
+mastax, 0.000
+materials and methods, 0.000
+matrix protein, 0.000
+maximum parsimony, 0.000
+megafauna, 0.000
+meiosis i, 0.000
+meiosis ii, 0.000
+menopause, 0.000
+meristematic tissue, 0.000
+meroblastic, 0.000
+mesohyl, 0.000
+metazoa, 0.000
+microbial mat, 0.000
+microbiology, 0.000
+microscope, 0.000
+microsporangium, 0.000
+microvilli, 0.000
+middle ear, 0.000
+milankovitch cycles, 0.000
+mineral, 0.000
+mineral soil, 0.000
+mineralocorticoid, 0.000
+mitochondria, 0.000
+mitochondria-first hypothesis, 0.000
+model system, 0.000
+modern synthesis, 0.000
+molecular biology, 0.000
+molecular cloning, 0.000
+molecular systematics, 0.000
+mollusca, 0.000
+monocarpic, 0.000
+monocot, 0.000
+monoecious, 0.000
+monogamy, 0.000
+monogastric, 0.000
+monohybrid, 0.000
+monophyletic group, 0.000
+mosses, 0.000
+mucin, 0.000
+multiple fruit, 0.000
+myc, 0.000
+mycetismus, 0.000
+myocardial infarction, 0.000
+myxini, 0.000
+müllerian mimicry, 0.000
+nacre, 0.000
+natural science, 0.000
+nectar guide, 0.000
+negative feedback loop, 0.000
+negative polarity, 0.000
+negative regulator, 0.000
+nematoda, 0.000
+nemertea, 0.000
+neornithes, 0.000
+nephridiopore, 0.000
+net primary productivity, 0.000
+neural stimuli, 0.000
+neurobiology, 0.000
+next-generation sequencing, 0.000
+nitrogenase, 0.000
+nodule, 0.000
+nodules, 0.000
+non-electrolyte, 0.000
+nondisjunction, 0.000
+nonrandom mating, 0.000
+nonrenewable resource, 0.000
+northern blotting, 0.000
+nucleotide excision repair, 0.000
+nucleus-first hypothesis, 0.000
+o horizon, 0.000
+obligate aerobes, 0.000
+obligate anaerobes, 0.000
+ocean upwelling, 0.000
+oceanic zone, 0.000
+omnivore, 0.000
+one-child policy, 0.000
+open circulatory system, 0.000
+operator, 0.000
+orbital, 0.000
+order, 0.000
+organ of corti, 0.000
+ornithorhynchidae, 0.000
+osculum, 0.000
+osmolarity, 0.000
+osmoreceptor, 0.000
+osmotic balance, 0.000
+osteichthyes, 0.000
+ovary, 0.000
+oxygen dissociation curve, 0.000
+oxygen-carrying capacity, 0.000
+p21, 0.000
+p53, 0.000
+p680, 0.000
+p700, 0.000
+paleognathae, 0.000
+palmately compound leaf, 0.000
+pan, 0.000
+papilla, 0.000
+paracentric, 0.000
+parasite, 0.000
+parasitic plant, 0.000
+parasympathetic nervous system, 0.000
+parazoa, 0.000
+parental types, 0.000
+parkinson’s disease, 0.000
+particulate matter, 0.000
+peat moss, 0.000
+perception, 0.000
+pericentric, 0.000
+peritubular capillary network, 0.000
+permanent tissue, 0.000
+permissive, 0.000
+petromyzontidae, 0.000
+ph paper, 0.000
+ph scale, 0.000
+phage therapy, 0.000
+phosphodiester, 0.000
+phosphodiesterase, 0.000
+physiological dead space, 0.000
+pigment, 0.000
+pioneer species, 0.000
+planospiral, 0.000
+plasma cell, 0.000
+plasma membrane, 0.000
+plasmodesma, 0.000
+plesiadapis, 0.000
+pleura, 0.000
+polar nuclei, 0.000
+pollen grain, 0.000
+pollen tube, 0.000
+pollination, 0.000
+polycarpic, 0.000
+polygenic, 0.000
+polymorphic, 0.000
+pongo, 0.000
+population, 0.000
+population genetics, 0.000
+population growth rate, 0.000
+population variation, 0.000
+porifera, 0.000
+positive feedback loop, 0.000
+positive polarity, 0.000
+positive regulator, 0.000
+post-anal tail, 0.000
+post-transcriptional, 0.000
+post-translational, 0.000
+posterior pituitary, 0.000
+predator, 0.000
+preinitiation complex, 0.000
+primary active transport, 0.000
+primary electron acceptor, 0.000
+primary producer, 0.000
+primary structure, 0.000
+primary succession, 0.000
+primates, 0.000
+probe, 0.000
+productive, 0.000
+proofreading, 0.000
+prosimian, 0.000
+prosthetic group, 0.000
+protein signature, 0.000
+protonema, 0.000
+pseudocoelomate, 0.000
+pseudostratified, 0.000
+pulmocutaneous circulation, 0.000
+pulmonary circulation, 0.000
+pump, 0.000
+pure culture, 0.000
+pyrimidine, 0.000
+quiescent, 0.000
+radioresistant, 0.000
+raphe, 0.000
+reception, 0.000
+receptive field, 0.000
+recessive lethal, 0.000
+recombinant dna, 0.000
+reduction division, 0.000
+reflex action, 0.000
+reinforcement, 0.000
+relative fitness, 0.000
+renal pelvis, 0.000
+renin-angiotensin-aldosterone, 0.000
+reproductive isolation, 0.000
+resistance, 0.000
+resorption, 0.000
+respiratory distress syndrome, 0.000
+results, 0.000
+resuscitation, 0.000
+retinoblastoma protein ; rb, 0.000
+reverse genetics, 0.000
+rhizoids, 0.000
+rho-dependent termination, 0.000
+rho-independent, 0.000
+rib, 0.000
+ring of life, 0.000
+risc, 0.000
+rna editing, 0.000
+rna stability, 0.000
+rna-binding protein ; rbp, 0.000
+rod, 0.000
+root cap, 0.000
+root hair, 0.000
+root system, 0.000
+rooted, 0.000
+roughage, 0.000
+ruminant, 0.000
+runner, 0.000
+s-layer, 0.000
+sand, 0.000
+sarcopterygii, 0.000
+sargassum, 0.000
+satellite glia, 0.000
+schizophrenia, 0.000
+science, 0.000
+scientific method, 0.000
+secondary active transport, 0.000
+secondary growth, 0.000
+secondary succession, 0.000
+selective pressure, 0.000
+selectively permeable, 0.000
+self-pollination, 0.000
+semi-permeable membrane, 0.000
+semilunar valve, 0.000
+sensory receptor, 0.000
+sensory-somatic nervous system, 0.000
+serendipity, 0.000
+sex-linked, 0.000
+sexual reproduction, 0.000
+shared ancestral character, 0.000
+shine-dalgarno sequence, 0.000
+shoot system, 0.000
+shotgun sequencing, 0.000
+sickle cell anemia, 0.000
+sieve-tube cell, 0.000
+signal, 0.000
+signal integration, 0.000
+signaling cell, 0.000
+signaling pathway, 0.000
+silt, 0.000
+simple epithelia, 0.000
+simple fruit, 0.000
+simple leaf, 0.000
+simulation model, 0.000
+sink, 0.000
+sister taxa, 0.000
+skeletal muscle tissue, 0.000
+solar intensity, 0.000
+somatostatin, 0.000
+soredia, 0.000
+source, 0.000
+source water, 0.000
+southern blotting, 0.000
+species, 0.000
+species richness, 0.000
+specific heat capacity, 0.000
+sphenodontia, 0.000
+sphere of hydration, 0.000
+sphincter, 0.000
+spiral cleavage, 0.000
+squamata, 0.000
+streptophytes, 0.000
+structural isomers, 0.000
+style, 0.000
+suspensor, 0.000
+swim bladder, 0.000
+sympathetic nervous system, 0.000
+sympatric speciation, 0.000
+symphysis, 0.000
+symporter, 0.000
+systematics, 0.000
+systemic circulation, 0.000
+systems biology, 0.000
+tachyglossidae, 0.000
+tap root system, 0.000
+target cell, 0.000
+tarsal, 0.000
+tastant, 0.000
+tata box, 0.000
+taxis, 0.000
+taxonomy, 0.000
+test cross, 0.000
+thigmonastic, 0.000
+threshold of excitation, 0.000
+thyroglobulin, 0.000
+tonic activity, 0.000
+tragedy of the commons, 0.000
+trans fat, 0.000
+transcriptional start site, 0.000
+transition state, 0.000
+translocation, 0.000
+transport maximum, 0.000
+transport protein, 0.000
+transporter, 0.000
+transverse  plane; horizontal plane, 0.000
+triacylglycerol ; also, triglyceride, 0.000
+triiodothyronine ; t3, 0.000
+trophic level, 0.000
+trp operon, 0.000
+tryptophan, 0.000
+tuber, 0.000
+tubular secretion, 0.000
+tumor suppressor gene, 0.000
+ubiquinone, 0.000
+ultrasound, 0.000
+uniporter, 0.000
+uniramous, 0.000
+up-regulation, 0.000
+upstream, 0.000
+ureotelic, 0.000
+ureter, 0.000
+uric acid, 0.000
+urinary bladder, 0.000
+urine, 0.000
+urochordata, 0.000
+urodela, 0.000
+vaccine, 0.000
+variable, 0.000
+variation, 0.000
+vascular plant, 0.000
+vasodilator, 0.000
+vasopressin, 0.000
+veliger, 0.000
+ventilation/perfusion  mismatch; v/q mismatch, 0.000
+vernalization, 0.000
+vertebrata, 0.000
+vessel element, 0.000
+viable-but-non-culturable  state; vbnc state, 0.000
+vicariance, 0.000
+villi, 0.000
+viral receptor, 0.000
+virus core, 0.000
+vitamin, 0.000
+viviparity, 0.000
+water vascular system, 0.000
+wax, 0.000
+weather, 0.000
+web of life, 0.000
+white blood cell, 0.000
+white-nose syndrome, 0.000
+whole-genome sequencing, 0.000
+whorled, 0.000
+x inactivation, 0.000
+x-linked, 0.000
+zero population growth, 0.000
+zoology, 0.000
+zoonosis, 0.000
+zygomycota, 0.000

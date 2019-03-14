@@ -1,10 +1,10 @@
 {
     "learning_rate": 1e-3,
-    "batch_size": 10,
-    "num_epochs": 5,
+    "batch_size": 5,
+    "num_epochs": 10,
 
-    "model_type": "hoveyma",
-    "embed_types": ["glove"],
+    "model_type": "bert",
+    "embed_types": ["bert"],
     "bert_type": "bert-base-cased",
 
     "lstm_hidden_size": 200,

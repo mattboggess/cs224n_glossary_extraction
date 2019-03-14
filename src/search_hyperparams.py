@@ -48,15 +48,15 @@ if __name__ == "__main__":
 
     # Perform hypersearch over one parameter
     learning_rates = [5e-5, 3e-5, 2e-5]
-    batch_sizes = [16, 32]
+    dropout_rates = [0.1, 0.3, 0.5]
 
-    for batch_size in batch_sizes:
-        params.batch_size = batch_size
+    for dr in dropout_rates:
+        params.dropout_rate = dr 
 
         for learning_rate in learning_rates:
             # Modify the relevant parameter in params
             params.learning_rate = learning_rate
 
             # Launch job (name has to be unique)
-            job_name = "learning_rate_{}_batch_size_{}".format(learning_rate, batch_size)
+            job_name = "learning_rate_{}_dropout_rate_{}".format(learning_rate, dr)
             launch_training_job(args.parent_dir, args.data_dir, job_name, params)
