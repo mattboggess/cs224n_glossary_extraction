@@ -3,8 +3,8 @@
     "batch_size": 5,
     "num_epochs": 50,
 
-    "model_type": "hoveyma",
-    "embed_types": ["word"],
+    "model_type": "bert",
+    "embed_types": ["bert", "glove", "char", "word"],
     "bert_type": "bert-base-cased",
 
     "lstm_hidden_size": 200,
