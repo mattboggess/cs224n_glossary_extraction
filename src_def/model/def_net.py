@@ -47,7 +47,7 @@ class Net(nn.Module):
             # the embedding takes as input the vocab_size and the embedding_dim
             self.word_embed_type = 'glove'
             self.defm_embed_size = params.glove_embedding_size
-            self.embedding = nn.Embedding(params.vocab_size, params.defm_embed_size)
+            self.embedding = nn.Embedding(params.glove_vocab_size, params.defm_embed_size)
             
             # load in glove weights & fix
             glove_weights = np.load(params.glove_path)['glove']

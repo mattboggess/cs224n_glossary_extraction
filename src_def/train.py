@@ -22,7 +22,7 @@ parser.add_argument('--model_dir', default='experiments/base_model', help="Direc
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before \
                     training")  # 'best' or 'train'
-parser.add_argument("--is_def", default=False, action="store_true")
+parser.add_argument("--is_def", default=True, action="store_true")
 
 def train(model, optimizer, loss_fn, data_iterator, metrics, params, num_steps):
     """Train the model on `num_steps` batches
