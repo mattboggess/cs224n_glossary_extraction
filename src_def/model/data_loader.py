@@ -35,9 +35,11 @@ class DataLoader(object):
         # loading vocab (we require this to map words to their indices)
         vocab_path = os.path.join(data_dir, 'words.txt')
         self.vocab = {}
+        self.vocabi2c = {}
         with open(vocab_path) as f:
             for i, l in enumerate(f.read().splitlines()):
                 self.vocab[l] = i
+                self.vocabi2c[i] = l
         
         # setting the indices for UNKnown words and PADding symbols
         self.unk_ind = self.vocab[self.dataset_params.unk_word]
@@ -46,9 +48,11 @@ class DataLoader(object):
         # loading tags (we require this to map tags to their indices)
         tags_path = os.path.join(data_dir, 'tags.txt')
         self.tag_map = {}
+        self.inv_tag_map = {}
         with open(tags_path) as f:
             for i, t in enumerate(f.read().splitlines()):
                 self.tag_map[t] = i
+                self.inv_tag_map[i] = t
 
         # adding dataset parameters to param (e.g. vocab size, )
         params.update(json_path)
@@ -86,7 +90,7 @@ class DataLoader(object):
                 labels.append(l)        
 
         # checks to ensure there is a tag for each token
-        assert len(labels) == len(sentences)
+        assert (len(labels) == len(sentences))
         if not self.is_def:
             for i in range(len(labels)):
                 assert len(labels[i]) == len(sentences[i])

@@ -4,7 +4,8 @@ import argparse
 from collections import Counter
 import json
 import os
-
+import gzip
+import numpy as np
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--min_count_word', default=1, help="Minimum count for words in the dataset", type=int)
@@ -86,17 +87,64 @@ if __name__ == '__main__':
     words = [tok for tok, count in words.items() if count >= args.min_count_word]
     tags = [tok for tok, count in tags.items() if count >= args.min_count_tag]
 
+    # Build char vocab with train and test datasets
+    print("Building character vocabulary...")
+    chars = Counter()
+    for word in words:
+        for ch in word:
+            chars.update(ch)
+    chars = [tok for tok, count in chars.items() if count >= args.min_count_word]
+    print("- done.")
+
     # Add pad tokens
     if PAD_WORD not in words: words.append(PAD_WORD)
     if PAD_TAG not in tags: tags.append(PAD_TAG)
+    if PAD_WORD not in chars: chars.append(PAD_WORD)
 
     # add word for unknown words
     words.append(UNK_WORD)
+    chars.append(UNK_WORD)
 
     # Save vocabularies to file
     print("Saving vocabularies to file...")
     save_vocab_to_txt_file(words, os.path.join(args.data_dir, 'words.txt'))
     save_vocab_to_txt_file(tags, os.path.join(args.data_dir, 'tags.txt'))
+    save_vocab_to_txt_file(chars, os.path.join(args.data_dir, 'chars.txt'))
+    print("- done.")
+
+    # Load the glove word embeddings
+    print("Processing GloVe Embeddings...")
+    chunksize = 10 ** 4
+    glove_embeddings = []
+    glove_words = {}
+    words = set(words)
+    num_glove = 0
+    glove_ix = 0
+    average_embedding = np.zeros(300)
+    with gzip.open('../data/embeddings/glove.840B.300d.txt.gz', 'rt') as fid:
+        for line in fid:
+            num_glove += 1
+            values = line.split(' ')
+            word = values[0]
+            embedding = np.asarray(values[1:], dtype='float32')
+            average_embedding += embedding
+            if word in words and word != UNK_WORD:
+                glove_words[word] = glove_ix
+                glove_embeddings.append(embedding)
+                glove_ix += 1
+
+    glove_words[UNK_WORD] = glove_ix
+    glove_embeddings.append(average_embedding / num_glove)
+    glove_words[PAD_WORD] = glove_ix + 1
+    glove_embeddings.append(np.zeros(300))
+    print("- done.")
+
+    # Save glove embeddings to file
+    print("Saving Reduced GloVe embeddings to file...")
+    save_dict_to_json(glove_words, os.path.join(args.data_dir, 'glove_indices.json'))
+    glove_path = os.path.join(args.data_dir, 'glove_embeddings.npz')
+    np.savez_compressed(glove_path,
+                        glove=np.array(glove_embeddings))
     print("- done.")
 
     # Save datasets properties in json file
@@ -105,7 +153,11 @@ if __name__ == '__main__':
         'dev_size': size_dev_sentences,
         'test_size': size_test_sentences,
         'vocab_size': len(words),
+        'char_vocab_size': len(chars),
+        'glove_vocab_size': len(glove_words.keys()),
+        'glove_embedding_size': len(glove_embeddings[0]),
         'number_of_tags': len(tags),
+        'glove_path': glove_path,
         'pad_word': PAD_WORD,
         'pad_tag': PAD_TAG,
         'unk_word': UNK_WORD

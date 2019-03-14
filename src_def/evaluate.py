@@ -8,6 +8,7 @@ import numpy as np
 import torch
 import utils
 import model.net as net
+import model.def_net as def_net
 from model.data_loader import DataLoader
 
 parser = argparse.ArgumentParser()
@@ -15,7 +16,7 @@ parser.add_argument('--data_dir', default='data/small', help="Directory containi
 parser.add_argument('--model_dir', default='experiments/base_model', help="Directory containing params.json")
 parser.add_argument('--restore_file', default='best', help="name of the file in --model_dir \
                      containing weights to load")
-
+parser.add_argument("--is_def", default=False, action="store_true")
 
 def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
     """Evaluate the model on `num_steps` batches.
@@ -34,6 +35,8 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
 
     # summary for current eval loop
     summ = []
+    tagged_sentences = []
+    labels = []
 
     # compute metrics over the dataset
     for _ in range(num_steps):
@@ -53,11 +56,23 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
                          for metric in metrics}
         summary_batch['loss'] = loss.item()
         summ.append(summary_batch)
+        data_batch = data_batch.data.cpu().numpy().tolist()
+        output_batch = output_batch > 0.5
+        for x, y in zip(data_batch, output_batch):
+            y = int(y[0])
+            tagged_sent = " ".join([data_loader.vocabi2c[_] for _ in x]) + '<' + str(data_loader.inv_tag_map[y]) + '/>'
+            tagged_sentences.append(tagged_sent)
 
     # compute mean of all metrics in summary
     metrics_mean = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]}
     metrics_string = " ; ".join("{}: {:05.3f}".format(k, v) for k, v in metrics_mean.items())
     logging.info("- Eval metrics : " + metrics_string)
+
+    # write out tagged sentences
+    ofname = os.path.join(args.model_dir, 'output_tagged_sentences.txt')
+    with open(ofname, 'w') as fout:
+        fout.write("\n".join(tagged_sentences))
+    
     return metrics_mean
 
 
@@ -85,7 +100,7 @@ if __name__ == '__main__':
     logging.info("Creating the dataset...")
 
     # load data
-    data_loader = DataLoader(args.data_dir, params)
+    data_loader = DataLoader(args.data_dir, params, args.is_def)
     data = data_loader.load_data(['test'], args.data_dir)
     test_data = data['test']
 
@@ -96,10 +111,14 @@ if __name__ == '__main__':
     logging.info("- done.")
 
     # Define the model
-    model = net.Net(params).cuda() if params.cuda else net.Net(params)
-
-    loss_fn = net.loss_fn
-    metrics = net.metrics
+    if args.is_def:
+        model = def_net.Net(params).cuda() if params.cuda else def_net.Net(params)
+        loss_fn = def_net.loss_fn
+        metrics = def_net.metrics
+    else:
+        model = net.Net(params).cuda() if params.cuda else net.Net(params)
+        loss_fn = net.loss_fn
+        metrics = net.metrics
 
     logging.info("Starting evaluation")
 
