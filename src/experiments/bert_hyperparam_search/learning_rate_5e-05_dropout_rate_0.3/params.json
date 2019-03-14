@@ -1,0 +1,17 @@
+{
+    "lstm_hidden_size": 200,
+    "char_embedding_size": 50,
+    "bert_type": "bert-base-cased",
+    "batch_size": 16,
+    "embed_types": [
+        "bert"
+    ],
+    "save_summary_steps": 100,
+    "num_epochs": 5,
+    "cnn_window_size": 3,
+    "learning_rate": 5e-05,
+    "cnn_num_filters": 30,
+    "dropout_rate": 0.3,
+    "word_embedding_size": 200,
+    "model_type": "bert"
+}

@@ -1,7 +1,7 @@
 {
     "learning_rate": 1e-3,
-    "batch_size": 5,
-    "num_epochs": 10,
+    "batch_size": 16,
+    "num_epochs": 5,
 
     "model_type": "bert",
     "embed_types": ["bert"],
