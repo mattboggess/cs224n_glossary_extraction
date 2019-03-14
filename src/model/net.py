@@ -115,7 +115,7 @@ class BertNER(nn.Module):
     def __init__(self, params):
         super(BertNER, self).__init__()
         self.bert = BertModel.from_pretrained(params.bert_type)
-        self.dropout = nn.Dropout(self.bert.config.hidden_dropout_prob)
+        self.dropout = nn.Dropout(params.dropout_rate)
         self.fc = nn.Linear(self.bert.config.hidden_size, params.number_of_tags)
 
     def forward(self, batch):
@@ -127,6 +127,7 @@ class BertNER(nn.Module):
         attention_mask[attention_ix] = -1
 
         s = self.dropout(s)
+
 
         # make the Variable contiguous in memory (a PyTorch artefact)
         s = s.contiguous()
