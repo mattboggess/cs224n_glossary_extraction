@@ -58,10 +58,12 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
         summ.append(summary_batch)
         if __name__ == '__main__':
             data_batch = data_batch.data.cpu().numpy().tolist()
+            labels_batch = labels_batch.tolist()
             output_batch = output_batch > 0.5
-            for x, y in zip(data_batch, output_batch):
+            for x, y, z in zip(data_batch, output_batch, labels_batch):
+                z = int(z[0])
                 y = int(y[0])
-                tagged_sent = " ".join([data_loader.vocabi2c[_] for _ in x]) + '<' + str(data_loader.inv_tag_map[y]) + '/>'
+                tagged_sent = " ".join([data_loader.vocabi2c[_] for _ in x]) + '<' + str(data_loader.inv_tag_map[y]) + '/>' + '<' + str(data_loader.inv_tag_map[z]) + '/>'
                 tagged_sentences.append(tagged_sent)
                 
     # compute mean of all metrics in summary
