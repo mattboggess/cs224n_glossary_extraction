@@ -16,7 +16,7 @@ parser.add_argument('--data_dir', default='data/small', help="Directory containi
 parser.add_argument('--model_dir', default='experiments/base_model', help="Directory containing params.json")
 parser.add_argument('--restore_file', default='best', help="name of the file in --model_dir \
                      containing weights to load")
-parser.add_argument("--is_def", default=False, action="store_true")
+parser.add_argument("--is_def", default=True, action="store_true")
 
 def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
     """Evaluate the model on `num_steps` batches.
@@ -37,6 +37,7 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
     summ = []
     tagged_sentences = []
     labels = []
+    loss_avg = utils.RunningAverage()    
 
     # compute metrics over the dataset
     for _ in range(num_steps):
@@ -65,7 +66,9 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
                 y = int(y[0])
                 tagged_sent = " ".join([data_loader.vocabi2c[_] for _ in x]) + '<' + str(data_loader.inv_tag_map[y]) + '/>' + '<' + str(data_loader.inv_tag_map[z]) + '/>'
                 tagged_sentences.append(tagged_sent)
-                
+
+        # update the average loss
+        loss_avg.update(loss.item())
     # compute mean of all metrics in summary
     metrics_mean = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]}
     metrics_string = " ; ".join("{}: {:05.3f}".format(k, v) for k, v in metrics_mean.items())
@@ -77,7 +80,7 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
         with open(ofname, 'w') as fout:
             fout.write("\n".join(tagged_sentences))
     
-    return metrics_mean
+    return metrics_mean, loss_avg()
 
 
 if __name__ == '__main__':
@@ -107,6 +110,7 @@ if __name__ == '__main__':
     data_loader = DataLoader(args.data_dir, params, args.is_def)
     data = data_loader.load_data(['test'], args.data_dir)
     test_data = data['test']
+    logging.info("Loading {}".format(args.data_dir))
 
     # specify the test set size
     params.test_size = test_data['size']
@@ -131,6 +135,6 @@ if __name__ == '__main__':
 
     # Evaluate
     num_steps = (params.test_size + 1) // params.batch_size
-    test_metrics = evaluate(model, loss_fn, test_data_iterator, metrics, params, num_steps)
+    test_metrics, _ = evaluate(model, loss_fn, test_data_iterator, metrics, params, num_steps)
     save_path = os.path.join(args.model_dir, "metrics_test_{}.json".format(args.restore_file))
     utils.save_dict_to_json(test_metrics, save_path)

@@ -157,7 +157,7 @@ def loss_fn(outputs, labels):
     # focal loss
     #CE(pt) = −log(pt)
     #FL(pt) = −(1 − pt)γ log(pt)
-    #loss = -torch.sum((labels*torch.log(outputs) + (1-labels)*torch.log(1-outputs))*((1-outputs)**0.5))
+    #loss = -torch.sum((labels*torch.log(outputs) + (1-labels)*torch.log(1-outputs))*((1-outputs)**2))
     #loss = -torch.sum((labels*torch.log(outputs)*0.95 + (1-labels)*torch.log(1-outputs)*0.05))/len(labels)
     return loss
 

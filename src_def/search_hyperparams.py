@@ -51,23 +51,17 @@ if __name__ == "__main__":
     params = utils.Params(json_path)
 
     # Perform hypersearch over one parameter
-    #learning_rates = [1e-4, 1e-3, 1e-2]
-    learning_rates = []
-    batch_sizes = [2, 4, 8, 16, 32, 64, 128]
+    hyper_params = {}
+    #hyper_params['learning_rate'] = [1e-4, 1e-3, 1e-2]
+    #hyper_params['batch_size'] = [32, 64, 128, 256, 512, 1024, 2048]
+    #hyper_params['defm_dropout_rate'] = [0.6,0.7,0.8,0.9]
+    hyper_params['defm_cnn_kernels'] = [3,4,5,6,7,8,9]
 
-    for learning_rate in learning_rates:
-        # Modify the relevant parameter in params
-        params.learning_rate = learning_rate
+    for k,v in hyper_params.items():
+        for x in v:
+            # Modify the relevant parameter in params
+            params.dict[k] = x
+            # Launch job (name has to be unique)
+            job_name = "{}_{}".format(k,x)
+            launch_training_job(args.parent_dir, args.data_dir, job_name, params)
 
-        # Launch job (name has to be unique)
-        job_name = "learning_rate_{}".format(learning_rate)
-        launch_training_job(args.parent_dir, args.data_dir, job_name, params)
-
-    for batch_size in batch_sizes:
-        # Modify the relevant parameter in params
-        params.batch_size = batch_size
-
-        # Launch job (name has to be unique)
-        job_name = "batch_size_{}".format(batch_size)
-        launch_training_job(args.parent_dir, args.data_dir, job_name, params)
-        
