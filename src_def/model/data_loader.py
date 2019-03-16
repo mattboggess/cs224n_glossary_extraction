@@ -261,6 +261,7 @@ class DataLoader(object):
                     bert_mask += [-1]
                 else:
                     bert_mask += ([1] + [-1] * (len(bert_tokenids) - 1))
+            assert(len(bert_sent) == len(bert_mask)), sent
             bert_sents.append(bert_sent)
             bert_masks.append(bert_mask)
 

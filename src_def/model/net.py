@@ -170,12 +170,17 @@ class BertDEF(nn.Module):
         self.fc = nn.Linear(params.defm_lstm_hidden_dim*2, 1, bias=True)
 
     def forward(self, batch):
+
+        #print (batch['bert'].size())
+        #print (batch['bert_mask'].size())
         attention_mask = batch['bert_mask']
         attention_ix = attention_mask == -1
         attention_mask[attention_ix] = 1
         s, _ = self.bert(batch['bert'], attention_mask=attention_mask,
                          output_all_encoded_layers=False)
         attention_mask[attention_ix] = -1
+
+        #print (s.size())
 
         # run through cnn 
         s = s.permute(0,2,1)  # dim: batch_size x defm_embed_size x seq_len
