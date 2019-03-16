@@ -227,7 +227,7 @@ class SBertDEF(nn.Module):
         self.dropout = nn.Dropout(params.defm_dropout_rate, inplace=True)
 
         # the fully connected layer transforms the output to give the final output layer
-        self.fc = nn.Linear(self.bert.config.hidden_size, 1, bias=True)
+        self.fc = nn.Linear(self.bert.config.hidden_size * params.fixed_sent_length, 1, bias=True)
 
     def forward(self, batch):
 

@@ -105,6 +105,10 @@ class DataLoader(object):
         # adding dataset parameters to param (e.g. vocab size, )
         params.update(json_path)
 
+        # store parameters
+        self.params = params
+        
+
     def load_sentences_labels(self, sentences_file, wlabels_file, slabels_file, terms_file, d):
         """
         Loads sentences, labels, and terms from their corresponding files.
@@ -311,8 +315,13 @@ class DataLoader(object):
         elif embed_type == 'bert':
             word_ids, word_masks = self.words2bertindices(sents)
             pad_id = self.bert_tokenizer.convert_tokens_to_ids([self.dataset_params.pad_word])[0]
-            sents_t = pad_sents(word_ids, pad_id)
-            word_mask = pad_sents(word_masks, 0)
+            if self.params.fixed_sent_length:
+                x = self.bert_tokenizer.convert_tokens_to_ids('[SEP]')[0]
+                sents_t = pad_sents(word_ids, pad_id, self.params.fixed_sent_length, x)
+                word_mask = pad_sents(word_masks, 0, self.params.fixed_sent_length, -1)
+            else:
+                sents_t = pad_sents(word_ids, pad_id)
+                word_mask = pad_sents(word_masks, 0)
             sents_var = torch.tensor(sents_t, dtype=torch.long)
             berts_mask = torch.tensor(word_mask, dtype=torch.long)
             return sents_var, berts_mask
@@ -385,11 +394,12 @@ class DataLoader(object):
 
             yield batch
 
-def pad_sents(sents, pad_token, max_length=None):
+def pad_sents(sents, pad_token, fixed_length=None, sent_end_token=None):
     """ Pad list of sentences according to the longest sentence in the batch.
     @param sents (list[list[int]]): list of sentences, where each sentence
                                     is represented as a list of words
     @param pad_token (int): padding token
+    @fixed_length (int): if non zero, every sent will be made of fixed length
     @returns sents_padded (list[list[int]]): list of sentences where sentences shorter
         than the max length sentence are padded out with the pad_token, such that
         each sentences in the batch now has equal length.
@@ -397,14 +407,18 @@ def pad_sents(sents, pad_token, max_length=None):
     """
     sents_padded = []
 
-    if not max_length:
+    if not fixed_length or fixed_length == 0:
         max_len = max(len(s) for s in sents)
     else:
-        max_len = max_length
-
+        max_len = fixed_length
+        
     for s in sents:
         padded = [pad_token] * max_len
-        padded[:len(s)] = s
+        if len(s) < max_len:
+            padded[:len(s)] = s
+        else:
+            padded[:max_len-1] = s[0:max_len-1]
+            padded[max_len-1] = sent_end_token
         sents_padded.append(padded)
 
     return sents_padded
