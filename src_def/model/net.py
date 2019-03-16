@@ -216,6 +216,50 @@ class BertDEF(nn.Module):
         return s
 
 
+class SBertDEF(nn.Module):
+
+    def __init__(self, params):
+        print ("- Using bert embeddings")
+        super(SBertDEF, self).__init__()
+        self.bert = BertModel.from_pretrained(params.bert_type)
+
+        # dropout Layer
+        self.dropout = nn.Dropout(params.defm_dropout_rate, inplace=True)
+
+        # the fully connected layer transforms the output to give the final output layer
+        self.fc = nn.Linear(self.bert.config.hidden_size, 1, bias=True)
+
+    def forward(self, batch):
+
+        #print (batch['bert'].size())
+        #print (batch['bert_mask'].size())
+        attention_mask = batch['bert_mask']
+        attention_ix = attention_mask == -1
+        attention_mask[attention_ix] = 1
+        s, _ = self.bert(batch['bert'], attention_mask=attention_mask,
+                         output_all_encoded_layers=False)
+        attention_mask[attention_ix] = -1
+
+        # apply dropout
+        self.dropout(s)
+        
+        # make the Variable contiguous in memory (a PyTorch artefact)
+        s = s.contiguous()
+
+        # reshape the Variable so that each row contains one token
+        s = s.view(s.shape[0], -1)       # dim: batch_size*seq_len x lstm_hidden_dim
+        print (s.size())
+
+        # apply the fully connected layer and obtain the output (before softmax) for each token
+        s = self.fc(s)                   # dim: batch_size x 1
+
+        # apply sigmoid function
+        s = torch.sigmoid(s)
+        
+        return s
+
+
+
 def loss_fn(outputs, labels):
     """
     Compute the cross entropy loss given outputs from the model and labels for all tokens. Exclude loss terms

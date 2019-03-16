@@ -256,11 +256,12 @@ class DataLoader(object):
             for token in sent:
                 bert_tokens = self.bert_tokenizer.tokenize(token)
                 bert_tokenids = self.bert_tokenizer.convert_tokens_to_ids(bert_tokens)
-                bert_sent += bert_tokenids
-                if token == '[CLS]' or token == '[SEP]':
-                    bert_mask += [-1]
-                else:
-                    bert_mask += ([1] + [-1] * (len(bert_tokenids) - 1))
+                if len(bert_tokenids) > 0:
+                    bert_sent += bert_tokenids
+                    if token == '[CLS]' or token == '[SEP]':
+                        bert_mask += [-1]
+                    else:
+                        bert_mask += ([1] + [-1] * (len(bert_tokenids) - 1))
             assert(len(bert_sent) == len(bert_mask)), sent
             bert_sents.append(bert_sent)
             bert_masks.append(bert_mask)
