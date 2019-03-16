@@ -11,11 +11,11 @@ from tqdm import trange
 
 import utils
 import model.net as net
-import model.def_net as def_net
 from model.data_loader import DataLoader
 from evaluate import evaluate
 import matplotlib.pyplot as plt
 import pickle
+from pytorch_pretrained_bert import BertAdam
 
 
 parser = argparse.ArgumentParser()
@@ -24,7 +24,6 @@ parser.add_argument('--model_dir', default='experiments/base_model', help="Direc
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before \
                     training")  # 'best' or 'train'
-parser.add_argument("--is_def", default=True, action="store_true")
 
 def train(model, optimizer, loss_fn, data_iterator, metrics, params, num_steps):
     """Train the model on `num_steps` batches
@@ -50,7 +49,8 @@ def train(model, optimizer, loss_fn, data_iterator, metrics, params, num_steps):
     t = trange(num_steps)
     for i in t:
         # fetch the next training batch
-        train_batch, labels_batch = next(data_iterator)
+        train_batch = next(data_iterator)
+        labels_batch = train_batch['slabels']
 
         # compute model output and loss
         output_batch = model(train_batch)
@@ -74,7 +74,7 @@ def train(model, optimizer, loss_fn, data_iterator, metrics, params, num_steps):
                              for metric in metrics}
             summary_batch['loss'] = loss.item()
             summ.append(summary_batch)
-
+            
         # update the average loss
         loss_avg.update(loss.item())
         t.set_postfix(loss='{:05.8f}'.format(loss_avg()))
@@ -128,7 +128,7 @@ def train_and_evaluate(model, train_data, val_data, optimizer, loss_fn, metrics,
 
         val_acc = val_metrics['f1score']
         print ("- Current epoch f1 score = %s, best f1 score = %s" %(val_acc, best_val_acc))
-        is_best = val_acc >= best_val_acc
+        is_best = val_acc > best_val_acc
 
         # Save weights
         utils.save_checkpoint({'epoch': epoch + 1,
@@ -176,7 +176,7 @@ if __name__ == '__main__':
     logging.info("Loading the datasets...")
 
     # load data
-    data_loader = DataLoader(args.data_dir, params, args.is_def)
+    data_loader = DataLoader(args.data_dir, params)
     data = data_loader.load_data(['train', 'val'], args.data_dir)
     train_data = data['train']
     val_data = data['val']
@@ -188,18 +188,19 @@ if __name__ == '__main__':
     logging.info("- done.")
 
     # Define the model and optimizer
-    if args.is_def:
-        model = def_net.Net(params).cuda() if params.cuda else def_net.Net(params)
-        # fetch loss function and metrics
-        loss_fn = def_net.loss_fn
-        metrics = def_net.metrics
+    if params.model_type == 'bert':
+        model = net.BertDEF(params).cuda() if params.cuda else net.BertDEF(params)
     else:
-        model = net.Net(params).cuda() if params.cuda else net.Net(params)
-        # fetch loss function and metrics
-        loss_fn = net.loss_fn
-        metrics = net.metrics
+        model = net.LuisNet(params).cuda() if params.cuda else net.LuisNet(params)
 
-    optimizer = optim.Adam(model.parameters(), lr=params.learning_rate)
+    # fetch loss function and metrics
+    loss_fn = net.loss_fn
+    metrics = net.metrics
+
+    if params.model_type == 'bert':
+        optimizer = BertAdam(model.parameters(), lr=params.learning_rate)
+    else:
+        optimizer = optim.Adam(model.parameters(), lr=params.learning_rate)
 
     # log parameters
     # for x,v in params.__dict__.items():

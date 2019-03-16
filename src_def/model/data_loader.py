@@ -6,42 +6,52 @@ import json
 
 import torch
 from torch.autograd import Variable
+from pytorch_pretrained_bert import BertTokenizer
 
-import utils 
+import utils
 
 
 class DataLoader(object):
     """
-    Handles all aspects of the data. Stores the dataset_params, vocabulary and tags with their mappings to indices.
+    Handles all aspects of the data. Stores the dataset params, vocabulary and tags with their mappings to indices.
+    Provides a generator that yields batches of data for batch training of different models.
+
+    Currently supports the following representations of the input sentences:
+        - Custom word embeddings: Creates a map from every word in the vocab to a custom trainable
+        word embedding index.
+        - GloVe word embeddings: Creates a map from every word in the vocab to a pre-trained GloVe
+        word embedding vector index.
+        - Char embeddings: Creates a map from every character in the character vocab to a custom
+        trainable character embedding index.
+        - BERT word piece embeddings: Uses the HuggingFace Pytorch BertTokenizer that tokenizes the
+        sentences into word pieces and converts these word pieces to ids to be fed into the BERT
+        models
+
     """
-    def __init__(self, data_dir, params, is_def=True):
+    def __init__(self, data_dir, params):
         """
         Loads dataset_params, vocabulary and tags. Ensure you have run `build_vocab.py` on data_dir before using this
         class.
 
         Args:
             data_dir: (string) directory containing the dataset
-            is_def: (boolean) true for definition model
             params: (Params) hyperparameters of the training process. This function modifies params and appends
                     dataset_params (such as vocab size, num_of_tags etc.) to params.
         """
 
-        self.is_def = is_def
-
-        # loading dataset_params
+        # load the dataset params
         json_path = os.path.join(data_dir, 'dataset_params.json')
         assert os.path.isfile(json_path), "No json file found at {}, run build_vocab.py".format(json_path)
-        self.dataset_params = utils.Params(json_path)        
-        
-        # loading vocab (we require this to map words to their indices)
+        self.dataset_params = utils.Params(json_path)
+
+        # load vocab and create vocab <--> id mapping
         vocab_path = os.path.join(data_dir, 'words.txt')
         self.vocab2id = {}
-        self.id2vocab = {}
         with open(vocab_path) as f:
             for i, l in enumerate(f.read().splitlines()):
                 self.vocab2id[l] = i
-                self.id2vocab[i] = l
-        
+        self.id2vocab = {v: k for k, v in self.vocab2id.items()}
+
         # setting the indices for UNKnown words and PADding symbols
         self.unk_ind = self.vocab2id[self.dataset_params.unk_word]
         self.pad_ind = self.vocab2id[self.dataset_params.pad_word]
@@ -56,76 +66,97 @@ class DataLoader(object):
             self.glove2id[word] = glove_ix.get(word, glove_ix[self.dataset_params.unk_word])
         self.id2glove = {v: k for k, v in self.glove2id.items()}
 
-        if 'glove' in params.embed_types:
-            self.vocab = self.glove2id
-            self.vocabi2c = self.id2glove
-            self.unk_ind = self.glove2id[self.dataset_params.unk_word]
-            self.pad_ind = self.glove2id[self.dataset_params.pad_word]
-        else:
-            self.vocab = self.vocab2id
-            self.vocabi2c = self.id2vocab
-                
-        # loading tags (we require this to map tags to their indices)
-        tags_path = os.path.join(data_dir, 'tags.txt')
-        self.tag_map = {}
-        self.inv_tag_map= {}
-        with open(tags_path) as f:
-            for i, t in enumerate(f.read().splitlines()):
-                self.tag_map[t] = i
-                self.inv_tag_map[i] = t
+        # load tags and create tag <--> id mapping
+        # for NER model
+        wtags_path = os.path.join(data_dir, 'wtags.txt')
+        self.wtag2id = {}
+        self.wid2tag = {}
+        if os.path.exists(wtags_path):
+            with open(wtags_path) as f:
+                for i, t in enumerate(f.read().splitlines()):
+                    self.wtag2id[t] = i
+                self.wtag2id[self.dataset_params.pad_word] = -1
+                self.wid2tag = {v: k for k, v in self.wtag2id.items()}
 
-        # for definition model, force tags to be 0|1 for
-        # (negative|positive) samples
-        if self.is_def:
-            self.tag_map['0'] = 0
-            self.tag_map['1'] = 1
-            self.inv_tag_map[0] = '0'
-            self.inv_tag_map[1] = '1'
+        # for DEF model
+        stags_path = os.path.join(data_dir, 'stags.txt')
+        self.stag2id = {}
+        self.sid2tag = {}
+        if os.path.exists(stags_path):
+            with open(stags_path) as f:
+                for i, t in enumerate(f.read().splitlines()):
+                    self.stag2id[t] = i
+                self.stag2id[self.dataset_params.pad_word] = -1
+                self.sid2tag = {v: k for k, v in self.stag2id.items()}
+
+        # adding character representation
+        char_path = os.path.join(data_dir, 'chars.txt')
+        self.char2id = {}
+        with open(char_path) as f:
+            for i, l in enumerate(f.read().splitlines()):
+                self.char2id[l] = i
+        self.id2char = {v: k for k, v in self.char2id.items()}
+
+        # Bert mappings
+        do_lower_case = params.bert_type != 'bert-base-cased'
+        self.bert_tokenizer = BertTokenizer.from_pretrained(params.bert_type,
+                                                            do_lower_case=do_lower_case)
 
         # adding dataset parameters to param (e.g. vocab size, )
         params.update(json_path)
 
-    def load_sentences_labels(self, sentences_file, labels_file, d):
+    def load_sentences_labels(self, sentences_file, wlabels_file, slabels_file, terms_file, d):
         """
-        Loads sentences and labels from their corresponding files. Maps tokens and tags to their indices and stores
-        them in the provided dict d.
+        Loads sentences, labels, and terms from their corresponding files.
 
         Args:
-            sentences_file: (string) file with sentences with tokens space-separated
+            sentences_file: (string) file with sentences with tokens space-separated generated
+            using ntlk's word_tokenize function
             labels_file: (string) file with NER tags for the sentences in labels_file
+            terms_file: (string) file with key terms for the entire textbook corpus represented in
+            the sentences file. A separate key term on each line.
             d: (dict) a dictionary in which the loaded data is stored
         """
 
         sentences = []
-        labels = []
+        wlabels = []
+        slabels = []
+        terms = []
 
         with open(sentences_file) as f:
             for sentence in f.read().splitlines():
-                # replace each token by its index if it is in vocab
-                # else use index of UNK_WORD
-                s = [self.vocab[token] if token in self.vocab 
-                     else self.unk_ind
-                     for token in sentence.split(' ')]
+                s = [token for token in sentence.split(' ')]
                 sentences.append(s)
-        
-        with open(labels_file) as f:
-            for sentence in f.read().splitlines():
-                if self.is_def:
-                    l = self.tag_map[sentence]
-                else:
-                    # replace each label by its index
-                    l = [self.tag_map[label] for label in sentence.split(' ')]
-                labels.append(l)        
 
-        # checks to ensure there is a tag for each token
-        assert (len(labels) == len(sentences))
-        if not self.is_def:
-            for i in range(len(labels)):
-                assert len(labels[i]) == len(sentences[i])
+        if os.path.exists(wlabels_file):
+            with open(wlabels_file) as f:
+                for sentence in f.read().splitlines():
+                    l = [label for label in sentence.split(' ')]
+                    wlabels.append(l)
+
+            # checks to ensure there is a tag for each token
+            assert len(wlabels) == len(sentences)
+            for i in range(len(wlabels)):
+                assert len(wlabels[i]) == len(sentences[i])
+
+        if os.path.exists(slabels_file):
+            with open(slabels_file) as f:
+                for sentence in f.read().splitlines():
+                    slabels.append(sentence)
+                    
+            # checks to ensure there is a tag for each sentence
+            assert len(slabels) == len(sentences)
+
+        if os.path.exists(terms_file):
+            with open(terms_file) as f:
+                for term in f.read().splitlines():
+                    terms.append(term)
 
         # storing sentences and labels in dict d
         d['data'] = sentences
-        d['labels'] = labels
+        d['wlabels'] = wlabels
+        d['slabels'] = slabels
+        d['terms'] = terms
         d['size'] = len(sentences)
 
     def load_data(self, types, data_dir):
@@ -141,19 +172,154 @@ class DataLoader(object):
 
         """
         data = {}
-        
+
         for split in ['train', 'val', 'test']:
             if split in types:
                 sentences_file = os.path.join(data_dir, split, "sentences.txt")
-                labels_file = os.path.join(data_dir, split, "labels.txt")
+                wlabels_file = os.path.join(data_dir, split, "wlabels.txt")
+                slabels_file = os.path.join(data_dir, split, "slabels.txt")
+                terms_file = os.path.join(data_dir, split, "terms.txt")
                 data[split] = {}
-                self.load_sentences_labels(sentences_file, labels_file, data[split])
+                self.load_sentences_labels(sentences_file, wlabels_file, slabels_file, terms_file, data[split])
 
         return data
 
+    def words2charindices(self, sents):
+        """ Convert list of sentences of words into list of list of list of character indices.
+
+        Args:
+            sents: list[list[str]] sentences(s) split into words
+
+        Returns:
+            char_ids: list[list[list[int]]] list of character indices for words across sentences
+        """
+        word_ids = []
+        for sent in sents:
+            sent_ids = []
+            for word in sent:
+                ch_ids = [self.char2id.get(ch, self.char2id[self.dataset_params.unk_word]) for ch in word]
+                sent_ids.append(ch_ids)
+            word_ids.append(sent_ids)
+
+        return word_ids
+
+    def tags2indices(self, sents):
+        """ Convert list of sentences of tags into list of list of indices.
+
+        Args:
+            sents: list[list[str]] sentences(s) split into tags
+
+        Returns:
+            tag_ids: list[list[int]] list of tag ids across sentences
+        """
+        return [[self.wtag2id[t] for t in s] for s in sents]
+
+
+    def words2indices(self, sents, embed_type):
+        """ Convert list of sentences of words into list of list of indices.
+
+        Args:
+            sents: list[list[str]] sentences(s) split into words
+            embed_type: str (glove|word) word embedding type to retrieve indices for
+
+        Returns:
+            word_ids: list[list[int]] list of word ids across sentences
+        """
+        if embed_type == 'word':
+            return [[self.vocab2id.get(w, self.vocab2id[self.dataset_params.unk_word]) for w in s] for s in sents]
+        elif embed_type == 'glove':
+            return [[self.glove2id.get(w, self.glove2id[self.dataset_params.unk_word]) for w in s] for s in sents]
+        else:
+            raise ValueError('Unknown embedding type: %s' % embed_type)
+
+    def words2bertindices(self, sents):
+        """ Convert list of sentences of words into list of list of Bert wordpiece indices.
+
+        Additionally creates a mask denoting which indices are wordpiece expansions of original
+        words (denoted by -1). We will use this to re-map back to the original word token space
+        when evaluating the tagging.
+
+        Args:
+            sents: list[list[str]] sentences(s) split into words
+
+        Returns:
+            bert_ids: list[list[int]] sentences expanded into wordpiece indices
+            bert_masks: list[list[int] list of masks for each sentence that is -1 wherever a word
+            got extended into additional word pieces
+        """
+        bert_sents = []
+        bert_masks = []
+        for sent in sents:
+            bert_sent = []
+            bert_mask = []
+            sent = ['[CLS]'] + sent + ['[SEP]']
+            for token in sent:
+                bert_tokens = self.bert_tokenizer.tokenize(token)
+                bert_tokenids = self.bert_tokenizer.convert_tokens_to_ids(bert_tokens)
+                bert_sent += bert_tokenids
+                if token == '[CLS]' or token == '[SEP]':
+                    bert_mask += [-1]
+                else:
+                    bert_mask += ([1] + [-1] * (len(bert_tokenids) - 1))
+            bert_sents.append(bert_sent)
+            bert_masks.append(bert_mask)
+
+        return bert_sents, bert_masks
+
+    def to_input_tensor(self, sents, embed_type):
+        """ Convert list of sentences (words) into input tensor to be fed into models
+            to retrieve appropriate embeddings.
+
+        Args:
+            sents: list[list[str]] sentences(s) split into words
+            embed_type: str (glove|word|char|bert|label) embedding type to produce indices for
+
+        Returns:
+            id_tensor: tensor of (embedding_shape, batch_size)
+            id_mask: tensor of (embedding_shape, batch_size)
+        """
+        if embed_type == 'char':
+            char_ids = self.words2charindices(sents)
+            pad_id = self.char2id[self.dataset_params.pad_word]
+            sents_padded = pad_sents_char(char_ids, pad_id)
+            sents_t = torch.tensor(sents_padded, dtype=torch.long)
+            return sents_t.permute(1, 0, 2)
+        elif embed_type == 'word':
+            word_ids = self.words2indices(sents, 'word')
+            pad_id = self.vocab2id[self.dataset_params.pad_word]
+            sents_t = pad_sents(word_ids, pad_id)
+            id_tensor = torch.tensor(sents_t, dtype=torch.long)
+            return id_tensor
+        elif embed_type == 'wtag':
+            tag_ids = self.tags2indices(sents)
+            pad_id = self.wtag2id[self.dataset_params.pad_word]
+            sents_t = pad_sents(tag_ids, pad_id)
+            id_tensor = torch.tensor(sents_t, dtype=torch.long)
+            return id_tensor
+        elif embed_type == 'stag':
+            sents_t = [int(x) for x in sents]
+            id_tensor = torch.tensor(sents_t, dtype=torch.float)
+            return id_tensor
+        elif embed_type == 'glove':
+            word_ids = self.words2indices(sents, 'glove')
+            pad_id = self.glove2id[self.dataset_params.pad_word]
+            sents_t = pad_sents(word_ids, pad_id)
+            sents_var = torch.tensor(sents_t, dtype=torch.long)
+            return sents_var
+        elif embed_type == 'bert':
+            word_ids, word_masks = self.words2bertindices(sents)
+            pad_id = self.bert_tokenizer.convert_tokens_to_ids([self.dataset_params.pad_word])[0]
+            sents_t = pad_sents(word_ids, pad_id)
+            word_mask = pad_sents(word_masks, 0)
+            sents_var = torch.tensor(sents_t, dtype=torch.long)
+            berts_mask = torch.tensor(word_mask, dtype=torch.long)
+            return sents_var, berts_mask
+        else:
+            raise ValueError('Unsupported Embedding Type: %s' % embed_type)
+
     def data_iterator(self, data, params, shuffle=False):
         """
-        Returns a generator that yields batches data with labels. Batch size is params.batch_size. Expires after one
+        Returns a generator that yields batches of data with labels. Batch size is params.batch_size. Expires after one
         pass over the data.
 
         Args:
@@ -162,8 +328,7 @@ class DataLoader(object):
             shuffle: (bool) whether the data should be shuffled
 
         Yields:
-            batch_data: (Variable) dimension batch_size x seq_len with the sentence data
-            batch_labels: (Variable) dimension batch_size x seq_len with the corresponding labels
+            batch: (dictionary) dimension batch_size x seq_len with the sentence data
 
         """
 
@@ -175,42 +340,98 @@ class DataLoader(object):
 
         # one pass over data
         for i in range((data['size']+1)//params.batch_size):
-            # fetch sentences and tags
+
+            batch = {}
+
+            # fetch sentences and labels
             batch_sentences = [data['data'][idx] for idx in order[i*params.batch_size:(i+1)*params.batch_size]]
-            batch_tags = [data['labels'][idx] for idx in order[i*params.batch_size:(i+1)*params.batch_size]]
+            batch_wtags = [data['wlabels'][idx] for idx in order[i*params.batch_size:(i+1)*params.batch_size] if idx < len(data['wlabels'])]
+            batch_stags = [data['slabels'][idx] for idx in order[i*params.batch_size:(i+1)*params.batch_size] if idx < len(data['slabels'])]
+            batch['sentences'] = batch_sentences
+            batch['wtags'] = batch_wtags
+            batch['stags'] = batch_stags
 
-            # compute length of longest sentence in batch
-            batch_max_len = max([len(s) for s in batch_sentences])
+            # convert word tags to a label tensor
+            if len(batch_wtags) > 0:
+                batch['wlabels'] = self.to_input_tensor(batch_wtags, 'wtag')
+                if params.cuda:
+                    batch['wlabels'] = batch['wlabels'].cuda()
+                    batch['wlabels'] = Variable(batch['wlabels'])
 
-            # prepare a numpy array with the data, initialising the data with pad_ind and all labels with -1
-            # initialising labels to -1 differentiates tokens with tags from PADding tokens
-            batch_data = self.pad_ind*np.ones((len(batch_sentences), batch_max_len))
-            if not self.is_def:
-                batch_labels = -1*np.ones((len(batch_sentences), batch_max_len))
-            else:
-                batch_labels = np.zeros((len(batch_sentences), 1))
+            # convert sentence tags to label tensor
+            if len(batch_stags) > 0:
+                batch['slabels'] = self.to_input_tensor(batch_stags, 'stag')
+                if params.cuda:
+                    batch['slabels'] = batch['slabels'].cuda()
+                    batch['slabels'] = Variable(batch['slabels'])
 
-            # copy the data to the numpy array
-            for j in range(len(batch_sentences)):
-                cur_len = len(batch_sentences[j])
-                batch_data[j][:cur_len] = batch_sentences[j]
-                if not self.is_def:
-                    batch_labels[j][:cur_len] = batch_tags[j]
+            # compute all desired embedding representation inputs
+            for embed_type in params.embed_types:
+                if embed_type == 'bert':
+                    sents, mask = self.to_input_tensor(batch_sentences, embed_type)
+                    batch[embed_type] = sents
+                    batch[embed_type + '_mask'] = mask
+                    if params.cuda:
+                        batch[embed_type] = batch[embed_type].cuda()
+                        batch[embed_type + '_mask'] = batch[embed_type + '_mask'].cuda()
+                    batch[embed_type] = Variable(batch[embed_type])
                 else:
-                    batch_labels[j][0] = float(batch_tags[j])
+                    batch[embed_type] = self.to_input_tensor(batch_sentences, embed_type)
+                    if params.cuda:
+                        batch[embed_type] = batch[embed_type].cuda()
+                    batch[embed_type] = Variable(batch[embed_type])
 
-            # since all data are indices, we convert them to torch LongTensors
-            # In def_model, target is float
-            if not self.is_def:
-                batch_data, batch_labels = torch.LongTensor(batch_data), torch.LongTensor(batch_labels)
+            yield batch
+
+def pad_sents(sents, pad_token, max_length=None):
+    """ Pad list of sentences according to the longest sentence in the batch.
+    @param sents (list[list[int]]): list of sentences, where each sentence
+                                    is represented as a list of words
+    @param pad_token (int): padding token
+    @returns sents_padded (list[list[int]]): list of sentences where sentences shorter
+        than the max length sentence are padded out with the pad_token, such that
+        each sentences in the batch now has equal length.
+        Output shape: (batch_size, max_sentence_length)
+    """
+    sents_padded = []
+
+    if not max_length:
+        max_len = max(len(s) for s in sents)
+    else:
+        max_len = max_length
+
+    for s in sents:
+        padded = [pad_token] * max_len
+        padded[:len(s)] = s
+        sents_padded.append(padded)
+
+    return sents_padded
+
+def pad_sents_char(sents, char_pad_token, max_word_length=21):
+    """ Pad list of sentences according to the longest sentence in the batch and max_word_length.
+        @param sents (list[list[list[int]]]): list of sentences, result of `words2charindices()`
+        from `vocab.py`
+        @param char_pad_token (int): index of the character-padding token
+        @returns sents_padded (list[list[list[int]]]): list of sentences where sentences/words shorter
+            than the max length sentence/word are padded out with the appropriate pad token, such that
+            each sentence in the batch now has same number of words and each word has an equal
+            number of characters
+            Output shape: (batch_size, max_sentence_length, max_word_length)
+    """
+    max_sent_len = max([len(sent) for sent in sents])
+    pad_word = [char_pad_token] * max_word_length
+
+    sents_padded = []
+    for sent in sents:
+        new_sent = []
+        for word in sent:
+            if len(word) > max_word_length:
+                new_sent.append(word[:max_word_length])
             else:
-                batch_data, batch_labels = torch.LongTensor(batch_data), torch.FloatTensor(batch_labels)
+                num_word_pad = max_word_length - len(word)
+                new_sent.append(word + [char_pad_token] * num_word_pad)
 
-            # shift tensors to GPU if available
-            if params.cuda:
-                batch_data, batch_labels = batch_data.cuda(), batch_labels.cuda()
+        num_sent_pad = max_sent_len - len(sent)
+        sents_padded.append(new_sent + [pad_word] * num_sent_pad)
 
-            # convert them to Variables to record operations in the computational graph
-            batch_data, batch_labels = Variable(batch_data), Variable(batch_labels)
-    
-            yield batch_data, batch_labels
+    return sents_padded

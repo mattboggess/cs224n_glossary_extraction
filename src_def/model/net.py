@@ -4,9 +4,9 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from pytorch_pretrained_bert import BertModel
 
-
-class Net(nn.Module):
+class LuisNet(nn.Module):
     """
     This is the standard way to define your own network in PyTorch. You typically choose the components
     (e.g. LSTMs, linear layers etc.) of your network in the __init__ function. You then apply these layers
@@ -21,29 +21,69 @@ class Net(nn.Module):
 
     def __init__(self, params):
         """
-        We define an recurrent network that predicts the NER tags for each token in the sentence. The components
-        required are:
-
-        - an embedding layer: this layer maps each index in range(params.vocab_size) to a params.embedding_dim vector
-        - lstm: applying the LSTM on the sequential input returns an output for each token in the sentence
-        - fc: a fully connected layer that converts the LSTM output for each token to a distribution over NER tags
+        We define a definition model which predicts if a sentence is a definition setnence or not.
+        - an embedding layer: maps input to word embeddings
+        - cnn layer: convolves over words in sentences
+        - max pool: pooling layer
+        - bilstm: applying the Bi-LSTM on the sequential input returns an output for each token in the sentence
+        - fc: a fully connected layer that converts the LSTM output to 1 or 0
 
         Args:
-            params: (Params) contains vocab_size, embedding_dim, lstm_hidden_dim
+            params: (Params) contains 
+               vocab_size          : size of vocabulary
+               defm_embed_size     : word embedding size
+               defm_cnn_num_filters: number of cnn filters
+               defm_cnn_kernel     : cnn kernel
+               defm_pool_kernel    : pooling kernel
+               defm_pool_stride    : pooling stride
+               defm_lstm_hidden_dim: bi-lstm hidden size
+               defm_dcsn_threshold : decision threshold 
         """
-        super(Net, self).__init__()
+        super(LuisNet, self).__init__()
 
-        # the embedding takes as input the vocab_size and the embedding_dim
-        self.embedding = nn.Embedding(params.vocab_size, params.embedding_dim)
+        self.threshold = params.defm_dcsn_threshold
 
-        # the LSTM takes as input the size of its input (embedding_dim), its hidden size
-        # for more details on how to use it, check out the documentation
-        self.lstm = nn.LSTM(params.embedding_dim, params.lstm_hidden_dim, batch_first=True)
+        if 'glove' in params.embed_types:
+            # the embedding takes as input the vocab_size and the embedding_dim
+            print ("- Using glove embeddings")
+            self.word_embed_type = 'glove'
+            self.defm_embed_size = params.glove_embedding_size
+            self.embedding = nn.Embedding(params.glove_vocab_size, 
+                                          params.defm_embed_size)
+            
+            # load in glove weights & fix
+            glove_weights = np.load(params.glove_path)['glove']
+            self.embedding.load_state_dict({'weight': torch.tensor(glove_weights)})
+            self.embedding.weight.requires_grad = False
+        else:
+            self.word_embed_type = 'word'
+            self.defm_embed_size = params.defm_embed_size
+            self.embedding = nn.Embedding(params.vocab_size, params.defm_embed_size)
+
+        # cnn filters
+        self.cnn = nn.Conv1d(params.defm_embed_size, 
+                             params.defm_cnn_num_filters,
+                             params.defm_cnn_kernel,
+                             padding=int(params.defm_cnn_kernel/2),
+                             bias=True)
+        nn.init.xavier_uniform_(self.cnn.weight, gain=1)
+
+        # max pool
+        self.maxpool_layer = nn.MaxPool1d(params.defm_pool_kernel, stride=params.defm_pool_stride)
+        
+        # LSTM
+        self.lstm = nn.LSTM(params.defm_cnn_num_filters,
+                            params.defm_lstm_hidden_dim,
+                            batch_first=True,
+                            bidirectional=True)
+
+        # dropout Layer
+        self.dropout = nn.Dropout(params.defm_dropout_rate, inplace=True)
 
         # the fully connected layer transforms the output to give the final output layer
-        self.fc = nn.Linear(params.lstm_hidden_dim, params.number_of_tags)
+        self.fc = nn.Linear(params.defm_lstm_hidden_dim*2, 1, bias=True)
 
-    def forward(self, s):
+    def forward(self, batch):
         """
         This function defines how we use the components of our network to operate on an input batch.
 
@@ -59,25 +99,116 @@ class Net(nn.Module):
 
         Note: the dimensions after each step are provided
         """
+        # extract proper indices
+        s = batch[self.word_embed_type]
+
         #                                -> batch_size x seq_len
         # apply the embedding layer that maps each token to its embedding
-        s = self.embedding(s)            # dim: batch_size x seq_len x embedding_dim
+        s = self.embedding(s)            # dim: batch_size x seq_len x defm_embed_size
 
+        # run through cnn 
+        s = s.permute(0,2,1)  # dim: batch_size x defm_embed_size x seq_len
+        s = self.cnn(s)       # dim: batch_size x defm_cnn_num_filters x seq_len
+
+        # run through pooling layer
+        s = self.maxpool_layer(s) # dim: batch_size x defm_cnn_num_filters x seq_len/defm_pool_stride
+        
+        # apply dropout
+        self.dropout(s)
+        
+        s = s.permute(0,2,1)  # dim: batch_size x seq_len/defm_pool_stride x defm_cnn_num_filters
         # run the LSTM along the sentences of length seq_len
-        s, _ = self.lstm(s)              # dim: batch_size x seq_len x lstm_hidden_dim
+        _, (s,__) = self.lstm(s)              # dim: 2 x batch_size x defm_lstm_hidden_dim
 
         # make the Variable contiguous in memory (a PyTorch artefact)
         s = s.contiguous()
 
         # reshape the Variable so that each row contains one token
-        s = s.view(-1, s.shape[2])       # dim: batch_size*seq_len x lstm_hidden_dim
+        s = s.permute(1,0,2) # dim: batch_size x 2 x defm_lstm_hidden_dim
+        s = s.contiguous()
+        s = s.view(-1, s.shape[2]*2)       # dim: batch_size x 2*lstm_hidden_dim
+
+        # apply dropout
+        self.dropout(s)
 
         # apply the fully connected layer and obtain the output (before softmax) for each token
-        s = self.fc(s)                   # dim: batch_size*seq_len x num_tags
+        s = self.fc(s)                   # dim: batch_size x 1
 
-        # apply log softmax on each token's output (this is recommended over applying softmax
-        # since it is numerically more stable)
-        return F.log_softmax(s, dim=1)   # dim: batch_size*seq_len x num_tags
+        # apply sigmoid function
+        s = torch.sigmoid(s)
+        
+        return s
+
+class BertDEF(nn.Module):
+
+    def __init__(self, params):
+        print ("- Using bert embeddings")
+        super(BertDEF, self).__init__()
+        self.bert = BertModel.from_pretrained(params.bert_type)
+
+        # cnn filters
+        self.cnn = nn.Conv1d(self.bert.config.hidden_size, 
+                             params.defm_cnn_num_filters,
+                             params.defm_cnn_kernel,
+                             padding=int(params.defm_cnn_kernel/2),
+                             bias=True)
+        nn.init.xavier_uniform_(self.cnn.weight, gain=1)
+
+        # max pool
+        self.maxpool_layer = nn.MaxPool1d(params.defm_pool_kernel, stride=params.defm_pool_stride)
+        
+        # LSTM
+        self.lstm = nn.LSTM(params.defm_cnn_num_filters,
+                            params.defm_lstm_hidden_dim,
+                            batch_first=True,
+                            bidirectional=True)
+
+        # dropout Layer
+        self.dropout = nn.Dropout(params.defm_dropout_rate, inplace=True)
+
+        # the fully connected layer transforms the output to give the final output layer
+        self.fc = nn.Linear(params.defm_lstm_hidden_dim*2, 1, bias=True)
+
+    def forward(self, batch):
+        attention_mask = batch['bert_mask']
+        attention_ix = attention_mask == -1
+        attention_mask[attention_ix] = 1
+        s, _ = self.bert(batch['bert'], attention_mask=attention_mask,
+                         output_all_encoded_layers=False)
+        attention_mask[attention_ix] = -1
+
+        # run through cnn 
+        s = s.permute(0,2,1)  # dim: batch_size x defm_embed_size x seq_len
+        s = self.cnn(s)       # dim: batch_size x defm_cnn_num_filters x seq_len
+
+        # run through pooling layer
+        s = self.maxpool_layer(s) # dim: batch_size x defm_cnn_num_filters x seq_len/defm_pool_stride
+        
+        # apply dropout
+        self.dropout(s)
+        
+        s = s.permute(0,2,1)  # dim: batch_size x seq_len/defm_pool_stride x defm_cnn_num_filters
+        # run the LSTM along the sentences of length seq_len
+        _, (s,__) = self.lstm(s)              # dim: 2 x batch_size x defm_lstm_hidden_dim
+
+        # make the Variable contiguous in memory (a PyTorch artefact)
+        s = s.contiguous()
+
+        # reshape the Variable so that each row contains one token
+        s = s.permute(1,0,2) # dim: batch_size x 2 x defm_lstm_hidden_dim
+        s = s.contiguous()
+        s = s.view(-1, s.shape[2]*2)       # dim: batch_size x 2*lstm_hidden_dim
+
+        # apply dropout
+        self.dropout(s)
+
+        # apply the fully connected layer and obtain the output (before softmax) for each token
+        s = self.fc(s)                   # dim: batch_size x 1
+
+        # apply sigmoid function
+        s = torch.sigmoid(s)
+        
+        return s
 
 
 def loss_fn(outputs, labels):
@@ -86,9 +217,8 @@ def loss_fn(outputs, labels):
     for PADding tokens.
 
     Args:
-        outputs: (Variable) dimension batch_size*seq_len x num_tags - log softmax output of the model
-        labels: (Variable) dimension batch_size x seq_len where each element is either a label in [0, 1, ... num_tag-1],
-                or -1 in case it is a PADding token.
+        outputs: (Variable) dimension batch_size - sigmoid output of the model
+        labels: (Variable) dimension batch_size  - 0|1 (no definition|definition)
 
     Returns:
         loss: (Variable) cross entropy loss for all tokens in the batch
@@ -97,20 +227,15 @@ def loss_fn(outputs, labels):
           demonstrates how you can easily define a custom loss function.
     """
 
-    # reshape labels to give a flat vector of length batch_size*seq_len
-    labels = labels.view(-1)
-
-    # since PADding tokens have label -1, we can generate a mask to exclude the loss from those terms
-    mask = (labels >= 0).float()
-
-    # indexing with negative values is not supported. Since PADded tokens have label -1, we convert them to a positive
-    # number. This does not affect training, since we ignore the PADded tokens with the mask.
-    labels = labels % outputs.shape[1]
-
-    num_tokens = int(torch.sum(mask).item())
-
-    # compute cross entropy loss for all tokens (except PADding tokens), by multiplying with mask.
-    return -torch.sum(outputs[range(outputs.shape[0]), labels]*mask)/num_tokens
+    #labels = labels.squeeze(1)
+    outputs = outputs.squeeze(1)
+    loss = F.binary_cross_entropy(outputs, labels)
+    # focal loss
+    #CE(pt) = −log(pt)
+    #FL(pt) = −(1 − pt)γ log(pt)
+    #loss = -torch.sum((labels*torch.log(outputs) + (1-labels)*torch.log(1-outputs))*((1-outputs)**2))
+    #loss = -torch.sum((labels*torch.log(outputs)*0.95 + (1-labels)*torch.log(1-outputs)*0.05))/len(labels)
+    return loss
 
 
 def accuracy(outputs, labels):
@@ -118,28 +243,92 @@ def accuracy(outputs, labels):
     Compute the accuracy, given the outputs and labels for all tokens. Exclude PADding terms.
 
     Args:
-        outputs: (np.ndarray) dimension batch_size*seq_len x num_tags - log softmax output of the model
-        labels: (np.ndarray) dimension batch_size x seq_len where each element is either a label in
-                [0, 1, ... num_tag-1], or -1 in case it is a PADding token.
+        outputs: (np.ndarray) dimension batch_size - sigmoid output of the model
+        labels: (np.ndarray) dimension batch_size  - 0|1 (no definition|definition)
 
     Returns: (float) accuracy in [0,1]
     """
+    # threshold the output
+    #??fixme?? How to get threshold here
+    outputs = outputs > 0.5
+    outputs = outputs.squeeze(1)
+    labels = labels == 1
+    # compare outputs with labels and divide by number of sentences
+    return np.sum(outputs==labels)/float(labels.shape[0])
 
-    # reshape labels to give a flat vector of length batch_size*seq_len
-    labels = labels.ravel()
+def f1metric(outputs, labels):
+    """
+    Compute precision, recall and f1 score.
+    
+    Args:
+        outputs: (np.ndarray) dimension batch_size - sigmoid output of the model
+        labels: (np.ndarray) dimension batch_size  - 0|1 (no definition|definition)
 
-    # since PADding tokens have label -1, we can generate a mask to exclude the loss from those terms
-    mask = (labels >= 0)
+    Returns: float (prec, recall, f1)
+    """
 
-    # np.argmax gives us the class predicted for each token by the model
-    outputs = np.argmax(outputs, axis=1)
+    outputs = outputs > 0.5
+    outputs = outputs.squeeze(1)
+    labels = labels == 1
+    tn = np.sum(np.logical_or(outputs, labels) == 0)
+    tp = np.sum(np.logical_and(outputs, labels) == 1)
+    x = np.logical_xor(outputs, labels)
+    fn = np.sum(np.logical_and(x, labels))
+    fp = np.sum(np.logical_and(x, outputs))
+    p = r = f1 = 0.0
+    if tp != 0:
+        p = tp/(tp+fp)
+        r = tp/(tp+fn)
+        f1 = 2*(p*r)/(p+r)
+   #print ("labels={}, outputs={}, tp={}, tn={}, fp={}, fn={}, p={}, r={}, f1={}".format(len(labels), len(outputs), tp, tn, fp, fn, p, r, f1))
+    return (p,r,f1)
+    
 
-    # compare outputs with labels and divide by number of tokens (excluding PADding tokens)
-    return np.sum(outputs==labels)/float(np.sum(mask))
+def f1score(outputs, labels):
+    """
+    Compute f1 score.
+    
+    Args:
+        outputs: (np.ndarray) dimension batch_size - sigmoid output of the model
+        labels: (np.ndarray) dimension batch_size  - 0|1 (no definition|definition)
+
+    Returns: float
+    """
+
+    return f1metric(outputs, labels)[2]
+
+def precision(outputs, labels):
+    """
+    Compute f1 score.
+    
+    Args:
+        outputs: (np.ndarray) dimension batch_size - sigmoid output of the model
+        labels: (np.ndarray) dimension batch_size  - 0|1 (no definition|definition)
+
+    Returns: float
+    """
+
+    return f1metric(outputs, labels)[0]
+
+def recall(outputs, labels):
+    """
+    Compute f1 score.
+    
+    Args:
+        outputs: (np.ndarray) dimension batch_size - sigmoid output of the model
+        labels: (np.ndarray) dimension batch_size  - 0|1 (no definition|definition)
+
+    Returns: float
+    """
+
+    return f1metric(outputs, labels)[1]
 
 
 # maintain all metrics required in this dictionary- these are used in the training and evaluation loops
 metrics = {
     'accuracy': accuracy,
+    'precision': precision,
+    'recall': recall,
+    'f1score' : f1score,
     # could add more metrics such as accuracy for each token type
 }
