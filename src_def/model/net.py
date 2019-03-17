@@ -248,7 +248,7 @@ class SBertDEF(nn.Module):
 
         # reshape the Variable so that each row contains one token
         s = s.view(s.shape[0], -1)       # dim: batch_size*seq_len x lstm_hidden_dim
-        print (s.size())
+        #print (s.size())
 
         # apply the fully connected layer and obtain the output (before softmax) for each token
         s = self.fc(s)                   # dim: batch_size x 1

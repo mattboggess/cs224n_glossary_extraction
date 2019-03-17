@@ -120,6 +120,8 @@ if __name__ == '__main__':
     # Define the model
     if params.model_type == 'bert':
         model = net.BertDEF(params).cuda() if params.cuda else net.BertDEF(params)
+    elif params.model_type == 'sbert':
+        model = net.SBertDEF(params).cuda() if params.cuda else net.SBertDEF(params)
     else:
         model = net.LuisNet(params).cuda() if params.cuda else net.LuisNet(params)
     loss_fn = net.loss_fn
