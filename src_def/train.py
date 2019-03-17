@@ -107,8 +107,13 @@ def train_and_evaluate(model, train_data, val_data, optimizer, loss_fn, metrics,
         utils.load_checkpoint(restore_path, model, optimizer)
 
     best_val_acc = 0.0
-    tlosses = []
-    vlosses = []
+    try:
+        if os.path.exits(args.model_dir + '/loss_data.pickle.dat'):
+            with open(args.model_dir + '/loss_data.pickle.dat', 'wb') as fin:
+                tlosses, vlosses = pickle.load(fin)
+    except:
+        tlosses = []
+        vlosses = []
 
     for epoch in range(params.num_epochs):
         # Run one epoch
@@ -151,8 +156,8 @@ def train_and_evaluate(model, train_data, val_data, optimizer, loss_fn, metrics,
         utils.save_dict_to_json(val_metrics, last_json_path)
 
     # save losses for plot
-    with open(args.model_dir + '/loss_data.pickle.dat', 'wb') as fin:
-        pickle.dump((tlosses, vlosses), fin)
+    with open(args.model_dir + '/loss_data.pickle.dat', 'wb') as fout:
+        pickle.dump((tlosses, vlosses), fout)
 
 if __name__ == '__main__':
 

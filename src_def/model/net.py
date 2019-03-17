@@ -227,7 +227,12 @@ class SBertDEF(nn.Module):
         self.dropout = nn.Dropout(params.defm_dropout_rate, inplace=True)
 
         # the fully connected layer transforms the output to give the final output layer
-        self.fc = nn.Linear(self.bert.config.hidden_size * params.fixed_sent_length, 1, bias=True)
+        if params.use_cls:
+            self.fc = nn.Linear(self.bert.config.hidden_size, 1, bias=True)
+            self.use_bert_cls = True
+        else:
+            self.fc = nn.Linear(self.bert.config.hidden_size * params.fixed_sent_length, 1, bias=True)
+            self.use_bert_cls = False
 
     def forward(self, batch):
 
@@ -236,8 +241,12 @@ class SBertDEF(nn.Module):
         attention_mask = batch['bert_mask']
         attention_ix = attention_mask == -1
         attention_mask[attention_ix] = 1
-        s, _ = self.bert(batch['bert'], attention_mask=attention_mask,
-                         output_all_encoded_layers=False)
+        if self.use_bert_cls:
+            , s = self.bert(batch['bert'], attention_mask=attention_mask,
+                             output_all_encoded_layers=False)
+        else:
+            s, _ = self.bert(batch['bert'], attention_mask=attention_mask,
+                             output_all_encoded_layers=False)
         attention_mask[attention_ix] = -1
 
         # apply dropout
