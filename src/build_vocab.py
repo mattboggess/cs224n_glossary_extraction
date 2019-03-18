@@ -6,7 +6,7 @@ import json
 import os
 import pandas as pd
 import numpy as np
-
+import gzip
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--min_count_word', default=1, help="Minimum count for words in the dataset", type=int)
@@ -123,7 +123,7 @@ if __name__ == '__main__':
     num_glove = 0
     glove_ix = 0
     average_embedding = np.zeros(300)
-    with open('../data/embeddings/glove.840B.300d.txt', 'r') as fid:
+    with gzip.open('../data/embeddings/glove.840B.300d.txt.gz', 'rt') as fid:
         for line in fid:
             num_glove += 1
             values = line.split(' ')

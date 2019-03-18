@@ -11,9 +11,11 @@ from tqdm import trange
 
 import utils
 import model.net as net
-import model.def_net as def_net
 from model.data_loader import DataLoader
 from evaluate import evaluate
+import matplotlib.pyplot as plt
+import pickle
+from pytorch_pretrained_bert import BertAdam
 
 
 parser = argparse.ArgumentParser()
@@ -22,7 +24,6 @@ parser.add_argument('--model_dir', default='experiments/base_model', help="Direc
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before \
                     training")  # 'best' or 'train'
-parser.add_argument("--is_def", default=False, action="store_true")
 
 def train(model, optimizer, loss_fn, data_iterator, metrics, params, num_steps):
     """Train the model on `num_steps` batches
@@ -48,7 +49,8 @@ def train(model, optimizer, loss_fn, data_iterator, metrics, params, num_steps):
     t = trange(num_steps)
     for i in t:
         # fetch the next training batch
-        train_batch, labels_batch = next(data_iterator)
+        train_batch = next(data_iterator)
+        labels_batch = train_batch['slabels']
 
         # compute model output and loss
         output_batch = model(train_batch)
@@ -72,15 +74,16 @@ def train(model, optimizer, loss_fn, data_iterator, metrics, params, num_steps):
                              for metric in metrics}
             summary_batch['loss'] = loss.item()
             summ.append(summary_batch)
-
+            
         # update the average loss
         loss_avg.update(loss.item())
-        t.set_postfix(loss='{:05.3f}'.format(loss_avg()))
+        t.set_postfix(loss='{:05.8f}'.format(loss_avg()))
 
     # compute mean of all metrics in summary
     metrics_mean = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]}
     metrics_string = " ; ".join("{}: {:05.3f}".format(k, v) for k, v in metrics_mean.items())
     logging.info("- Train metrics: " + metrics_string)
+    return loss_avg()
 
 
 def train_and_evaluate(model, train_data, val_data, optimizer, loss_fn, metrics, params, model_dir, restore_file=None):
@@ -104,6 +107,13 @@ def train_and_evaluate(model, train_data, val_data, optimizer, loss_fn, metrics,
         utils.load_checkpoint(restore_path, model, optimizer)
 
     best_val_acc = 0.0
+    try:
+        if os.path.exits(args.model_dir + '/loss_data.pickle.dat'):
+            with open(args.model_dir + '/loss_data.pickle.dat', 'wb') as fin:
+                tlosses, vlosses = pickle.load(fin)
+    except:
+        tlosses = []
+        vlosses = []
 
     for epoch in range(params.num_epochs):
         # Run one epoch
@@ -112,16 +122,18 @@ def train_and_evaluate(model, train_data, val_data, optimizer, loss_fn, metrics,
         # compute number of batches in one epoch (one full pass over the training set)
         num_steps = (params.train_size + 1) // params.batch_size
         train_data_iterator = data_loader.data_iterator(train_data, params, shuffle=True)
-        train(model, optimizer, loss_fn, train_data_iterator, metrics, params, num_steps)
+        loss = train(model, optimizer, loss_fn, train_data_iterator, metrics, params, num_steps)
+        tlosses.append(loss)
 
         # Evaluate for one epoch on validation set
         num_steps = (params.val_size + 1) // params.batch_size
         val_data_iterator = data_loader.data_iterator(val_data, params, shuffle=False)
-        val_metrics = evaluate(model, loss_fn, val_data_iterator, metrics, params, num_steps)
+        val_metrics, loss = evaluate(model, loss_fn, val_data_iterator, metrics, params, num_steps)
+        vlosses.append(loss)
 
         val_acc = val_metrics['f1score']
         print ("- Current epoch f1 score = %s, best f1 score = %s" %(val_acc, best_val_acc))
-        is_best = val_acc >= best_val_acc
+        is_best = val_acc > best_val_acc
 
         # Save weights
         utils.save_checkpoint({'epoch': epoch + 1,
@@ -143,6 +155,9 @@ def train_and_evaluate(model, train_data, val_data, optimizer, loss_fn, metrics,
         last_json_path = os.path.join(model_dir, "metrics_val_last_weights.json")
         utils.save_dict_to_json(val_metrics, last_json_path)
 
+    # save losses for plot
+    with open(args.model_dir + '/loss_data.pickle.dat', 'wb') as fout:
+        pickle.dump((tlosses, vlosses), fout)
 
 if __name__ == '__main__':
 
@@ -166,7 +181,7 @@ if __name__ == '__main__':
     logging.info("Loading the datasets...")
 
     # load data
-    data_loader = DataLoader(args.data_dir, params, args.is_def)
+    data_loader = DataLoader(args.data_dir, params)
     data = data_loader.load_data(['train', 'val'], args.data_dir)
     train_data = data['train']
     val_data = data['val']
@@ -178,18 +193,21 @@ if __name__ == '__main__':
     logging.info("- done.")
 
     # Define the model and optimizer
-    if args.is_def:
-        model = def_net.Net(params).cuda() if params.cuda else def_net.Net(params)
-        # fetch loss function and metrics
-        loss_fn = def_net.loss_fn
-        metrics = def_net.metrics
+    if params.model_type == 'bert':
+        model = net.BertDEF(params).cuda() if params.cuda else net.BertDEF(params)
+    elif params.model_type == 'sbert':
+        model = net.SBertDEF(params).cuda() if params.cuda else net.SBertDEF(params)
     else:
-        model = net.Net(params).cuda() if params.cuda else net.Net(params)
-        # fetch loss function and metrics
-        loss_fn = net.loss_fn
-        metrics = net.metrics
+        model = net.LuisNet(params).cuda() if params.cuda else net.LuisNet(params)
 
-    optimizer = optim.Adam(model.parameters(), lr=params.learning_rate)
+    # fetch loss function and metrics
+    loss_fn = net.loss_fn
+    metrics = net.metrics
+
+    if params.model_type == 'bert':
+        optimizer = BertAdam(model.parameters(), lr=params.learning_rate)
+    else:
+        optimizer = optim.Adam(model.parameters(), lr=params.learning_rate)
 
     # log parameters
     # for x,v in params.__dict__.items():

@@ -13,9 +13,9 @@ parser.add_argument('--min_count_tag', default=1, help="Minimum count for tags i
 parser.add_argument('--data_dir', default='data/small', help="Directory containing the dataset")
 
 # Hyper parameters for the vocab
-PAD_WORD = '<pad>'
+PAD_WORD = '[PAD]'
 PAD_TAG = 'O'
-UNK_WORD = 'UNK'
+UNK_WORD = '[UNK]'
 
 
 def save_vocab_to_txt_file(vocab, txt_path):
@@ -70,22 +70,39 @@ if __name__ == '__main__':
     size_test_sentences = update_vocab(os.path.join(args.data_dir, 'test/sentences.txt'), words)
     print("- done.")
 
-    # Build tag vocab with train and test datasets
-    print("Building tag vocabulary...")
-    tags = Counter()
-    size_train_tags = update_vocab(os.path.join(args.data_dir, 'train/labels.txt'), tags)
-    size_dev_tags = update_vocab(os.path.join(args.data_dir, 'val/labels.txt'), tags)
-    size_test_tags = update_vocab(os.path.join(args.data_dir, 'test/labels.txt'), tags)
-    print("- done.")
+    # Build stag vocab with train and test datasets
+    stags = Counter()
+    if os.path.exists(os.path.join(args.data_dir, 'train/slabels.txt')):
+        print("Building stag vocabulary...")
+        size_train_stags = update_vocab(os.path.join(args.data_dir, 'train/slabels.txt'), stags)
+        size_dev_stags = update_vocab(os.path.join(args.data_dir, 'val/slabels.txt'), stags)
+        size_test_stags = update_vocab(os.path.join(args.data_dir, 'test/slabels.txt'), stags)
+        print("- done.")
 
-    # Assert same number of examples in datasets
-    assert size_train_sentences == size_train_tags
-    assert size_dev_sentences == size_dev_tags
-    assert size_test_sentences == size_test_tags
+        # Assert same number of examples in datasets
+        assert size_train_sentences == size_train_stags
+        assert size_dev_sentences == size_dev_stags
+        assert size_test_sentences == size_test_stags
+        stags = [tok for tok, count in stags.items() if count >= args.min_count_tag]
+        if PAD_TAG not in stags: stags.append(PAD_TAG)
+
+    # Build wtag vocab with train and test datasets
+    wtags = Counter()
+    if os.path.exists(os.path.join(args.data_dir, 'train/wlabels.txt')):
+        print("Building wtag vocabulary...")
+        size_train_wtags = update_vocab(os.path.join(args.data_dir, 'train/wlabels.txt'), wtags)
+        size_dev_wtags = update_vocab(os.path.join(args.data_dir, 'val/wlabels.txt'), wtags)
+        size_test_wtags = update_vocab(os.path.join(args.data_dir, 'test/wlabels.txt'), wtags)
+        print("- done.")
+
+        assert size_train_sentences == size_train_wtags
+        assert size_dev_sentences == size_dev_wtags
+        assert size_test_sentences == size_test_wtags
+        wtags = [tok for tok, count in wtags.items() if count >= args.min_count_tag]
+        if PAD_TAG not in stags: wtags.append(PAD_TAG)
 
     # Only keep most frequent tokens
     words = [tok for tok, count in words.items() if count >= args.min_count_word]
-    tags = [tok for tok, count in tags.items() if count >= args.min_count_tag]
 
     # Build char vocab with train and test datasets
     print("Building character vocabulary...")
@@ -98,7 +115,6 @@ if __name__ == '__main__':
 
     # Add pad tokens
     if PAD_WORD not in words: words.append(PAD_WORD)
-    if PAD_TAG not in tags: tags.append(PAD_TAG)
     if PAD_WORD not in chars: chars.append(PAD_WORD)
 
     # add word for unknown words
@@ -108,8 +124,9 @@ if __name__ == '__main__':
     # Save vocabularies to file
     print("Saving vocabularies to file...")
     save_vocab_to_txt_file(words, os.path.join(args.data_dir, 'words.txt'))
-    save_vocab_to_txt_file(tags, os.path.join(args.data_dir, 'tags.txt'))
     save_vocab_to_txt_file(chars, os.path.join(args.data_dir, 'chars.txt'))
+    save_vocab_to_txt_file(stags, os.path.join(args.data_dir, 'stags.txt'))
+    save_vocab_to_txt_file(wtags, os.path.join(args.data_dir, 'wtags.txt'))
     print("- done.")
 
     # Load the glove word embeddings
@@ -132,7 +149,7 @@ if __name__ == '__main__':
                 glove_words[word] = glove_ix
                 glove_embeddings.append(embedding)
                 glove_ix += 1
-
+    
     glove_words[UNK_WORD] = glove_ix
     glove_embeddings.append(average_embedding / num_glove)
     glove_words[PAD_WORD] = glove_ix + 1
@@ -156,7 +173,8 @@ if __name__ == '__main__':
         'char_vocab_size': len(chars),
         'glove_vocab_size': len(glove_words.keys()),
         'glove_embedding_size': len(glove_embeddings[0]),
-        'number_of_tags': len(tags),
+        'number_of_stags': len(stags),
+        'number_of_wtags': len(wtags),
         'glove_path': glove_path,
         'pad_word': PAD_WORD,
         'pad_tag': PAD_TAG,
