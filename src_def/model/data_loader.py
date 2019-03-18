@@ -315,13 +315,16 @@ class DataLoader(object):
         elif embed_type == 'bert':
             word_ids, word_masks = self.words2bertindices(sents)
             pad_id = self.bert_tokenizer.convert_tokens_to_ids([self.dataset_params.pad_word])[0]
-            if self.params.fixed_sent_length:
+            try:
                 x = self.bert_tokenizer.convert_tokens_to_ids('[SEP]')[0]
-                sents_t = pad_sents(word_ids, pad_id, self.params.fixed_sent_length, x)
-                word_mask = pad_sents(word_masks, 0, self.params.fixed_sent_length, -1)
-            else:
+                sents_t = pad_sents(word_ids, pad_id, self.params.fixed_sent_length, \
+                                    x, self.params.max_max_length)
+                word_mask = pad_sents(word_masks, 0, self.params.fixed_sent_length, \
+                                      -1, self.params.max_max_length)
+            except:
                 sents_t = pad_sents(word_ids, pad_id)
                 word_mask = pad_sents(word_masks, 0)
+
             sents_var = torch.tensor(sents_t, dtype=torch.long)
             berts_mask = torch.tensor(word_mask, dtype=torch.long)
             return sents_var, berts_mask
@@ -394,7 +397,7 @@ class DataLoader(object):
 
             yield batch
 
-def pad_sents(sents, pad_token, fixed_length=None, sent_end_token=None):
+def pad_sents(sents, pad_token, fixed_length=None, sent_end_token=None, max_max_length=None):
     """ Pad list of sentences according to the longest sentence in the batch.
     @param sents (list[list[int]]): list of sentences, where each sentence
                                     is represented as a list of words
@@ -411,10 +414,14 @@ def pad_sents(sents, pad_token, fixed_length=None, sent_end_token=None):
         max_len = max(len(s) for s in sents)
     else:
         max_len = fixed_length
+
+    if max_max_length and \
+       max_len > max_max_length:
+        max_len = max_max_length
         
     for s in sents:
         padded = [pad_token] * max_len
-        if len(s) < max_len:
+        if len(s) <= max_len:
             padded[:len(s)] = s
         else:
             padded[:max_len-1] = s[0:max_len-1]
