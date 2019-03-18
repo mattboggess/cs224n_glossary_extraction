@@ -1,0 +1,1037 @@
+abduction, 0.992
+abscisic acid ; aba, 0.821
+abscission, 0.672
+absorption spectrum, 0.983
+abyssal zone, 0.751
+acclimatization, 0.928
+acellular, 0.707
+acetyl coa, 0.999
+acetylcholine, 0.964
+acetylcholinesterase, 0.541
+acid, 0.891
+acromegaly, 0.635
+actin, 0.998
+action potential, 0.978
+activation energy, 0.978
+activator, 0.710
+active site, 0.969
+active transport, 0.973
+acute disease, 0.853
+adaptive immunity, 0.995
+adaptive radiation, 0.883
+adduction, 0.999
+adhesion, 0.984
+adrenal cortex, 0.976
+adrenal gland, 0.964
+adrenal medulla, 0.988
+adrenocorticotropic hormone ; acth, 0.999
+adventitious, 0.804
+aerobic respiration, 0.980
+afferent arteriole, 0.872
+affinity, 0.801
+aldosterone, 0.998
+aleurone, 0.772
+alimentary canal, 0.929
+allantois, 0.961
+allele, 0.981
+allergy, 0.654
+allopolyploid, 0.742
+allosteric inhibition, 0.931
+alveolar duct, 0.810
+alveolar ventilation, 0.991
+alveolus, 0.879
+amino acid, 0.999
+aminopeptidase, 0.802
+amnion, 0.992
+amphiphilic, 0.858
+amygdala, 0.978
+anabolic, 0.590
+anaphase, 0.901
+androecium, 0.764
+aneuploidy, 0.725
+angiotensin converting enzyme ; ace, 0.992
+angiotensin i, 0.997
+angiotensin ii, 1.000
+anion, 0.995
+anther, 0.747
+antheridium, 0.606
+antibody, 0.969
+anticodon, 0.995
+antidiuretic hormone ; adh, 0.990
+antigen, 0.982
+antigen-presenting cell ; apc, 0.924
+antioxidant, 0.611
+anus, 0.573
+aorta, 0.996
+aphotic zone, 0.765
+apomixis, 0.976
+apoptosis, 0.969
+appendicular skeleton, 0.999
+arachnoid mater, 0.998
+archegonium, 0.945
+archenteron, 0.977
+arteriole, 0.907
+artery, 0.938
+articulation, 1.000
+ascocarp, 0.643
+assimilation, 0.962
+atom, 0.879
+atomic mass, 0.874
+atomic number, 0.999
+atp, 0.997
+atp synthase, 0.913
+atrial natriuretic peptide ; anp, 0.975
+atrioventricular valve, 0.997
+atrium, 0.972
+autoinducer, 0.956
+autonomic nervous system, 0.984
+autosome, 0.506
+auxin, 0.867
+avidity, 0.814
+axial skeleton, 0.998
+axillary bud, 0.989
+axon, 0.997
+axon hillock, 0.988
+bacteriophage, 0.846
+basal ganglia, 0.938
+basal metabolic rate ; bmr, 0.815
+base, 0.899
+basidiocarp, 0.744
+basidium, 0.816
+basilar membrane, 0.975
+basophil, 0.965
+bile, 0.919
+binary fission, 0.918
+binomial nomenclature, 0.942
+biochemistry, 0.562
+biofilm, 0.975
+biogeochemical cycle, 0.909
+biogeography, 0.648
+biological nitrogen fixation, 0.859
+bioluminescence, 0.622
+biome, 0.574
+bioremediation, 0.896
+biotechnology, 0.841
+biotic potential ; rmax, 0.901
+blastocyst, 0.995
+blastopore, 0.967
+blastula, 0.991
+blood pressure, 0.978
+blood urea nitrogen ; bun, 0.796
+bolus, 0.990
+bone, 0.977
+botulism, 0.997
+brainstem, 0.909
+branch point, 0.809
+bronchiole, 0.985
+bronchus, 0.774
+budding, 0.912
+buffer, 0.984
+bulbourethral gland, 0.989
+calcification, 0.693
+calcitonin, 0.947
+calorie, 0.959
+calyx, 0.841
+candela, 0.762
+capillary, 0.988
+capsid, 0.987
+capsule, 0.892
+carbohydrate, 0.978
+carbon fixation, 0.816
+carbonic anhydrase, 0.997
+cardiac cycle, 0.993
+cardiac output, 0.998
+carotenoid, 0.477
+carpel, 0.741
+carpus, 0.705
+cartilage, 0.998
+cartilaginous joint, 0.992
+cation, 0.998
+cell, 0.835
+cell cycle, 0.981
+cell plate, 0.942
+cell theory, 0.674
+cell wall, 0.972
+cell-mediated immune response, 0.938
+cellulose, 0.898
+centriole, 0.991
+centromere, 0.888
+centrosome, 0.864
+cephalic phase, 0.960
+cerebellum, 0.995
+cerebral cortex, 0.961
+cerebrospinal fluid ; csf, 0.989
+channel protein, 0.646
+charophyte, 0.894
+chemical energy, 0.840
+chemiosmosis, 0.898
+chiasmata, 0.584
+chitin, 0.828
+chloride shift, 0.939
+chlorophyll, 0.893
+chloroplast, 0.940
+choanocyte, 0.662
+cholecystokinin, 0.946
+chondrichthyes, 0.583
+chorion, 0.984
+choroid plexus, 0.997
+chromatid, 0.901
+chromatin, 0.966
+chromophore, 0.681
+chromosome, 0.987
+chylomicron, 0.971
+chyme, 0.985
+chymotrypsin, 0.969
+chytridiomycosis, 0.488
+chytridiomycota, 0.524
+cilium, 0.548
+circadian, 0.985
+circumduction, 0.822
+citric acid cycle, 0.967
+clathrin, 0.731
+clavicle, 0.998
+cleavage, 0.688
+cleavage furrow, 0.871
+clitoris, 0.949
+cloaca, 0.683
+clonal selection, 0.934
+clone, 0.644
+cnidaria, 0.748
+cnidocyte, 0.780
+cochlea, 0.994
+codominance, 0.914
+codon, 0.993
+coelom, 0.738
+coenzyme, 0.766
+cofactor, 0.939
+cohesion, 0.511
+coleoptile, 0.932
+colloid, 0.970
+commensalism, 0.714
+community, 0.809
+compact bone, 0.901
+complement system, 0.813
+compliance, 0.663
+compound, 0.890
+concentration gradient, 0.899
+conjugation, 0.979
+connective tissue, 0.988
+contig, 0.971
+continuous variation, 0.842
+corm, 0.648
+cornea, 0.630
+corpus callosum, 1.000
+cortex ; animal, 0.990
+cortisol, 0.994
+cotyledon, 0.909
+countercurrent exchanger, 0.762
+countercurrent multiplier, 0.599
+covalent bond, 0.975
+cranial nerve, 0.996
+cranium, 0.939
+cryogenian period, 0.950
+cutaneous respiration, 0.784
+cuticle ; animal, 0.883
+cyanobacteria, 0.959
+cyclic amp ; camp, 0.992
+cyclin, 0.559
+cytokine, 0.694
+cytokinesis, 0.866
+cytokinin, 0.966
+cytoplasm, 0.996
+cytoskeleton, 0.912
+cytosol, 0.959
+death rate, 0.841
+deductive reasoning, 0.658
+degeneracy, 0.819
+dehydration synthesis, 0.712
+denaturation, 0.716
+dendrite, 0.997
+dentary, 0.661
+deoxyribonucleic acid ; dna, 0.984
+dephosphorylation, 0.561
+depolarization, 0.996
+depression, 0.827
+deuteromycota, 0.557
+diabetes mellitus, 0.976
+diabetogenic effect, 0.577
+diacylglycerol ; dag, 0.828
+diaphragm, 0.962
+diaphysis, 0.955
+diastole, 0.970
+diffusion, 0.924
+dioecious, 0.572
+diploid, 0.904
+disaccharide, 0.958
+discontinuous variation, 0.939
+dispersal, 0.781
+dissociation, 0.729
+distal convoluted tubule ; dct, 0.999
+dominant, 0.909
+dominant lethal, 0.962
+dormancy, 0.974
+dorsal cavity, 0.984
+dorsiflexion, 0.989
+down-regulation, 0.527
+duodenum, 0.994
+dura mater, 0.999
+ediacaran period, 0.775
+efferent arteriole, 0.986
+elastase, 0.911
+electrocardiogram ; ecg, 0.897
+electrolyte, 0.758
+electromagnetic spectrum, 0.845
+electron, 0.763
+electron configuration, 0.991
+electron microscope, 0.849
+electron transport chain, 0.956
+electronegativity, 0.993
+element, 0.926
+elevation, 0.880
+enantiomers, 0.833
+endemic disease, 0.903
+endocardium, 0.991
+endocarp, 0.664
+endochondral ossification, 0.959
+endocrine cell, 0.795
+endocrine gland, 0.981
+endocrine system, 0.986
+endocytosis, 0.986
+endodermis, 0.929
+endoplasmic reticulum, 0.950
+endoskeleton, 0.752
+endosperm, 0.798
+endosymbiosis, 0.513
+endotherm, 0.814
+enterocoelom, 0.892
+enterocoely, 0.971
+enthalpy, 0.974
+entropy, 0.982
+enzyme, 0.990
+enzyme-linked receptor, 0.908
+eosinophil, 0.666
+epicardium, 0.995
+epicotyl, 0.972
+epidermis, 0.993
+epinephrine, 0.999
+epiphyseal plate, 0.970
+epiphysis, 0.988
+epiphyte, 0.798
+epithelial tissue, 0.546
+epitope, 0.987
+equilibrium, 0.919
+erythropoietin ; epo, 0.961
+esophagus, 0.989
+estivation, 0.800
+estrogens, 0.992
+eukaryote, 0.842
+eukaryotic cell, 0.785
+eukaryotic initiation factor-2 ; eif-2, 0.615
+evaporation, 0.656
+eversion, 0.985
+evolution, 0.912
+excitatory postsynaptic potential ; epsp, 0.978
+exine, 0.694
+exocarp, 0.730
+exocytosis, 0.993
+exon, 0.993
+exoskeleton, 0.707
+expiratory reserve volume ; erv, 0.963
+extension, 0.885
+extracellular domain, 0.817
+facilitated transport, 0.845
+false negative, 0.985
+feedback inhibition, 0.709
+femur, 0.998
+fermentation, 0.951
+fertilization, 0.964
+fibula, 1.000
+first messenger, 1.000
+fission, 0.849
+flagellum, 0.863
+flexion, 0.997
+flow-resistive, 0.646
+follicle-stimulating hormone ; fsh, 0.998
+foodborne disease, 0.999
+forced expiratory volume ; fev, 0.848
+forearm, 0.998
+fovea, 0.884
+fragmentation, 0.760
+frequency-dependent selection, 0.815
+frontal lobe, 1.000
+ftsz, 0.627
+functional group, 0.859
+functional residual capacity ; frc, 0.911
+functional vital capacity ; fvc, 0.879
+fusiform, 0.971
+fusion, 0.688
+g-protein, 0.806
+gallbladder, 0.909
+gamete, 0.932
+gametic barrier, 0.793
+gametophyte, 0.929
+gap junction, 0.657
+gastric phase, 0.682
+gastrin, 0.870
+gastrodermis, 0.689
+gastrovascular cavity, 0.827
+gastrula, 0.930
+gastrulation, 0.968
+gene, 0.667
+gene expression, 0.966
+gene flow, 0.933
+gene pool, 0.707
+gene targeting, 0.719
+gene therapy, 0.980
+genetic engineering, 0.979
+genetic marker, 0.836
+genome, 0.986
+genomics, 0.810
+genotype, 0.982
+gestation, 0.845
+gigantism, 0.643
+glomeromycota, 0.518
+glomerular filtration, 0.965
+glomerular filtration rate ; gfr, 0.991
+glomerulus ; renal, 0.994
+glucagon, 0.994
+gluconeogenesis, 0.997
+glycogen, 0.992
+glycogenolysis, 0.984
+glycolipid, 0.900
+glycolysis, 0.997
+glycoprotein, 0.926
+golgi apparatus, 0.977
+gonadotropin-releasing hormone ; gnrh, 0.998
+granzyme, 0.955
+greenhouse effect, 0.946
+ground tissue, 0.810
+growth hormone, 0.961
+guanine triphosphate ; gtp, 0.684
+gustation, 0.521
+gymnosperm, 0.897
+gynoecium, 0.710
+gyrus, 0.803
+habituation, 0.539
+handicap principle, 0.911
+haploid, 0.754
+haustoria, 0.729
+haversian canal, 0.962
+heat, 0.871
+heat energy, 0.636
+helicase, 0.942
+hemizygous, 0.503
+hemocoel, 0.614
+hemoglobin, 0.943
+herbaceous, 0.532
+hermaphroditism, 0.870
+heterosporous, 0.928
+heterozygous, 0.975
+hilum, 0.996
+hinge joint, 0.994
+hippocampus, 0.999
+histone, 0.823
+holoenzyme, 0.865
+homeostasis, 0.971
+homosporous, 0.562
+homothallic, 0.602
+homozygous, 0.980
+horizon, 0.874
+horizontal gene transfer ; hgt, 0.992
+horizontal transmission, 0.740
+hormone, 0.987
+hornworts, 0.615
+humerus, 1.000
+humoral immune response, 0.947
+hybrid zone, 0.725
+hybridization, 0.902
+hydrocarbon, 0.859
+hydrogen bond, 0.954
+hydrophilic, 0.987
+hydrophobic, 0.981
+hydrostatic skeleton, 0.998
+hyoid bone, 0.995
+hyperextension, 1.000
+hyperglycemia, 0.868
+hyperopia, 0.834
+hyperthyroidism, 0.840
+hypertonic, 0.913
+hypha, 0.946
+hypocotyl, 0.809
+hypoglycemia, 0.605
+hypophyseal portal system, 0.921
+hypothalamus, 0.997
+hypothyroidism, 0.701
+hypotonic, 0.832
+ileum, 0.993
+immune tolerance, 0.790
+imprinting, 0.748
+incomplete dominance, 0.941
+incus, 0.990
+inferior vena cava, 0.998
+inflammation, 0.996
+ingestion, 0.763
+inhibin, 0.863
+inhibitor, 0.603
+inner ear, 0.924
+inorganic compound, 0.647
+inositol triphosphate ; ip3, 0.977
+inspiratory capacity, 0.981
+inspiratory reserve volume ; irv, 0.994
+insulin, 0.970
+integral protein, 0.546
+integument, 0.524
+internode, 0.981
+interphase, 0.869
+intersexual selection, 0.627
+interstitial fluid, 0.978
+intertidal zone, 0.631
+intramembranous ossification, 0.969
+intrasexual selection, 0.756
+intron, 0.925
+inversion, 0.788
+ion, 0.950
+iris, 0.934
+islets of langerhans ; pancreatic islets, 0.999
+isomerase, 0.680
+isomers, 0.987
+isotonic, 0.908
+isotope, 0.712
+isthmus, 0.750
+jejunum, 0.996
+joint, 0.983
+karyogram, 0.891
+karyokinesis, 0.747
+karyotype, 0.736
+kidney, 0.566
+kinesis, 0.850
+kinesthesia, 0.951
+kinetic energy, 0.843
+kinetochore, 0.864
+kinetoplast, 0.685
+labia majora, 0.967
+labia minora, 0.983
+lactase, 0.985
+lagging strand, 0.991
+lamina, 0.914
+large intestine, 0.951
+larynx, 0.997
+lateral meristem, 0.892
+lateral rotation, 1.000
+law of mass action, 0.992
+law of segregation, 0.945
+leading strand, 0.986
+leptin, 0.998
+lichen, 0.590
+ligand, 0.984
+limbic system, 0.906
+linkage analysis, 0.923
+lipase, 0.903
+lipid, 0.997
+liver, 0.943
+liverworts, 0.563
+locus, 0.560
+long bone, 0.908
+long-term potentiation ; ltp, 0.942
+loop of henle, 0.997
+luteinizing hormone, 1.000
+lymph, 0.824
+lysis, 0.964
+lysogenic cycle, 0.949
+lysosome, 0.959
+lytic cycle, 0.995
+macromolecule, 0.842
+macronutrient, 0.782
+macrophage, 0.868
+macula densa, 0.999
+malleus, 0.995
+maltase, 0.855
+mantle, 0.990
+mass extinction, 0.892
+mass number, 0.995
+mast cell, 0.969
+matrix, 0.953
+matter, 0.761
+mechanoreceptor, 0.859
+medial rotation, 0.997
+medulla, 0.977
+medusa, 0.636
+megasporangium, 0.532
+megaspore, 0.778
+membrane potential, 0.998
+memory cell, 0.780
+menstrual cycle, 0.898
+meristem, 0.830
+mesocarp, 0.792
+mesoglea, 0.594
+mesohyl, 0.704
+mesophyll, 0.724
+messenger rna ; mrna, 0.994
+metabolism, 0.993
+metabolome, 0.748
+metabolomics, 0.676
+metacarpus, 0.638
+metagenomics, 0.780
+metaphase, 0.897
+metaphase plate, 0.835
+microbial mat, 0.890
+microglia, 0.955
+micropropagation, 0.970
+micropyle, 0.954
+microsporangium, 0.761
+microspore, 0.672
+microtubule, 0.929
+middle ear, 0.892
+mineralocorticoid, 0.675
+mitosis, 0.871
+mitotic phase, 0.837
+mitotic spindle, 0.962
+molality, 0.980
+molarity, 0.980
+mold, 0.900
+mole, 0.900
+molecular cloning, 0.771
+molecule, 0.854
+monocot, 0.596
+monocyte, 0.920
+monoecious, 0.646
+monomer, 0.753
+monosaccharide, 0.884
+mortality rate, 0.989
+motor end plate, 0.801
+mrsa, 0.911
+mucosa-associated lymphoid tissue ; malt, 0.850
+mucus, 0.657
+multiple cloning site ; mcs, 0.772
+mutation, 0.906
+mutualism, 0.823
+mycelium, 0.747
+mycology, 0.607
+mycosis, 0.910
+myelin, 0.976
+myocardium, 0.995
+myofibril, 0.992
+myopia, 0.605
+myosin, 0.998
+nasal cavity, 0.998
+natural selection, 0.776
+nematoda, 0.745
+nephridia, 0.576
+nephridiopore, 0.692
+neural tube, 0.995
+neuron, 0.995
+neurotransmitter, 0.999
+neutron, 0.679
+neutrophil, 0.720
+next-generation sequencing, 0.672
+nitrification, 0.812
+nitrogen fixation, 0.904
+nitrogenase, 0.563
+nociception, 0.558
+node, 0.873
+nodes of ranvier, 0.996
+nondisjunction, 0.577
+nontemplate strand, 0.971
+norepinephrine, 0.996
+notochord, 0.991
+nuclear envelope, 0.868
+nucleic acid, 0.948
+nucleoid, 0.993
+nucleolus, 0.966
+nucleoplasm, 0.896
+nucleosome, 0.983
+nucleotide, 0.969
+nucleus, 0.899
+nutrient, 0.792
+occipital lobe, 0.999
+octet rule, 0.957
+odorant, 0.671
+olfaction, 0.857
+olfactory bulb, 0.992
+olfactory epithelium, 0.870
+olfactory receptor, 0.897
+oligodendrocyte, 0.982
+oncogene, 0.671
+oogenesis, 0.790
+operon, 0.828
+opposition, 0.685
+opsonization, 0.990
+order, 0.610
+organ, 0.958
+organ system, 0.755
+organelle, 0.865
+organic compound, 0.973
+organic molecule, 0.836
+organism, 0.592
+organogenesis, 0.964
+origin, 0.728
+osmoregulation, 0.704
+osmosis, 0.983
+osmotic pressure, 0.844
+osseous tissue, 0.811
+ossification, 0.943
+osteoclast, 0.856
+osteon, 0.990
+outer ear, 0.990
+oval window, 0.900
+ovarian cycle, 0.918
+oviduct, 0.986
+ovulation, 0.998
+ovule, 0.956
+oxidative phosphorylation, 0.954
+oxytocin, 0.997
+p53, 0.614
+pancreas, 0.972
+pandemic, 0.890
+papilla, 0.570
+parasitism, 0.515
+parathyroid gland, 0.981
+parathyroid hormone ; pth, 0.983
+parietal lobe, 0.995
+parthenogenesis, 0.768
+partial pressure, 0.995
+passive immunity, 0.984
+passive transport, 0.984
+patella, 0.999
+pathogen, 0.896
+pectoral girdle, 0.998
+pellicle, 0.625
+pelvic girdle, 0.926
+penis, 0.995
+pepsin, 0.956
+pepsinogen, 0.892
+peptide bond, 0.914
+peptidoglycan, 0.990
+peptidyl transferase, 0.934
+perforin, 0.876
+perianth, 0.566
+pericarp, 0.704
+pericycle, 0.747
+periderm, 0.983
+periodic table, 0.873
+peripheral resistance, 0.809
+peristalsis, 0.997
+peristome, 0.751
+petiole, 0.964
+phagolysosome, 0.749
+pharmacogenomics, 0.896
+pharynx, 0.996
+phenotype, 0.947
+pheromone, 0.659
+phosphatase, 0.895
+phosphodiesterase ; pde, 0.979
+phospholipid, 0.993
+phosphorylation, 0.733
+photic zone, 0.970
+photoact, 0.743
+photomorphogenesis, 0.593
+photon, 0.991
+photosystem, 0.931
+phototropism, 0.712
+phyllotaxy, 0.762
+phylogeny, 0.648
+physical map, 0.749
+phytochrome, 0.622
+pia mater, 0.998
+pilus, 0.771
+pinocytosis, 0.885
+pith, 0.751
+pituitary gland, 0.985
+pituitary stalk, 0.995
+pivot joint, 0.986
+placenta, 0.954
+plankton, 0.844
+plantar flexion, 0.889
+plasma, 0.863
+plasma cell, 0.982
+plasma membrane, 0.819
+plasmid, 0.995
+plasmolysis, 0.986
+plastid, 0.730
+platelet, 0.950
+pleurisy, 0.875
+plumule, 0.827
+pneumatic bone, 0.787
+polar covalent bond, 0.996
+pollination, 0.644
+poly-a tail, 0.860
+polygyny, 0.776
+polymer, 0.746
+polymerase chain reaction ; pcr, 0.992
+polynucleotide, 0.755
+polypeptide, 0.993
+polysaccharide, 0.990
+polysome, 0.957
+polyspermy, 0.976
+population density, 0.946
+potential energy, 0.929
+potocytosis, 0.525
+presbyopia, 0.779
+primary structure, 0.866
+primase, 0.912
+primer, 0.933
+prion, 0.636
+product, 0.832
+progesterone, 0.992
+prokaryote, 0.919
+prolactin ; prl, 0.969
+prometaphase, 0.614
+promoter, 0.854
+pronation, 0.991
+prophage, 0.996
+prophase, 0.943
+proprioception, 0.975
+prostate gland, 0.905
+prosthetic group, 0.843
+protease, 0.981
+protein, 0.982
+proteome, 0.765
+proteomics, 0.821
+proton, 0.964
+protraction, 0.997
+proventriculus, 0.988
+proximal convoluted tubule ; pct, 0.999
+pseudocoelomate, 0.984
+punnett square, 0.802
+pupil, 0.958
+purine, 0.637
+pyrimidine, 0.585
+pyruvate, 0.925
+quadrat, 0.616
+quaternary structure, 0.735
+quorum sensing, 0.973
+radial cleavage, 0.729
+radial symmetry, 0.864
+radicle, 0.995
+radioisotope, 0.702
+radius, 0.936
+radula, 0.806
+raphe, 0.567
+reactant, 0.995
+reaction center, 0.946
+reading frame, 0.885
+receptor, 0.936
+receptor potential, 0.949
+receptor-mediated endocytosis, 0.900
+recessive, 0.982
+recessive lethal, 0.822
+recombination nodules, 0.580
+recruitment, 0.846
+rectum, 0.905
+reduction, 0.880
+refractory period, 0.940
+renal capsule, 0.983
+renal corpuscle, 0.883
+renal tubule, 0.698
+renin, 0.995
+replication fork, 0.943
+residual volume, 0.942
+resistance ; ecological, 0.808
+respiratory quotient, 0.999
+respiratory rate, 0.993
+restriction endonuclease, 0.946
+restriction fragment length polymorphism ; rflp, 0.993
+retina, 0.924
+retraction, 0.893
+reverse transcriptase, 0.998
+reverse transcriptase pcr ; rt-pcr, 0.996
+rhizoids, 0.828
+rhizome, 0.717
+rhodopsin, 0.810
+rhynchocoel, 0.669
+ribonuclease, 0.738
+ribonucleic acid ; rna, 0.981
+ribosomal rna ; rrna, 0.977
+ribosome, 0.995
+rna-binding protein ; rbp, 0.781
+rough endoplasmic reticulum ; rer, 0.846
+s phase, 0.771
+saddle joint, 0.999
+sagittal plane, 0.864
+salivary amylase, 0.971
+saltatory conduction, 0.996
+sarcolemma, 0.997
+sarcomere, 0.990
+scapula, 0.999
+schizocoelom, 0.885
+schizocoely, 0.958
+schwann cell, 0.908
+scrotum, 0.991
+scutellum, 0.824
+second messenger, 0.882
+secondary structure, 0.771
+secretin, 0.937
+segmental artery, 0.994
+selective pressure, 0.779
+self-pollination, 0.612
+semen, 0.942
+semilunar valve, 0.945
+seminal vesicle, 0.986
+senescence, 0.877
+sensory transduction, 0.654
+septum, 0.839
+serotype, 0.943
+serum, 0.944
+sessile, 0.883
+set point, 0.914
+signal transduction, 0.727
+signaling pathway, 0.956
+sinoatrial  node; sa node, 0.999
+skull, 0.982
+small intestine, 0.986
+smooth endoplasmic reticulum ; ser, 0.949
+solute, 0.840
+solvent, 0.995
+somatic cell, 0.841
+somatosensation, 0.640
+somatostatin, 0.508
+southern blotting, 0.946
+speciation, 0.687
+spermatheca, 0.634
+spermatogenesis, 0.951
+spinal cord, 0.992
+spiral cleavage, 0.672
+splicing, 0.607
+spongocoel, 0.685
+sporangium, 0.811
+spore, 0.741
+sporophyll, 0.663
+sporophyte, 0.976
+stamen, 0.667
+stapes, 0.980
+starch, 0.790
+start codon, 0.956
+stele, 0.874
+stereocilia, 0.923
+sternum, 0.990
+steroid, 0.992
+stigma, 0.637
+stolon, 0.925
+stoma, 0.501
+stomach, 0.960
+strobili, 0.502
+strobilus, 0.699
+stroke volume, 0.983
+stroma, 0.711
+stromatolite, 0.848
+subduction, 0.957
+substrate, 0.971
+substrate-level phosphorylation, 0.870
+sucrase, 0.865
+sulcus, 0.904
+superior colliculus, 0.966
+supination, 1.000
+suprachiasmatic nucleus, 0.814
+surface tension, 0.812
+surfactant, 0.670
+survivorship curve, 0.871
+suspensor, 0.665
+suture, 0.990
+symbiosis, 0.831
+synapse, 0.988
+synapsis, 0.505
+synaptic cleft, 0.971
+synaptic signal, 0.779
+synarthrosis, 0.958
+synchondrosis, 0.884
+syndesmosis, 1.000
+systematics, 0.610
+systole, 0.924
+t cell, 0.892
+tadpole, 0.539
+tastant, 0.725
+taste bud, 0.983
+tectorial membrane, 0.992
+tegmen, 0.986
+telomerase, 0.780
+telomere, 0.909
+telophase, 0.836
+template strand, 0.789
+temporal lobe, 0.999
+tertiary structure, 0.910
+test, 0.763
+testa, 0.729
+testes, 0.980
+testosterone, 0.998
+testudines, 0.567
+tetrad, 0.886
+thalamus, 0.999
+thalassemia, 0.864
+thallus, 0.680
+theory, 0.576
+thermoregulation, 0.901
+thick filament, 0.932
+thigmomorphogenesis, 0.818
+thoracic cage, 0.988
+thylakoid, 0.721
+thymus, 0.797
+thyroglobulin, 0.779
+thyroid gland, 0.944
+thyroid-stimulating hormone ; tsh, 0.997
+thyroxine ; tetraiodothyronine, t4, 0.939
+tibia, 1.000
+tidal volume, 0.855
+tight junction, 0.997
+tissue, 0.884
+topoisomerase, 0.670
+torpor, 0.918
+total lung capacity ; tlc, 0.916
+trabeculae, 0.947
+trachea, 0.999
+tracheid, 0.921
+trait, 0.878
+transcription, 0.966
+transcription bubble, 0.983
+transduction, 0.865
+transfer rna ; trna, 0.988
+transformation, 0.750
+transgenic, 0.894
+translation, 0.984
+translocation, 0.610
+transpiration, 0.940
+triacylglycerol ; also, triglyceride, 0.988
+tricuspid valve, 0.944
+triiodothyronine, 0.509
+trochophore, 0.804
+trophoblast, 0.990
+tropomyosin, 0.931
+troponin, 0.998
+trypsin, 0.769
+tryptophan, 0.616
+tympanum, 0.552
+ubiquinone, 0.562
+ulna, 0.999
+umami, 0.928
+unsaturated fatty acid, 0.970
+up-regulation, 0.936
+urea cycle, 0.948
+ureter, 0.627
+uric acid, 0.659
+uterus, 0.999
+vacuole, 0.672
+vagina, 0.999
+valence shell, 0.998
+vasa recta, 0.999
+vascular bundle, 0.901
+vascular stele, 1.000
+vascular tissue, 0.644
+vasoconstriction, 0.966
+vasodilation, 0.964
+vasodilator, 0.682
+vein, 0.977
+vena cava, 0.896
+ventral cavity, 0.933
+ventricle, 0.997
+venule, 0.997
+vertebral column, 0.999
+vertical transmission, 0.943
+vesicle, 0.870
+virion, 0.972
+vision, 0.752
+water potential, 0.729
+wavelength, 0.767
+x-linked, 0.711
+xylem, 0.531
+yeast, 0.932
+zona pellucida, 1.000
+zygospore, 0.549

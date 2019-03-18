@@ -1,0 +1,18 @@
+{
+    "bert_type": "bert-base-cased",
+    "char_embedding_size": 50,
+    "cnn_num_filters": 30,
+    "word_embedding_size": 200,
+    "save_summary_steps": 100,
+    "num_epochs": 20,
+    "learning_rate": 0.001,
+    "lstm_hidden_size": 200,
+    "cnn_window_size": 3,
+    "batch_size": 16,
+    "model_type": "hoveyma",
+    "dropout_rate": 0.5,
+    "embed_types": [
+        "glove",
+        "char"
+    ]
+}
