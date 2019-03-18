@@ -1,0 +1,11 @@
+|                                                                         |   Term precision |   NER accuracy |     loss |   Term recall |   Term f1 |   NER precision |   Term accuracy |   NER recall |   NER f1 |
+|:------------------------------------------------------------------------|-----------------:|---------------:|---------:|--------------:|----------:|----------------:|----------------:|-------------:|---------:|
+| experiments/bert_hyperparam_search/learning_rate_5e-05_dropout_rate_0.3 |         0.363248 |       0.936959 | 0.271948 |      0.561484 |  0.441118 |        0.474561 |        0.282971 |     0.455811 | 0.432434 |
+| experiments/bert_hyperparam_search/learning_rate_5e-05_dropout_rate_0.1 |         0.354252 |       0.936122 | 0.262509 |      0.573679 |  0.438021 |        0.468059 |        0.280427 |     0.461732 | 0.431801 |
+| experiments/bert_hyperparam_search/learning_rate_3e-05_dropout_rate_0.5 |         0.369304 |       0.936643 | 0.277725 |      0.592988 |  0.455148 |        0.474992 |        0.294623 |     0.47821  | 0.442681 |
+| experiments/bert_hyperparam_search/learning_rate_2e-05_dropout_rate_0.1 |         0.381437 |       0.936783 | 0.341572 |      0.590955 |  0.463624 |        0.481351 |        0.301764 |     0.468282 | 0.43842  |
+| experiments/bert_hyperparam_search/learning_rate_2e-05_dropout_rate_0.3 |         0.368047 |       0.936045 | 0.26393  |      0.605183 |  0.457725 |        0.478557 |        0.296785 |     0.479081 | 0.443211 |
+| experiments/bert_hyperparam_search/learning_rate_5e-05_dropout_rate_0.5 |         0.361995 |       0.93762  | 0.362759 |      0.560467 |  0.43988  |        0.486914 |        0.281953 |     0.46183  | 0.437007 |
+| experiments/bert_hyperparam_search/learning_rate_2e-05_dropout_rate_0.5 |         0.381324 |       0.93739  | 0.33945  |      0.57063  |  0.457154 |        0.482359 |        0.296306 |     0.457622 | 0.432765 |
+| experiments/bert_hyperparam_search/learning_rate_3e-05_dropout_rate_0.3 |         0.372229 |       0.936662 | 0.273757 |      0.580285 |  0.453535 |        0.479746 |        0.293272 |     0.468549 | 0.438695 |
+| experiments/bert_hyperparam_search/learning_rate_3e-05_dropout_rate_0.1 |         0.401477 |       0.938703 | 0.366015 |      0.524898 |  0.454966 |        0.491661 |        0.29447  |     0.427199 | 0.420215 |

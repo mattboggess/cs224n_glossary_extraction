@@ -1,0 +1,18 @@
+{
+    "lstm_hidden_size": 200,
+    "word_embedding_size": 200,
+    "cnn_window_size": 3,
+    "bert_type": "bert-base-cased",
+    "learning_rate": 0.0005,
+    "cnn_num_filters": 30,
+    "num_epochs": 20,
+    "char_embedding_size": 50,
+    "model_type": "hoveyma",
+    "embed_types": [
+        "glove",
+        "char"
+    ],
+    "dropout_rate": 0.5,
+    "batch_size": 16,
+    "save_summary_steps": 100
+}

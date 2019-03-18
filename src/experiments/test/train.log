@@ -1,0 +1,3 @@
+2019-03-13 19:16:20,897:INFO: Loading the datasets...
+2019-03-13 19:16:20,985:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/team/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-13 19:16:21,049:INFO: - done.

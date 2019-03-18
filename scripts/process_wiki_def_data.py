@@ -58,21 +58,21 @@ for x in ("full", "small"):
 
 with open(dataDir + "/full/train/sentences.txt", "w") as fout:
     fout.write("\n".join([sentences[x] for x in indices[0:train_size]]))
-with open(dataDir + "/full/train/labels.txt", "w") as fout:
+with open(dataDir + "/full/train/slabels.txt", "w") as fout:
     fout.write("\n".join([tags[x] for x in indices[0:train_size]]))
 
 with open(dataDir + "/full/val/sentences.txt", "w") as fout:
     fout.write("\n".join([sentences[x] for x in indices[train_size:]]))
-with open(dataDir + "/full/val/labels.txt", "w") as fout:
+with open(dataDir + "/full/val/slabels.txt", "w") as fout:
     fout.write("\n".join([tags[x] for x in indices[train_size:]]))
 
 # small
 with open(dataDir + "/small/train/sentences.txt", "w") as fout:
     fout.write("\n".join([sentences[x] for x in indices[0:debug_size]]))
-with open(dataDir + "/small/train/labels.txt", "w") as fout:
+with open(dataDir + "/small/train/slabels.txt", "w") as fout:
     fout.write("\n".join([tags[x] for x in indices[0:debug_size]]))
 
 with open(dataDir + "/small/val/sentences.txt", "w") as fout:
     fout.write("\n".join([sentences[x] for x in indices[debug_size:debug_size*2]]))
-with open(dataDir + "/small/val/labels.txt", "w") as fout:
+with open(dataDir + "/small/val/slabels.txt", "w") as fout:
     fout.write("\n".join([tags[x] for x in indices[debug_size:debug_size*2]]))

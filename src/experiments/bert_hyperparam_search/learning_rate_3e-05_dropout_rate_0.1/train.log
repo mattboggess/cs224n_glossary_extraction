@@ -1,0 +1,37 @@
+2019-03-12 06:49:27,771:INFO: Loading the datasets...
+2019-03-12 06:49:27,905:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/team/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-12 06:49:28,551:INFO: - done.
+2019-03-12 06:49:28,578:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/team/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-12 06:49:28,579:INFO: extracting archive file /home/team/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmpfme06npg
+2019-03-12 06:49:32,283:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-12 06:49:39,017:INFO: Starting training for 5 epoch(s)
+2019-03-12 06:49:39,017:INFO: Epoch 1/5
+2019-03-12 07:12:33,596:INFO: - Train metrics: NER accuracy: 0.949 ; NER f1: 0.740 ; NER recall: 0.751 ; NER precision: 0.761 ; loss: 0.128
+2019-03-12 07:14:28,095:INFO: - Eval metrics : Term f1: 0.453 ; loss: 0.275 ; NER precision: 0.473 ; Term accuracy: 0.293 ; NER accuracy: 0.936 ; NER f1: 0.431 ; NER recall: 0.459 ; Term precision: 0.372 ; Term recall: 0.580
+2019-03-12 07:14:30,253:INFO: - Found new best Term F1
+2019-03-12 07:14:30,259:INFO: Epoch 2/5
+2019-03-12 07:37:26,376:INFO: - Train metrics: NER accuracy: 0.985 ; NER f1: 0.884 ; NER recall: 0.899 ; NER precision: 0.877 ; loss: 0.043
+2019-03-12 07:39:20,689:INFO: - Eval metrics : Term f1: 0.455 ; loss: 0.366 ; NER precision: 0.492 ; Term accuracy: 0.294 ; NER accuracy: 0.939 ; NER f1: 0.420 ; NER recall: 0.427 ; Term precision: 0.401 ; Term recall: 0.525
+2019-03-12 07:40:03,246:INFO: - Found new best Term F1
+2019-03-12 07:40:03,266:INFO: Epoch 3/5
+2019-03-12 08:03:02,222:INFO: - Train metrics: NER accuracy: 0.991 ; NER f1: 0.927 ; NER recall: 0.942 ; NER precision: 0.919 ; loss: 0.029
+2019-03-12 08:04:56,853:INFO: - Eval metrics : Term f1: 0.450 ; loss: 0.405 ; NER precision: 0.488 ; Term accuracy: 0.291 ; NER accuracy: 0.938 ; NER f1: 0.434 ; NER recall: 0.451 ; Term precision: 0.376 ; Term recall: 0.562
+2019-03-12 08:05:16,277:INFO: Epoch 4/5
+2019-03-12 08:28:16,547:INFO: - Train metrics: NER accuracy: 0.992 ; NER f1: 0.938 ; NER recall: 0.956 ; NER precision: 0.926 ; loss: 0.022
+2019-03-12 08:30:10,997:INFO: - Eval metrics : Term f1: 0.437 ; loss: 0.436 ; NER precision: 0.469 ; Term accuracy: 0.279 ; NER accuracy: 0.936 ; NER f1: 0.436 ; NER recall: 0.471 ; Term precision: 0.343 ; Term recall: 0.600
+2019-03-12 08:30:30,227:INFO: Epoch 5/5
+2019-03-12 08:53:34,096:INFO: - Train metrics: NER accuracy: 0.995 ; NER f1: 0.958 ; NER recall: 0.973 ; NER precision: 0.947 ; loss: 0.017
+2019-03-12 08:55:28,613:INFO: - Eval metrics : Term f1: 0.432 ; loss: 0.437 ; NER precision: 0.469 ; Term accuracy: 0.275 ; NER accuracy: 0.936 ; NER f1: 0.437 ; NER recall: 0.469 ; Term precision: 0.339 ; Term recall: 0.593

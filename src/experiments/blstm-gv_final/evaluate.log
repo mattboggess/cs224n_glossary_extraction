@@ -1,0 +1,5 @@
+2019-03-15 00:09:42,474:INFO: Creating the dataset...
+2019-03-15 00:09:42,610:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/team/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-15 00:09:42,864:INFO: - done.
+2019-03-15 00:09:47,214:INFO: Starting evaluation
+2019-03-15 00:09:58,125:INFO: - Eval metrics : Term recall: 0.507 ; NER accuracy: 0.943 ; NER precision: 0.521 ; Term f1: 0.428 ; NER recall: 0.431 ; loss: 0.348 ; Term accuracy: 0.272 ; Term precision: 0.370 ; NER f1: 0.445
