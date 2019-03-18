@@ -340,6 +340,10 @@ class DataLoader(object):
                         batch[embed_type] = batch[embed_type].cuda()
                     batch[embed_type] = Variable(batch[embed_type])
 
+            for key in batch.keys():
+                print(key)
+                print(batch[key])
+
             yield batch
 
 def pad_sents(sents, pad_token):
