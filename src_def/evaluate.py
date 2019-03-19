@@ -70,7 +70,23 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps):
         loss_avg.update(loss.item())
     # compute mean of all metrics in summary
     metrics_mean = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]}
-    metrics_string = " ; ".join("{}: {:05.3f}".format(k, v) for k, v in metrics_mean.items())
+    metrics_sum = {metric:np.sum([x[metric] for x in summ]) for metric in summ[0]}
+    # compute f1score
+    tp = metrics_sum['tp']
+    fp = metrics_sum['fp']
+    fn = metrics_sum['fn']
+    p = r = f1 = 0.0
+    if tp != 0:
+        p = tp/(tp+fp)
+        r = tp/(tp+fn)
+        f1 = 2*(p*r)/(p+r)
+    metrics_mean['f1score'] = f1
+    metrics_mean['precision'] = p
+    metrics_mean['recall'] = r
+    for x in ('tp', 'fp', 'fn'):
+        del metrics_mean[x]
+
+    metrics_string = " ; ".join("{}: {:05.3f}".format(k, metrics_mean[k]) for k in sorted(metrics_mean.keys()))
     logging.info("- Eval metrics : " + metrics_string)
 
     if __name__ == '__main__':    

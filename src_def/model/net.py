@@ -323,14 +323,22 @@ def f1metric(outputs, labels):
     x = np.logical_xor(outputs, labels)
     fn = np.sum(np.logical_and(x, labels))
     fp = np.sum(np.logical_and(x, outputs))
-    p = r = f1 = 0.0
-    if tp != 0:
-        p = tp/(tp+fp)
-        r = tp/(tp+fn)
-        f1 = 2*(p*r)/(p+r)
+    return (tp, fp, fn)
+    # if tp != 0:
+    #     p = tp/(tp+fp)
+    #     r = tp/(tp+fn)
+    #     f1 = 2*(p*r)/(p+r)
    #print ("labels={}, outputs={}, tp={}, tn={}, fp={}, fn={}, p={}, r={}, f1={}".format(len(labels), len(outputs), tp, tn, fp, fn, p, r, f1))
-    return (p,r,f1)
-    
+   #return (p,r,f1)
+
+def tp(outputs, labels):
+    return f1metric(outputs, labels)[0]
+
+def fp(outputs, labels):
+    return f1metric(outputs, labels)[1]
+
+def fn(outputs, labels):
+    return f1metric(outputs, labels)[2]
 
 def f1score(outputs, labels):
     """
@@ -375,8 +383,8 @@ def recall(outputs, labels):
 # maintain all metrics required in this dictionary- these are used in the training and evaluation loops
 metrics = {
     'accuracy': accuracy,
-    'precision': precision,
-    'recall': recall,
-    'f1score' : f1score,
+    'tp': tp,
+    'fp': fp,
+    'fn': fn
     # could add more metrics such as accuracy for each token type
 }
