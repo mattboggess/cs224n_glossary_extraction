@@ -1,0 +1,57 @@
+2019-03-19 17:40:53,969:INFO: Loading the datasets...
+2019-03-19 17:40:54,145:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-19 17:40:54,590:INFO: - done.
+2019-03-19 17:40:54,623:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-19 17:40:54,624:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmpf2gkhx2p
+2019-03-19 17:40:58,254:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-19 17:41:05,186:INFO: learning_rate => 1e-06
+2019-03-19 17:41:05,186:INFO: batch_size => 8
+2019-03-19 17:41:05,186:INFO: defm_dropout_rate => 0.5
+2019-03-19 17:41:05,186:INFO: Starting training for 10 epoch(s)
+2019-03-19 17:41:05,186:INFO: Epoch 1/10
+2019-03-19 18:19:27,717:INFO: - Train metrics: tp: 0.386 ; accuracy: 0.896 ; fp: 0.241 ; fn: 0.590 ; loss: 0.282
+2019-03-19 18:21:04,755:INFO: - Eval metrics : accuracy: 0.913 ; f1score: 0.614 ; loss: 0.227 ; precision: 0.671 ; recall: 0.566
+2019-03-19 18:21:06,941:INFO: - Found new best accuracy
+2019-03-19 18:21:06,941:INFO: Epoch 2/10
+2019-03-19 18:59:23,963:INFO: - Train metrics: tp: 0.482 ; accuracy: 0.910 ; fp: 0.229 ; fn: 0.494 ; loss: 0.242
+2019-03-19 19:01:01,484:INFO: - Eval metrics : accuracy: 0.916 ; f1score: 0.615 ; loss: 0.226 ; precision: 0.702 ; recall: 0.547
+2019-03-19 19:01:37,793:INFO: - Found new best accuracy
+2019-03-19 19:01:37,794:INFO: Epoch 3/10
+2019-03-19 19:39:59,812:INFO: - Train metrics: tp: 0.482 ; accuracy: 0.907 ; fp: 0.253 ; fn: 0.494 ; loss: 0.231
+2019-03-19 19:41:37,449:INFO: - Eval metrics : accuracy: 0.915 ; f1score: 0.641 ; loss: 0.229 ; precision: 0.664 ; recall: 0.619
+2019-03-19 19:42:20,169:INFO: - Found new best accuracy
+2019-03-19 19:42:20,170:INFO: Epoch 4/10
+2019-03-19 20:20:45,846:INFO: - Train metrics: tp: 0.506 ; accuracy: 0.908 ; fp: 0.265 ; fn: 0.470 ; loss: 0.245
+2019-03-19 20:22:23,263:INFO: - Eval metrics : accuracy: 0.917 ; f1score: 0.640 ; loss: 0.251 ; precision: 0.682 ; recall: 0.603
+2019-03-19 20:22:38,397:INFO: Epoch 5/10
+2019-03-19 21:01:04,017:INFO: - Train metrics: tp: 0.554 ; accuracy: 0.914 ; fp: 0.265 ; fn: 0.422 ; loss: 0.222
+2019-03-19 21:02:41,442:INFO: - Eval metrics : accuracy: 0.917 ; f1score: 0.644 ; loss: 0.267 ; precision: 0.676 ; recall: 0.615
+2019-03-19 21:03:17,580:INFO: - Found new best accuracy
+2019-03-19 21:03:17,581:INFO: Epoch 6/10
+2019-03-19 21:41:40,981:INFO: - Train metrics: tp: 0.627 ; accuracy: 0.926 ; fp: 0.241 ; fn: 0.349 ; loss: 0.215
+2019-03-19 21:43:18,271:INFO: - Eval metrics : accuracy: 0.918 ; f1score: 0.634 ; loss: 0.283 ; precision: 0.699 ; recall: 0.580
+2019-03-19 21:43:33,325:INFO: Epoch 7/10
+2019-03-19 22:21:56,104:INFO: - Train metrics: tp: 0.663 ; accuracy: 0.928 ; fp: 0.265 ; fn: 0.313 ; loss: 0.206
+2019-03-19 22:23:33,555:INFO: - Eval metrics : accuracy: 0.918 ; f1score: 0.620 ; loss: 0.316 ; precision: 0.722 ; recall: 0.544
+2019-03-19 22:23:48,691:INFO: Epoch 8/10
+2019-03-19 23:02:14,983:INFO: - Train metrics: tp: 0.590 ; accuracy: 0.925 ; fp: 0.217 ; fn: 0.386 ; loss: 0.217
+2019-03-19 23:03:52,055:INFO: - Eval metrics : accuracy: 0.919 ; f1score: 0.609 ; loss: 0.351 ; precision: 0.742 ; recall: 0.516
+2019-03-19 23:04:07,191:INFO: Epoch 9/10
+2019-03-19 23:42:31,685:INFO: - Train metrics: tp: 0.687 ; accuracy: 0.935 ; fp: 0.229 ; fn: 0.289 ; loss: 0.196
+2019-03-19 23:44:09,133:INFO: - Eval metrics : accuracy: 0.918 ; f1score: 0.643 ; loss: 0.285 ; precision: 0.691 ; recall: 0.601
+2019-03-19 23:44:24,161:INFO: Epoch 10/10
+2019-03-20 00:22:47,101:INFO: - Train metrics: tp: 0.627 ; accuracy: 0.925 ; fp: 0.253 ; fn: 0.349 ; loss: 0.221
+2019-03-20 00:24:24,335:INFO: - Eval metrics : accuracy: 0.917 ; f1score: 0.639 ; loss: 0.325 ; precision: 0.686 ; recall: 0.597

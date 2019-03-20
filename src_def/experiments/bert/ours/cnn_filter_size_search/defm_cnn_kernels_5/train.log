@@ -1,0 +1,62 @@
+2019-03-19 10:33:44,244:INFO: Loading the datasets...
+2019-03-19 10:33:44,419:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-19 10:33:44,859:INFO: - done.
+2019-03-19 10:33:44,890:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-19 10:33:44,891:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmplfa_m0cg
+2019-03-19 10:33:48,541:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-19 10:33:55,512:INFO: learning_rate => 1e-06
+2019-03-19 10:33:55,512:INFO: batch_size => 8
+2019-03-19 10:33:55,512:INFO: defm_dropout_rate => 0.5
+2019-03-19 10:33:55,512:INFO: Starting training for 2 epoch(s)
+2019-03-19 10:33:55,512:INFO: Epoch 1/2
+2019-03-19 11:12:19,701:INFO: - Train metrics: tp: 0.325 ; fp: 0.241 ; fn: 0.651 ; accuracy: 0.889 ; loss: 0.319
+2019-03-19 11:13:56,777:INFO: - Eval metrics : accuracy: 0.913 ; f1score: 0.601 ; loss: 0.239 ; precision: 0.683 ; recall: 0.537
+2019-03-19 11:13:58,971:INFO: - Found new best accuracy
+2019-03-19 11:13:58,972:INFO: Epoch 2/2
+2019-03-19 11:52:22,666:INFO: - Train metrics: tp: 0.470 ; fp: 0.229 ; fn: 0.506 ; accuracy: 0.908 ; loss: 0.257
+2019-03-19 11:53:59,827:INFO: - Eval metrics : accuracy: 0.916 ; f1score: 0.617 ; loss: 0.236 ; precision: 0.699 ; recall: 0.552
+2019-03-19 11:54:36,196:INFO: - Found new best accuracy
+2019-03-19 16:08:57,598:INFO: Loading the datasets...
+2019-03-19 16:08:57,767:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-19 16:08:58,211:INFO: - done.
+2019-03-19 16:08:58,241:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-19 16:08:58,242:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmpemr9ic2t
+2019-03-19 16:09:01,819:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-19 16:09:08,754:INFO: learning_rate => 1e-06
+2019-03-19 16:09:08,754:INFO: batch_size => 8
+2019-03-19 16:09:08,754:INFO: defm_dropout_rate => 0.5
+2019-03-19 16:09:08,754:INFO: Starting training for 2 epoch(s)
+2019-03-19 16:09:08,754:INFO: Restoring parameters from experiments/bert/ours/cnn_filter_size_search/defm_cnn_kernels_5/last.pth.tar
+2019-03-19 16:09:09,723:INFO: Epoch 1/2
+2019-03-19 16:47:27,471:INFO: - Train metrics: fn: 0.410 ; accuracy: 0.919 ; fp: 0.241 ; tp: 0.566 ; loss: 0.239
+2019-03-19 16:49:04,284:INFO: - Eval metrics : accuracy: 0.916 ; f1score: 0.629 ; loss: 0.255 ; precision: 0.687 ; recall: 0.580
+2019-03-19 16:49:40,467:INFO: - Found new best accuracy
+2019-03-19 16:49:40,468:INFO: Epoch 2/2
+2019-03-19 17:27:55,759:INFO: - Train metrics: fn: 0.434 ; accuracy: 0.920 ; fp: 0.205 ; tp: 0.542 ; loss: 0.235
+2019-03-19 17:29:32,980:INFO: - Eval metrics : accuracy: 0.917 ; f1score: 0.626 ; loss: 0.267 ; precision: 0.697 ; recall: 0.568

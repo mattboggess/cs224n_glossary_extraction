@@ -1,0 +1,31 @@
+2019-03-19 09:12:44,877:INFO: Loading the datasets...
+2019-03-19 09:12:45,049:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-19 09:12:45,496:INFO: - done.
+2019-03-19 09:12:45,525:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-19 09:12:45,526:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmp5ypnoc8p
+2019-03-19 09:12:49,120:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-19 09:12:56,039:INFO: learning_rate => 1e-06
+2019-03-19 09:12:56,039:INFO: batch_size => 8
+2019-03-19 09:12:56,039:INFO: defm_dropout_rate => 0.5
+2019-03-19 09:12:56,039:INFO: Starting training for 2 epoch(s)
+2019-03-19 09:12:56,039:INFO: Epoch 1/2
+2019-03-19 09:51:20,171:INFO: - Train metrics: accuracy: 0.892 ; fn: 0.639 ; fp: 0.229 ; tp: 0.337 ; loss: 0.319
+2019-03-19 09:52:57,321:INFO: - Eval metrics : accuracy: 0.913 ; f1score: 0.602 ; loss: 0.239 ; precision: 0.684 ; recall: 0.537
+2019-03-19 09:52:59,503:INFO: - Found new best accuracy
+2019-03-19 09:52:59,503:INFO: Epoch 2/2
+2019-03-19 10:31:23,008:INFO: - Train metrics: accuracy: 0.908 ; fn: 0.506 ; fp: 0.229 ; tp: 0.470 ; loss: 0.256
+2019-03-19 10:33:00,379:INFO: - Eval metrics : accuracy: 0.915 ; f1score: 0.614 ; loss: 0.236 ; precision: 0.696 ; recall: 0.549
+2019-03-19 10:33:42,852:INFO: - Found new best accuracy

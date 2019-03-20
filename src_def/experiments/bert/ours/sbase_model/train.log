@@ -1,0 +1,294 @@
+2019-03-16 09:21:39,201:INFO: Loading the datasets...
+2019-03-16 09:21:39,233:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-16 09:21:39,264:INFO: - done.
+2019-03-16 09:22:05,136:INFO: Loading the datasets...
+2019-03-16 09:22:05,167:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-16 09:22:05,197:INFO: - done.
+2019-03-16 09:22:05,223:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-16 09:22:05,224:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmp5sderkgo
+2019-03-16 09:22:08,791:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-16 09:22:15,667:INFO: learning_rate => 1e-05
+2019-03-16 09:22:15,667:INFO: batch_size => 4
+2019-03-16 09:22:15,668:INFO: defm_dropout_rate => 0.5
+2019-03-16 09:22:15,668:INFO: Starting training for 5 epoch(s)
+2019-03-16 09:22:15,668:INFO: Epoch 1/5
+2019-03-16 09:24:13,861:INFO: Loading the datasets...
+2019-03-16 09:24:13,903:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-16 09:24:13,934:INFO: - done.
+2019-03-16 09:24:13,961:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-16 09:24:13,961:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmpuaq1oxs7
+2019-03-16 09:24:17,508:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-16 09:24:24,392:INFO: learning_rate => 1e-05
+2019-03-16 09:24:24,392:INFO: batch_size => 4
+2019-03-16 09:24:24,392:INFO: defm_dropout_rate => 0.5
+2019-03-16 09:24:24,392:INFO: Starting training for 5 epoch(s)
+2019-03-16 09:24:24,392:INFO: Epoch 1/5
+2019-03-16 09:26:54,361:INFO: Loading the datasets...
+2019-03-16 09:26:54,396:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-16 09:26:54,427:INFO: - done.
+2019-03-16 09:26:54,451:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-16 09:26:54,452:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmp_g7kg33d
+2019-03-16 09:26:57,992:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-16 09:27:04,776:INFO: learning_rate => 1e-05
+2019-03-16 09:27:04,776:INFO: batch_size => 4
+2019-03-16 09:27:04,777:INFO: defm_dropout_rate => 0.5
+2019-03-16 09:27:04,777:INFO: Starting training for 5 epoch(s)
+2019-03-16 09:27:04,777:INFO: Epoch 1/5
+2019-03-16 09:29:06,067:INFO: Loading the datasets...
+2019-03-16 09:29:06,104:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-16 09:29:06,134:INFO: - done.
+2019-03-16 09:29:06,158:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-16 09:29:06,158:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmpyvhkhp2t
+2019-03-16 09:29:09,697:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-16 09:29:16,543:INFO: learning_rate => 1e-05
+2019-03-16 09:29:16,543:INFO: batch_size => 4
+2019-03-16 09:29:16,544:INFO: defm_dropout_rate => 0.5
+2019-03-16 09:29:16,544:INFO: Starting training for 5 epoch(s)
+2019-03-16 09:29:16,544:INFO: Epoch 1/5
+2019-03-16 09:29:59,393:INFO: Loading the datasets...
+2019-03-16 09:29:59,425:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-16 09:29:59,455:INFO: - done.
+2019-03-16 09:29:59,481:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-16 09:29:59,481:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmptksuqu2_
+2019-03-16 09:30:03,004:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-16 09:30:09,861:INFO: learning_rate => 1e-05
+2019-03-16 09:30:09,861:INFO: batch_size => 4
+2019-03-16 09:30:09,861:INFO: defm_dropout_rate => 0.5
+2019-03-16 09:30:09,861:INFO: Starting training for 5 epoch(s)
+2019-03-16 09:30:09,861:INFO: Epoch 1/5
+2019-03-16 09:31:12,391:INFO: Loading the datasets...
+2019-03-16 09:31:12,431:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-16 09:31:12,462:INFO: - done.
+2019-03-16 09:31:12,485:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-16 09:31:12,486:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmpqh6f4lci
+2019-03-16 09:31:16,073:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-16 09:31:22,925:INFO: learning_rate => 1e-05
+2019-03-16 09:31:22,925:INFO: batch_size => 4
+2019-03-16 09:31:22,925:INFO: defm_dropout_rate => 0.5
+2019-03-16 09:31:22,925:INFO: Starting training for 5 epoch(s)
+2019-03-16 09:31:22,925:INFO: Epoch 1/5
+2019-03-16 23:50:26,629:INFO: Loading the datasets...
+2019-03-16 23:50:26,807:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-16 23:50:27,226:INFO: - done.
+2019-03-16 23:50:27,256:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-16 23:50:27,257:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmpn95cj5x5
+2019-03-16 23:50:30,833:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-16 23:50:37,674:INFO: learning_rate => 1e-05
+2019-03-16 23:50:37,674:INFO: batch_size => 4
+2019-03-16 23:50:37,674:INFO: defm_dropout_rate => 0.5
+2019-03-16 23:50:37,674:INFO: Starting training for 5 epoch(s)
+2019-03-16 23:50:37,674:INFO: Epoch 1/5
+2019-03-16 23:52:18,162:INFO: Loading the datasets...
+2019-03-16 23:52:18,318:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-16 23:52:18,734:INFO: - done.
+2019-03-16 23:52:18,763:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-16 23:52:18,763:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmp5tzclxww
+2019-03-16 23:52:22,305:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-16 23:52:29,133:INFO: learning_rate => 1e-05
+2019-03-16 23:52:29,133:INFO: batch_size => 4
+2019-03-16 23:52:29,133:INFO: defm_dropout_rate => 0.5
+2019-03-16 23:52:29,133:INFO: Starting training for 5 epoch(s)
+2019-03-16 23:52:29,133:INFO: Epoch 1/5
+2019-03-17 00:38:55,159:INFO: - Train metrics: precision: 0.212 ; accuracy: 0.893 ; f1score: 0.201 ; loss: 0.274 ; recall: 0.205
+2019-03-17 00:41:25,247:INFO: - Eval metrics : precision: 0.231 ; accuracy: 0.919 ; f1score: 0.221 ; loss: 0.201 ; recall: 0.220
+2019-03-17 00:41:27,415:INFO: - Found new best accuracy
+2019-03-17 00:41:27,416:INFO: Epoch 2/5
+2019-03-17 01:27:56,554:INFO: - Train metrics: precision: 0.299 ; accuracy: 0.931 ; f1score: 0.291 ; loss: 0.190 ; recall: 0.292
+2019-03-17 01:30:26,667:INFO: - Eval metrics : precision: 0.251 ; accuracy: 0.914 ; f1score: 0.244 ; loss: 0.221 ; recall: 0.247
+2019-03-17 01:31:07,136:INFO: - Found new best accuracy
+2019-03-17 01:31:07,136:INFO: Epoch 3/5
+2019-03-17 02:17:35,289:INFO: - Train metrics: precision: 0.360 ; accuracy: 0.961 ; f1score: 0.359 ; loss: 0.136 ; recall: 0.361
+2019-03-17 02:20:05,382:INFO: - Eval metrics : precision: 0.252 ; accuracy: 0.913 ; f1score: 0.245 ; loss: 0.266 ; recall: 0.248
+2019-03-17 02:20:44,842:INFO: - Found new best accuracy
+2019-03-17 02:20:44,842:INFO: Epoch 4/5
+2019-03-17 03:07:14,567:INFO: - Train metrics: precision: 0.407 ; accuracy: 0.980 ; f1score: 0.408 ; loss: 0.061 ; recall: 0.410
+2019-03-17 03:09:44,704:INFO: - Eval metrics : precision: 0.282 ; accuracy: 0.898 ; f1score: 0.281 ; loss: 0.361 ; recall: 0.295
+2019-03-17 03:10:24,763:INFO: - Found new best accuracy
+2019-03-17 03:10:24,764:INFO: Epoch 5/5
+2019-03-17 03:56:53,667:INFO: - Train metrics: precision: 0.425 ; accuracy: 0.985 ; f1score: 0.422 ; loss: 0.047 ; recall: 0.423
+2019-03-17 03:59:23,659:INFO: - Eval metrics : precision: 0.271 ; accuracy: 0.905 ; f1score: 0.266 ; loss: 0.402 ; recall: 0.272
+2019-03-17 04:16:29,312:INFO: Loading the datasets...
+2019-03-17 04:16:29,447:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-17 04:16:29,863:INFO: - done.
+2019-03-17 04:16:29,893:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-17 04:16:29,894:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmp8953aphw
+2019-03-17 04:16:33,439:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-17 04:16:40,220:INFO: learning_rate => 1e-05
+2019-03-17 04:16:40,221:INFO: batch_size => 4
+2019-03-17 04:16:40,221:INFO: defm_dropout_rate => 0.9
+2019-03-17 04:16:40,221:INFO: Starting training for 5 epoch(s)
+2019-03-17 04:16:40,221:INFO: Restoring parameters from experiments/bert/ours/sbase_model/best.pth.tar
+2019-03-17 04:16:41,131:INFO: Epoch 1/5
+2019-03-17 05:03:03,987:INFO: - Train metrics: loss: 0.030 ; f1score: 0.429 ; recall: 0.428 ; accuracy: 0.988 ; precision: 0.432
+2019-03-17 05:05:33,786:INFO: - Eval metrics : loss: 0.517 ; f1score: 0.250 ; recall: 0.254 ; accuracy: 0.913 ; precision: 0.258
+2019-03-17 05:06:14,796:INFO: - Found new best accuracy
+2019-03-17 05:06:14,797:INFO: Epoch 2/5
+2019-03-17 05:52:39,928:INFO: - Train metrics: loss: 0.017 ; f1score: 0.438 ; recall: 0.437 ; accuracy: 0.992 ; precision: 0.440
+2019-03-17 05:55:09,522:INFO: - Eval metrics : loss: 0.538 ; f1score: 0.264 ; recall: 0.270 ; accuracy: 0.910 ; precision: 0.268
+2019-03-17 05:55:47,667:INFO: - Found new best accuracy
+2019-03-17 05:55:47,667:INFO: Epoch 3/5
+2019-03-17 06:42:12,429:INFO: - Train metrics: loss: 0.039 ; f1score: 0.431 ; recall: 0.434 ; accuracy: 0.989 ; precision: 0.429
+2019-03-17 06:44:42,034:INFO: - Eval metrics : loss: 0.586 ; f1score: 0.237 ; recall: 0.237 ; accuracy: 0.918 ; precision: 0.245
+2019-03-17 06:45:02,369:INFO: Epoch 4/5
+2019-03-17 07:31:27,412:INFO: - Train metrics: loss: 0.038 ; f1score: 0.437 ; recall: 0.438 ; accuracy: 0.985 ; precision: 0.437
+2019-03-17 07:33:57,135:INFO: - Eval metrics : loss: 0.550 ; f1score: 0.252 ; recall: 0.256 ; accuracy: 0.911 ; precision: 0.259
+2019-03-17 07:34:17,134:INFO: Epoch 5/5
+2019-03-17 08:20:42,355:INFO: - Train metrics: loss: 0.037 ; f1score: 0.422 ; recall: 0.422 ; accuracy: 0.985 ; precision: 0.425
+2019-03-17 08:23:12,010:INFO: - Eval metrics : loss: 0.485 ; f1score: 0.253 ; recall: 0.257 ; accuracy: 0.909 ; precision: 0.260
+2019-03-18 14:24:24,043:INFO: Loading the datasets...
+2019-03-18 14:24:24,209:INFO: loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased-vocab.txt from cache at /home/msingh9/.pytorch_pretrained_bert/5e8a2b4893d13790ed4150ca1906be5f7a03d6c4ddf62296c383f6db42814db2.e13dbb970cb325137104fb2e5f36fe865f27746c6b526f6352861b1980eb80b1
+2019-03-18 14:24:24,657:INFO: - done.
+2019-03-18 14:24:24,687:INFO: loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-cased.tar.gz from cache at /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c
+2019-03-18 14:24:24,687:INFO: extracting archive file /home/msingh9/.pytorch_pretrained_bert/a803ce83ca27fecf74c355673c434e51c265fb8a3e0e57ac62a80e38ba98d384.681017f415dfb33ec8d0e04fe51a619f3f01532ecea04edbfd48c5d160550d9c to temp dir /tmp/tmp1an8isq0
+2019-03-18 14:24:28,258:INFO: Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 28996
+}
+
+2019-03-18 14:24:35,166:INFO: learning_rate => 1e-05
+2019-03-18 14:24:35,166:INFO: batch_size => 8
+2019-03-18 14:24:35,166:INFO: defm_dropout_rate => 0.5
+2019-03-18 14:24:35,166:INFO: Starting training for 5 epoch(s)
+2019-03-18 14:24:35,166:INFO: Epoch 1/5
+2019-03-18 14:50:58,350:INFO: - Train metrics: fp: 0.325 ; loss: 0.253 ; fn: 0.494 ; tp: 0.482 ; accuracy: 0.898
+2019-03-18 14:52:33,663:INFO: - Eval metrics : accuracy: 0.919 ; f1score: 0.635 ; loss: 0.196 ; precision: 0.709 ; recall: 0.575
+2019-03-18 14:53:09,804:INFO: - Found new best accuracy
+2019-03-18 14:53:09,804:INFO: Epoch 2/5
+2019-03-18 15:19:31,285:INFO: - Train metrics: fp: 0.241 ; loss: 0.188 ; fn: 0.313 ; tp: 0.663 ; accuracy: 0.931
+2019-03-18 15:21:06,798:INFO: - Eval metrics : accuracy: 0.915 ; f1score: 0.655 ; loss: 0.216 ; precision: 0.654 ; recall: 0.657
+2019-03-18 15:21:43,036:INFO: - Found new best accuracy
+2019-03-18 15:21:43,037:INFO: Epoch 3/5
+2019-03-18 15:48:04,924:INFO: - Train metrics: fp: 0.229 ; loss: 0.133 ; fn: 0.145 ; tp: 0.831 ; accuracy: 0.953
+2019-03-18 15:49:40,550:INFO: - Eval metrics : accuracy: 0.912 ; f1score: 0.633 ; loss: 0.285 ; precision: 0.646 ; recall: 0.621
+2019-03-18 15:49:55,582:INFO: Epoch 4/5
+2019-03-18 16:16:19,684:INFO: - Train metrics: fp: 0.108 ; loss: 0.102 ; fn: 0.133 ; tp: 0.843 ; accuracy: 0.970
+2019-03-18 16:17:55,214:INFO: - Eval metrics : accuracy: 0.907 ; f1score: 0.634 ; loss: 0.339 ; precision: 0.610 ; recall: 0.660
+2019-03-18 16:18:10,353:INFO: Epoch 5/5
+2019-03-18 16:44:32,503:INFO: - Train metrics: fp: 0.096 ; loss: 0.054 ; fn: 0.036 ; tp: 0.940 ; accuracy: 0.983
+2019-03-18 16:46:07,847:INFO: - Eval metrics : accuracy: 0.905 ; f1score: 0.632 ; loss: 0.362 ; precision: 0.600 ; recall: 0.667

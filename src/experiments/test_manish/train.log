@@ -1,0 +1,726 @@
+2019-03-13 05:58:07,766:INFO: Loading the datasets...
+2019-03-13 06:22:19,977:INFO: Loading the datasets...
+2019-03-13 06:23:34,388:INFO: Loading the datasets...
+2019-03-13 06:27:09,763:INFO: Loading the datasets...
+2019-03-13 06:27:24,701:INFO: Loading the datasets...
+2019-03-13 06:31:05,868:INFO: Loading the datasets...
+2019-03-13 06:36:19,359:INFO: Loading the datasets...
+2019-03-13 06:38:28,888:INFO: Loading the datasets...
+2019-03-13 06:42:22,349:INFO: Loading the datasets...
+2019-03-13 06:43:43,359:INFO: Loading the datasets...
+2019-03-13 06:55:06,943:INFO: Loading the datasets...
+2019-03-13 06:55:06,945:INFO: - done.
+2019-03-13 06:55:27,869:INFO: Loading the datasets...
+2019-03-13 06:55:27,870:INFO: - done.
+2019-03-13 06:55:30,613:INFO: Starting training for 5 epoch(s)
+2019-03-13 06:55:30,614:INFO: Epoch 1/5
+2019-03-13 06:55:30,873:INFO: - Train metrics: loss: 1.591 ; NER precision: 0.011 ; NER accuracy: 0.244 ; NER f1: 0.022 ; NER recall: 0.200
+2019-03-13 06:55:30,884:INFO: - Eval metrics : Term f1: 0.182 ; Term precision: 1.000 ; NER f1: 0.143 ; Term recall: 0.100 ; loss: 1.407 ; NER recall: 0.125 ; NER accuracy: 0.924 ; Term accuracy: 0.100 ; NER precision: 0.167
+2019-03-13 06:55:30,901:INFO: - Found new best Term F1
+2019-03-13 06:55:30,901:INFO: Epoch 2/5
+2019-03-13 06:55:30,919:INFO: - Train metrics: loss: 1.431 ; NER precision: 0.061 ; NER accuracy: 0.714 ; NER f1: 0.105 ; NER recall: 0.400
+2019-03-13 06:55:30,942:INFO: - Eval metrics : Term f1: 0.000 ; Term precision: 0.000 ; NER f1: 0.000 ; Term recall: 0.000 ; loss: 1.230 ; NER recall: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000
+2019-03-13 06:55:31,019:INFO: Epoch 3/5
+2019-03-13 06:55:31,037:INFO: - Train metrics: loss: 1.241 ; NER precision: 0.167 ; NER accuracy: 0.924 ; NER f1: 0.182 ; NER recall: 0.200
+2019-03-13 06:55:31,049:INFO: - Eval metrics : Term f1: 0.000 ; Term precision: 0.000 ; NER f1: 0.000 ; Term recall: 0.000 ; loss: 1.034 ; NER recall: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000
+2019-03-13 06:55:31,108:INFO: Epoch 4/5
+2019-03-13 06:55:31,126:INFO: - Train metrics: loss: 1.073 ; NER precision: 0.000 ; NER accuracy: 0.958 ; NER f1: 0.000 ; NER recall: 0.000
+2019-03-13 06:55:31,137:INFO: - Eval metrics : Term f1: 0.000 ; Term precision: 0.000 ; NER f1: 0.000 ; Term recall: 0.000 ; loss: 0.809 ; NER recall: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000
+2019-03-13 06:55:31,182:INFO: Epoch 5/5
+2019-03-13 06:55:31,200:INFO: - Train metrics: loss: 0.832 ; NER precision: 0.000 ; NER accuracy: 0.958 ; NER f1: 0.000 ; NER recall: 0.000
+2019-03-13 06:55:31,211:INFO: - Eval metrics : Term f1: 0.000 ; Term precision: 0.000 ; NER f1: 0.000 ; Term recall: 0.000 ; loss: 0.564 ; NER recall: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000
+2019-03-13 06:56:21,071:INFO: Loading the datasets...
+2019-03-13 06:56:21,073:INFO: - done.
+2019-03-13 06:56:23,757:INFO: Starting training for 100 epoch(s)
+2019-03-13 06:56:23,758:INFO: Epoch 1/100
+2019-03-13 06:56:23,782:INFO: - Train metrics: NER precision: 0.011 ; NER f1: 0.022 ; NER accuracy: 0.244 ; NER recall: 0.200 ; loss: 1.591
+2019-03-13 06:56:23,793:INFO: - Eval metrics : NER f1: 0.143 ; NER accuracy: 0.924 ; Term accuracy: 0.100 ; NER precision: 0.167 ; Term recall: 0.100 ; loss: 1.407 ; Term f1: 0.182 ; Term precision: 1.000 ; NER recall: 0.125
+2019-03-13 06:56:23,930:INFO: - Found new best Term F1
+2019-03-13 06:56:23,930:INFO: Epoch 2/100
+2019-03-13 06:56:23,949:INFO: - Train metrics: NER precision: 0.061 ; NER f1: 0.105 ; NER accuracy: 0.714 ; NER recall: 0.400 ; loss: 1.431
+2019-03-13 06:56:23,960:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 1.230 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,016:INFO: Epoch 3/100
+2019-03-13 06:56:24,034:INFO: - Train metrics: NER precision: 0.167 ; NER f1: 0.182 ; NER accuracy: 0.924 ; NER recall: 0.200 ; loss: 1.241
+2019-03-13 06:56:24,045:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 1.034 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,115:INFO: Epoch 4/100
+2019-03-13 06:56:24,132:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 1.073
+2019-03-13 06:56:24,143:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.809 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,159:INFO: Epoch 5/100
+2019-03-13 06:56:24,180:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.832
+2019-03-13 06:56:24,191:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.564 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,215:INFO: Epoch 6/100
+2019-03-13 06:56:24,233:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.638
+2019-03-13 06:56:24,244:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.376 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,269:INFO: Epoch 7/100
+2019-03-13 06:56:24,286:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.386
+2019-03-13 06:56:24,297:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.399 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,318:INFO: Epoch 8/100
+2019-03-13 06:56:24,337:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.260
+2019-03-13 06:56:24,348:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.494 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,380:INFO: Epoch 9/100
+2019-03-13 06:56:24,398:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.271
+2019-03-13 06:56:24,409:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.499 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,441:INFO: Epoch 10/100
+2019-03-13 06:56:24,459:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.286
+2019-03-13 06:56:24,471:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.434 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,490:INFO: Epoch 11/100
+2019-03-13 06:56:24,509:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.265
+2019-03-13 06:56:24,519:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.344 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,547:INFO: Epoch 12/100
+2019-03-13 06:56:24,564:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.233
+2019-03-13 06:56:24,575:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.272 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,598:INFO: Epoch 13/100
+2019-03-13 06:56:24,616:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.201
+2019-03-13 06:56:24,627:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.235 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,651:INFO: Epoch 14/100
+2019-03-13 06:56:24,672:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.193
+2019-03-13 06:56:24,683:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.217 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,809:INFO: Epoch 15/100
+2019-03-13 06:56:24,827:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.187
+2019-03-13 06:56:24,838:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.206 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:24,881:INFO: Epoch 16/100
+2019-03-13 06:56:24,899:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.197
+2019-03-13 06:56:24,910:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.194 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:25,024:INFO: Epoch 17/100
+2019-03-13 06:56:25,042:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.188
+2019-03-13 06:56:25,053:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.182 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:25,249:INFO: Epoch 18/100
+2019-03-13 06:56:25,267:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.174
+2019-03-13 06:56:25,278:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.170 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:25,288:INFO: Epoch 19/100
+2019-03-13 06:56:25,306:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 0.333 ; NER accuracy: 0.966 ; NER recall: 0.200 ; loss: 0.141
+2019-03-13 06:56:25,317:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.159 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:25,406:INFO: Epoch 20/100
+2019-03-13 06:56:25,424:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.143
+2019-03-13 06:56:25,435:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.150 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:25,592:INFO: Epoch 21/100
+2019-03-13 06:56:25,610:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.125
+2019-03-13 06:56:25,621:INFO: - Eval metrics : NER f1: 0.000 ; NER accuracy: 0.942 ; Term accuracy: 0.000 ; NER precision: 0.000 ; Term recall: 0.000 ; loss: 0.143 ; Term f1: 0.000 ; Term precision: 0.000 ; NER recall: 0.000
+2019-03-13 06:56:25,639:INFO: Epoch 22/100
+2019-03-13 06:56:25,657:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.137
+2019-03-13 06:56:25,669:INFO: - Eval metrics : NER f1: 0.100 ; NER accuracy: 0.947 ; Term accuracy: 0.100 ; NER precision: 0.500 ; Term recall: 0.100 ; loss: 0.136 ; Term f1: 0.182 ; Term precision: 1.000 ; NER recall: 0.056
+2019-03-13 06:56:25,811:INFO: - Found new best Term F1
+2019-03-13 06:56:25,812:INFO: Epoch 23/100
+2019-03-13 06:56:25,830:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.128
+2019-03-13 06:56:25,841:INFO: - Eval metrics : NER f1: 0.182 ; NER accuracy: 0.951 ; Term accuracy: 0.200 ; NER precision: 0.500 ; Term recall: 0.200 ; loss: 0.127 ; Term f1: 0.333 ; Term precision: 1.000 ; NER recall: 0.111
+2019-03-13 06:56:26,159:INFO: - Found new best Term F1
+2019-03-13 06:56:26,160:INFO: Epoch 24/100
+2019-03-13 06:56:26,178:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.116
+2019-03-13 06:56:26,190:INFO: - Eval metrics : NER f1: 0.250 ; NER accuracy: 0.956 ; Term accuracy: 0.200 ; NER precision: 0.500 ; Term recall: 0.200 ; loss: 0.117 ; Term f1: 0.333 ; Term precision: 1.000 ; NER recall: 0.167
+2019-03-13 06:56:26,360:INFO: - Found new best Term F1
+2019-03-13 06:56:26,361:INFO: Epoch 25/100
+2019-03-13 06:56:26,379:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.103
+2019-03-13 06:56:26,390:INFO: - Eval metrics : NER f1: 0.308 ; NER accuracy: 0.961 ; Term accuracy: 0.300 ; NER precision: 0.500 ; Term recall: 0.300 ; loss: 0.105 ; Term f1: 0.462 ; Term precision: 1.000 ; NER recall: 0.222
+2019-03-13 06:56:26,551:INFO: - Found new best Term F1
+2019-03-13 06:56:26,552:INFO: Epoch 26/100
+2019-03-13 06:56:26,570:INFO: - Train metrics: NER precision: 0.000 ; NER f1: 0.000 ; NER accuracy: 0.958 ; NER recall: 0.000 ; loss: 0.086
+2019-03-13 06:56:26,581:INFO: - Eval metrics : NER f1: 0.508 ; NER accuracy: 0.965 ; Term accuracy: 0.500 ; NER precision: 1.000 ; Term recall: 0.500 ; loss: 0.093 ; Term f1: 0.667 ; Term precision: 1.000 ; NER recall: 0.347
+2019-03-13 06:56:26,956:INFO: - Found new best Term F1
+2019-03-13 06:56:26,957:INFO: Epoch 27/100
+2019-03-13 06:56:26,975:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 0.571 ; NER accuracy: 0.975 ; NER recall: 0.400 ; loss: 0.092
+2019-03-13 06:56:26,986:INFO: - Eval metrics : NER f1: 0.557 ; NER accuracy: 0.969 ; Term accuracy: 0.500 ; NER precision: 1.000 ; Term recall: 0.500 ; loss: 0.083 ; Term f1: 0.667 ; Term precision: 1.000 ; NER recall: 0.403
+2019-03-13 06:56:27,100:INFO: - Found new best Term F1
+2019-03-13 06:56:27,101:INFO: Epoch 28/100
+2019-03-13 06:56:27,119:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 0.333 ; NER accuracy: 0.966 ; NER recall: 0.200 ; loss: 0.079
+2019-03-13 06:56:27,130:INFO: - Eval metrics : NER f1: 0.866 ; NER accuracy: 0.987 ; Term accuracy: 0.900 ; NER precision: 1.000 ; Term recall: 0.900 ; loss: 0.074 ; Term f1: 0.947 ; Term precision: 1.000 ; NER recall: 0.764
+2019-03-13 06:56:27,655:INFO: - Found new best Term F1
+2019-03-13 06:56:27,656:INFO: Epoch 29/100
+2019-03-13 06:56:27,674:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 0.571 ; NER accuracy: 0.975 ; NER recall: 0.400 ; loss: 0.075
+2019-03-13 06:56:27,685:INFO: - Eval metrics : NER f1: 0.971 ; NER accuracy: 0.995 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.066 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 0.944
+2019-03-13 06:56:27,837:INFO: - Found new best Term F1
+2019-03-13 06:56:27,838:INFO: Epoch 30/100
+2019-03-13 06:56:27,856:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 0.750 ; NER accuracy: 0.983 ; NER recall: 0.600 ; loss: 0.073
+2019-03-13 06:56:27,868:INFO: - Eval metrics : NER f1: 0.971 ; NER accuracy: 0.995 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.060 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 0.944
+2019-03-13 06:56:28,072:INFO: - Found new best Term F1
+2019-03-13 06:56:28,072:INFO: Epoch 31/100
+2019-03-13 06:56:28,091:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 0.889 ; NER accuracy: 0.992 ; NER recall: 0.800 ; loss: 0.062
+2019-03-13 06:56:28,102:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.055 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:28,392:INFO: - Found new best Term F1
+2019-03-13 06:56:28,393:INFO: Epoch 32/100
+2019-03-13 06:56:28,411:INFO: - Train metrics: NER precision: 0.800 ; NER f1: 0.800 ; NER accuracy: 0.983 ; NER recall: 0.800 ; loss: 0.071
+2019-03-13 06:56:28,422:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.050 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:28,571:INFO: - Found new best Term F1
+2019-03-13 06:56:28,572:INFO: Epoch 33/100
+2019-03-13 06:56:28,590:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.049
+2019-03-13 06:56:28,601:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.046 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:29,000:INFO: - Found new best Term F1
+2019-03-13 06:56:29,012:INFO: Epoch 34/100
+2019-03-13 06:56:29,030:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.063
+2019-03-13 06:56:29,041:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.042 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:29,147:INFO: - Found new best Term F1
+2019-03-13 06:56:29,148:INFO: Epoch 35/100
+2019-03-13 06:56:29,166:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 0.889 ; NER accuracy: 0.992 ; NER recall: 0.800 ; loss: 0.050
+2019-03-13 06:56:29,177:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.037 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:29,428:INFO: - Found new best Term F1
+2019-03-13 06:56:29,525:INFO: Epoch 36/100
+2019-03-13 06:56:29,543:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.042
+2019-03-13 06:56:29,555:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.034 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:29,636:INFO: - Found new best Term F1
+2019-03-13 06:56:29,636:INFO: Epoch 37/100
+2019-03-13 06:56:29,654:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.036
+2019-03-13 06:56:29,665:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.030 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:29,894:INFO: - Found new best Term F1
+2019-03-13 06:56:29,895:INFO: Epoch 38/100
+2019-03-13 06:56:29,914:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.040
+2019-03-13 06:56:29,924:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.028 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:30,246:INFO: - Found new best Term F1
+2019-03-13 06:56:30,247:INFO: Epoch 39/100
+2019-03-13 06:56:30,266:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 0.889 ; NER accuracy: 0.992 ; NER recall: 0.800 ; loss: 0.041
+2019-03-13 06:56:30,277:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.026 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:30,459:INFO: - Found new best Term F1
+2019-03-13 06:56:30,468:INFO: Epoch 40/100
+2019-03-13 06:56:30,486:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 0.889 ; NER accuracy: 0.992 ; NER recall: 0.800 ; loss: 0.042
+2019-03-13 06:56:30,497:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.024 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:30,662:INFO: - Found new best Term F1
+2019-03-13 06:56:30,662:INFO: Epoch 41/100
+2019-03-13 06:56:30,680:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.032
+2019-03-13 06:56:30,691:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.022 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:30,849:INFO: - Found new best Term F1
+2019-03-13 06:56:30,850:INFO: Epoch 42/100
+2019-03-13 06:56:30,869:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.023
+2019-03-13 06:56:30,880:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.020 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:31,222:INFO: - Found new best Term F1
+2019-03-13 06:56:31,223:INFO: Epoch 43/100
+2019-03-13 06:56:31,241:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.028
+2019-03-13 06:56:31,252:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.017 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:31,596:INFO: - Found new best Term F1
+2019-03-13 06:56:31,597:INFO: Epoch 44/100
+2019-03-13 06:56:31,615:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.030
+2019-03-13 06:56:31,626:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.016 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:31,782:INFO: - Found new best Term F1
+2019-03-13 06:56:31,782:INFO: Epoch 45/100
+2019-03-13 06:56:31,801:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.025
+2019-03-13 06:56:31,813:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.015 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:32,137:INFO: - Found new best Term F1
+2019-03-13 06:56:32,137:INFO: Epoch 46/100
+2019-03-13 06:56:32,156:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.026
+2019-03-13 06:56:32,167:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.013 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:32,184:INFO: - Found new best Term F1
+2019-03-13 06:56:32,185:INFO: Epoch 47/100
+2019-03-13 06:56:32,203:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.017
+2019-03-13 06:56:32,214:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.012 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:32,722:INFO: - Found new best Term F1
+2019-03-13 06:56:32,738:INFO: Epoch 48/100
+2019-03-13 06:56:32,756:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.020
+2019-03-13 06:56:32,767:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.010 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:32,940:INFO: - Found new best Term F1
+2019-03-13 06:56:32,940:INFO: Epoch 49/100
+2019-03-13 06:56:32,959:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.014
+2019-03-13 06:56:32,970:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.010 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:33,097:INFO: - Found new best Term F1
+2019-03-13 06:56:33,098:INFO: Epoch 50/100
+2019-03-13 06:56:33,116:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.016
+2019-03-13 06:56:33,127:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.009 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:33,458:INFO: - Found new best Term F1
+2019-03-13 06:56:33,459:INFO: Epoch 51/100
+2019-03-13 06:56:33,477:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 0.889 ; NER accuracy: 0.992 ; NER recall: 0.800 ; loss: 0.022
+2019-03-13 06:56:33,488:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.008 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:33,656:INFO: - Found new best Term F1
+2019-03-13 06:56:33,657:INFO: Epoch 52/100
+2019-03-13 06:56:33,675:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 0.889 ; NER accuracy: 0.992 ; NER recall: 0.800 ; loss: 0.018
+2019-03-13 06:56:33,686:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.008 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:33,844:INFO: - Found new best Term F1
+2019-03-13 06:56:33,845:INFO: Epoch 53/100
+2019-03-13 06:56:33,862:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.013
+2019-03-13 06:56:33,873:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.008 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:34,040:INFO: - Found new best Term F1
+2019-03-13 06:56:34,041:INFO: Epoch 54/100
+2019-03-13 06:56:34,059:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.013
+2019-03-13 06:56:34,071:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.008 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:34,402:INFO: - Found new best Term F1
+2019-03-13 06:56:34,403:INFO: Epoch 55/100
+2019-03-13 06:56:34,421:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.023
+2019-03-13 06:56:34,433:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.007 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:34,596:INFO: - Found new best Term F1
+2019-03-13 06:56:34,597:INFO: Epoch 56/100
+2019-03-13 06:56:34,615:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.015
+2019-03-13 06:56:34,626:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.006 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:34,969:INFO: - Found new best Term F1
+2019-03-13 06:56:34,970:INFO: Epoch 57/100
+2019-03-13 06:56:34,988:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.013
+2019-03-13 06:56:34,999:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.005 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:35,332:INFO: - Found new best Term F1
+2019-03-13 06:56:35,333:INFO: Epoch 58/100
+2019-03-13 06:56:35,351:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.009
+2019-03-13 06:56:35,362:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.005 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:35,514:INFO: - Found new best Term F1
+2019-03-13 06:56:35,515:INFO: Epoch 59/100
+2019-03-13 06:56:35,534:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.010
+2019-03-13 06:56:35,546:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.004 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:35,891:INFO: - Found new best Term F1
+2019-03-13 06:56:35,892:INFO: Epoch 60/100
+2019-03-13 06:56:35,910:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.011
+2019-03-13 06:56:35,921:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.004 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:35,938:INFO: - Found new best Term F1
+2019-03-13 06:56:35,939:INFO: Epoch 61/100
+2019-03-13 06:56:35,957:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 0.889 ; NER accuracy: 0.992 ; NER recall: 0.800 ; loss: 0.024
+2019-03-13 06:56:35,968:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.004 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:36,278:INFO: - Found new best Term F1
+2019-03-13 06:56:36,279:INFO: Epoch 62/100
+2019-03-13 06:56:36,297:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.010
+2019-03-13 06:56:36,308:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.004 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:36,476:INFO: - Found new best Term F1
+2019-03-13 06:56:36,477:INFO: Epoch 63/100
+2019-03-13 06:56:36,495:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.005
+2019-03-13 06:56:36,506:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.003 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:36,847:INFO: - Found new best Term F1
+2019-03-13 06:56:36,848:INFO: Epoch 64/100
+2019-03-13 06:56:36,867:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.016
+2019-03-13 06:56:36,878:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.003 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:37,034:INFO: - Found new best Term F1
+2019-03-13 06:56:37,182:INFO: Epoch 65/100
+2019-03-13 06:56:37,200:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.006
+2019-03-13 06:56:37,212:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.003 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:37,576:INFO: - Found new best Term F1
+2019-03-13 06:56:37,577:INFO: Epoch 66/100
+2019-03-13 06:56:37,595:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.007
+2019-03-13 06:56:37,606:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.003 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:37,700:INFO: - Found new best Term F1
+2019-03-13 06:56:37,701:INFO: Epoch 67/100
+2019-03-13 06:56:37,719:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.005
+2019-03-13 06:56:37,730:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.003 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:37,804:INFO: - Found new best Term F1
+2019-03-13 06:56:37,805:INFO: Epoch 68/100
+2019-03-13 06:56:37,823:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.008
+2019-03-13 06:56:37,833:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.003 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:38,151:INFO: - Found new best Term F1
+2019-03-13 06:56:38,151:INFO: Epoch 69/100
+2019-03-13 06:56:38,169:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.009
+2019-03-13 06:56:38,180:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.002 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:38,347:INFO: - Found new best Term F1
+2019-03-13 06:56:38,348:INFO: Epoch 70/100
+2019-03-13 06:56:38,367:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.005
+2019-03-13 06:56:38,378:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.002 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:38,720:INFO: - Found new best Term F1
+2019-03-13 06:56:38,721:INFO: Epoch 71/100
+2019-03-13 06:56:38,739:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.006
+2019-03-13 06:56:38,750:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.002 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:39,078:INFO: - Found new best Term F1
+2019-03-13 06:56:39,079:INFO: Epoch 72/100
+2019-03-13 06:56:39,097:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.011
+2019-03-13 06:56:39,108:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.002 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:39,262:INFO: - Found new best Term F1
+2019-03-13 06:56:39,262:INFO: Epoch 73/100
+2019-03-13 06:56:39,281:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.004
+2019-03-13 06:56:39,292:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.002 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:39,646:INFO: - Found new best Term F1
+2019-03-13 06:56:39,647:INFO: Epoch 74/100
+2019-03-13 06:56:39,665:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.005
+2019-03-13 06:56:39,676:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.002 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:39,780:INFO: - Found new best Term F1
+2019-03-13 06:56:39,780:INFO: Epoch 75/100
+2019-03-13 06:56:39,798:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.004
+2019-03-13 06:56:39,809:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.002 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:40,034:INFO: - Found new best Term F1
+2019-03-13 06:56:40,034:INFO: Epoch 76/100
+2019-03-13 06:56:40,053:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.005
+2019-03-13 06:56:40,064:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.002 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:40,222:INFO: - Found new best Term F1
+2019-03-13 06:56:40,223:INFO: Epoch 77/100
+2019-03-13 06:56:40,241:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.008
+2019-03-13 06:56:40,252:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.002 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:40,607:INFO: - Found new best Term F1
+2019-03-13 06:56:40,608:INFO: Epoch 78/100
+2019-03-13 06:56:40,626:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.007
+2019-03-13 06:56:40,637:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.002 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:40,954:INFO: - Found new best Term F1
+2019-03-13 06:56:40,955:INFO: Epoch 79/100
+2019-03-13 06:56:40,973:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.003
+2019-03-13 06:56:40,984:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:41,133:INFO: - Found new best Term F1
+2019-03-13 06:56:41,134:INFO: Epoch 80/100
+2019-03-13 06:56:41,153:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.009
+2019-03-13 06:56:41,164:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:41,345:INFO: - Found new best Term F1
+2019-03-13 06:56:41,345:INFO: Epoch 81/100
+2019-03-13 06:56:41,364:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.004
+2019-03-13 06:56:41,375:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:41,542:INFO: - Found new best Term F1
+2019-03-13 06:56:41,542:INFO: Epoch 82/100
+2019-03-13 06:56:41,560:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.004
+2019-03-13 06:56:41,571:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:41,900:INFO: - Found new best Term F1
+2019-03-13 06:56:41,900:INFO: Epoch 83/100
+2019-03-13 06:56:41,919:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.006
+2019-03-13 06:56:41,930:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:42,270:INFO: - Found new best Term F1
+2019-03-13 06:56:42,270:INFO: Epoch 84/100
+2019-03-13 06:56:42,290:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.004
+2019-03-13 06:56:42,300:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:42,468:INFO: - Found new best Term F1
+2019-03-13 06:56:42,469:INFO: Epoch 85/100
+2019-03-13 06:56:42,487:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.004
+2019-03-13 06:56:42,498:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:42,829:INFO: - Found new best Term F1
+2019-03-13 06:56:42,830:INFO: Epoch 86/100
+2019-03-13 06:56:42,849:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.007
+2019-03-13 06:56:42,859:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:42,878:INFO: - Found new best Term F1
+2019-03-13 06:56:42,878:INFO: Epoch 87/100
+2019-03-13 06:56:42,896:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.003
+2019-03-13 06:56:42,907:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:43,215:INFO: - Found new best Term F1
+2019-03-13 06:56:43,216:INFO: Epoch 88/100
+2019-03-13 06:56:43,234:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.004
+2019-03-13 06:56:43,245:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:43,415:INFO: - Found new best Term F1
+2019-03-13 06:56:43,416:INFO: Epoch 89/100
+2019-03-13 06:56:43,435:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.003
+2019-03-13 06:56:43,446:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:43,781:INFO: - Found new best Term F1
+2019-03-13 06:56:43,781:INFO: Epoch 90/100
+2019-03-13 06:56:43,800:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.005
+2019-03-13 06:56:43,811:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:44,144:INFO: - Found new best Term F1
+2019-03-13 06:56:44,145:INFO: Epoch 91/100
+2019-03-13 06:56:44,163:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.004
+2019-03-13 06:56:44,175:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:44,341:INFO: - Found new best Term F1
+2019-03-13 06:56:44,342:INFO: Epoch 92/100
+2019-03-13 06:56:44,361:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.004
+2019-03-13 06:56:44,372:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:44,701:INFO: - Found new best Term F1
+2019-03-13 06:56:44,702:INFO: Epoch 93/100
+2019-03-13 06:56:44,720:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.003
+2019-03-13 06:56:44,731:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:44,748:INFO: - Found new best Term F1
+2019-03-13 06:56:44,749:INFO: Epoch 94/100
+2019-03-13 06:56:44,767:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.003
+2019-03-13 06:56:44,778:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:45,095:INFO: - Found new best Term F1
+2019-03-13 06:56:45,096:INFO: Epoch 95/100
+2019-03-13 06:56:45,114:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.003
+2019-03-13 06:56:45,125:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:45,290:INFO: - Found new best Term F1
+2019-03-13 06:56:45,290:INFO: Epoch 96/100
+2019-03-13 06:56:45,309:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.003
+2019-03-13 06:56:45,320:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:45,656:INFO: - Found new best Term F1
+2019-03-13 06:56:45,657:INFO: Epoch 97/100
+2019-03-13 06:56:45,676:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.004
+2019-03-13 06:56:45,687:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:46,022:INFO: - Found new best Term F1
+2019-03-13 06:56:46,023:INFO: Epoch 98/100
+2019-03-13 06:56:46,043:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.003
+2019-03-13 06:56:46,054:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:46,226:INFO: - Found new best Term F1
+2019-03-13 06:56:46,227:INFO: Epoch 99/100
+2019-03-13 06:56:46,245:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.003
+2019-03-13 06:56:46,256:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:46,578:INFO: - Found new best Term F1
+2019-03-13 06:56:46,579:INFO: Epoch 100/100
+2019-03-13 06:56:46,597:INFO: - Train metrics: NER precision: 1.000 ; NER f1: 1.000 ; NER accuracy: 1.000 ; NER recall: 1.000 ; loss: 0.002
+2019-03-13 06:56:46,608:INFO: - Eval metrics : NER f1: 1.000 ; NER accuracy: 1.000 ; Term accuracy: 1.000 ; NER precision: 1.000 ; Term recall: 1.000 ; loss: 0.001 ; Term f1: 1.000 ; Term precision: 1.000 ; NER recall: 1.000
+2019-03-13 06:56:46,626:INFO: - Found new best Term F1
+2019-03-13 07:06:05,857:INFO: Loading the datasets...
+2019-03-13 07:06:06,507:INFO: - done.
+2019-03-13 07:06:10,052:INFO: Starting training for 100 epoch(s)
+2019-03-13 07:06:10,052:INFO: Epoch 1/100
+2019-03-13 07:08:37,074:INFO: - Train metrics: NER f1: 0.439 ; NER accuracy: 0.937 ; NER precision: 0.622 ; loss: 0.210 ; NER recall: 0.378
+2019-03-13 07:08:53,009:INFO: - Eval metrics : Term f1: 0.317 ; NER f1: 0.338 ; NER accuracy: 0.930 ; loss: 0.242 ; Term precision: 0.255 ; Term recall: 0.421 ; Term accuracy: 0.189 ; NER precision: 0.387 ; NER recall: 0.358
+2019-03-13 07:08:56,037:INFO: - Found new best Term F1
+2019-03-13 07:08:56,043:INFO: Epoch 2/100
+2019-03-13 07:11:22,740:INFO: - Train metrics: NER f1: 0.634 ; NER accuracy: 0.957 ; NER precision: 0.760 ; loss: 0.139 ; NER recall: 0.577
+2019-03-13 07:11:38,135:INFO: - Eval metrics : Term f1: 0.327 ; NER f1: 0.357 ; NER accuracy: 0.929 ; loss: 0.264 ; Term precision: 0.254 ; Term recall: 0.458 ; Term accuracy: 0.195 ; NER precision: 0.388 ; NER recall: 0.394
+2019-03-13 07:11:40,605:INFO: - Found new best Term F1
+2019-03-13 07:11:40,612:INFO: Epoch 3/100
+2019-03-13 07:14:06,747:INFO: - Train metrics: NER f1: 0.688 ; NER accuracy: 0.963 ; NER precision: 0.783 ; loss: 0.116 ; NER recall: 0.653
+2019-03-13 07:14:22,277:INFO: - Eval metrics : Term f1: 0.339 ; NER f1: 0.373 ; NER accuracy: 0.929 ; loss: 0.286 ; Term precision: 0.258 ; Term recall: 0.494 ; Term accuracy: 0.204 ; NER precision: 0.394 ; NER recall: 0.422
+2019-03-13 07:14:26,534:INFO: - Found new best Term F1
+2019-03-13 07:14:26,547:INFO: Epoch 4/100
+2019-03-13 07:16:52,729:INFO: - Train metrics: NER f1: 0.711 ; NER accuracy: 0.965 ; NER precision: 0.806 ; loss: 0.106 ; NER recall: 0.674
+2019-03-13 07:17:08,306:INFO: - Eval metrics : Term f1: 0.334 ; NER f1: 0.369 ; NER accuracy: 0.928 ; loss: 0.299 ; Term precision: 0.256 ; Term recall: 0.481 ; Term accuracy: 0.200 ; NER precision: 0.391 ; NER recall: 0.419
+2019-03-13 07:17:08,884:INFO: Epoch 5/100
+2019-03-13 07:19:34,944:INFO: - Train metrics: NER f1: 0.758 ; NER accuracy: 0.970 ; NER precision: 0.825 ; loss: 0.097 ; NER recall: 0.738
+2019-03-13 07:19:50,722:INFO: - Eval metrics : Term f1: 0.342 ; NER f1: 0.376 ; NER accuracy: 0.929 ; loss: 0.308 ; Term precision: 0.265 ; Term recall: 0.482 ; Term accuracy: 0.206 ; NER precision: 0.397 ; NER recall: 0.427
+2019-03-13 07:19:51,621:INFO: - Found new best Term F1
+2019-03-13 07:19:51,627:INFO: Epoch 6/100
+2019-03-13 07:22:17,664:INFO: - Train metrics: NER f1: 0.772 ; NER accuracy: 0.971 ; NER precision: 0.834 ; loss: 0.087 ; NER recall: 0.754
+2019-03-13 07:22:33,320:INFO: - Eval metrics : Term f1: 0.349 ; NER f1: 0.374 ; NER accuracy: 0.930 ; loss: 0.316 ; Term precision: 0.271 ; Term recall: 0.493 ; Term accuracy: 0.212 ; NER precision: 0.399 ; NER recall: 0.422
+2019-03-13 07:22:35,744:INFO: - Found new best Term F1
+2019-03-13 07:22:35,751:INFO: Epoch 7/100
+2019-03-13 07:25:01,898:INFO: - Train metrics: NER f1: 0.777 ; NER accuracy: 0.972 ; NER precision: 0.836 ; loss: 0.088 ; NER recall: 0.754
+2019-03-13 07:25:17,637:INFO: - Eval metrics : Term f1: 0.352 ; NER f1: 0.375 ; NER accuracy: 0.931 ; loss: 0.329 ; Term precision: 0.276 ; Term recall: 0.486 ; Term accuracy: 0.214 ; NER precision: 0.403 ; NER recall: 0.420
+2019-03-13 07:25:20,720:INFO: - Found new best Term F1
+2019-03-13 07:25:20,727:INFO: Epoch 8/100
+2019-03-13 07:27:46,876:INFO: - Train metrics: NER f1: 0.781 ; NER accuracy: 0.972 ; NER precision: 0.832 ; loss: 0.083 ; NER recall: 0.769
+2019-03-13 07:28:02,175:INFO: - Eval metrics : Term f1: 0.356 ; NER f1: 0.372 ; NER accuracy: 0.932 ; loss: 0.332 ; Term precision: 0.288 ; Term recall: 0.466 ; Term accuracy: 0.216 ; NER precision: 0.409 ; NER recall: 0.407
+2019-03-13 07:28:04,395:INFO: - Found new best Term F1
+2019-03-13 07:28:04,402:INFO: Epoch 9/100
+2019-03-13 07:30:30,310:INFO: - Train metrics: NER f1: 0.794 ; NER accuracy: 0.974 ; NER precision: 0.847 ; loss: 0.077 ; NER recall: 0.778
+2019-03-13 07:30:46,003:INFO: - Eval metrics : Term f1: 0.354 ; NER f1: 0.379 ; NER accuracy: 0.931 ; loss: 0.342 ; Term precision: 0.275 ; Term recall: 0.497 ; Term accuracy: 0.215 ; NER precision: 0.405 ; NER recall: 0.426
+2019-03-13 07:30:46,584:INFO: Epoch 10/100
+2019-03-13 07:33:12,523:INFO: - Train metrics: NER f1: 0.791 ; NER accuracy: 0.974 ; NER precision: 0.840 ; loss: 0.074 ; NER recall: 0.784
+2019-03-13 07:33:27,969:INFO: - Eval metrics : Term f1: 0.356 ; NER f1: 0.379 ; NER accuracy: 0.931 ; loss: 0.341 ; Term precision: 0.280 ; Term recall: 0.488 ; Term accuracy: 0.217 ; NER precision: 0.406 ; NER recall: 0.424
+2019-03-13 07:33:31,240:INFO: - Found new best Term F1
+2019-03-13 07:33:31,246:INFO: Epoch 11/100
+2019-03-13 07:35:57,175:INFO: - Train metrics: NER f1: 0.805 ; NER accuracy: 0.975 ; NER precision: 0.846 ; loss: 0.072 ; NER recall: 0.796
+2019-03-13 07:36:12,733:INFO: - Eval metrics : Term f1: 0.353 ; NER f1: 0.377 ; NER accuracy: 0.930 ; loss: 0.353 ; Term precision: 0.276 ; Term recall: 0.489 ; Term accuracy: 0.214 ; NER precision: 0.401 ; NER recall: 0.424
+2019-03-13 07:36:14,416:INFO: Epoch 12/100
+2019-03-13 07:38:40,233:INFO: - Train metrics: NER f1: 0.821 ; NER accuracy: 0.977 ; NER precision: 0.854 ; loss: 0.068 ; NER recall: 0.822
+2019-03-13 07:38:55,808:INFO: - Eval metrics : Term f1: 0.365 ; NER f1: 0.377 ; NER accuracy: 0.932 ; loss: 0.356 ; Term precision: 0.293 ; Term recall: 0.485 ; Term accuracy: 0.224 ; NER precision: 0.409 ; NER recall: 0.416
+2019-03-13 07:38:59,094:INFO: - Found new best Term F1
+2019-03-13 07:38:59,101:INFO: Epoch 13/100
+2019-03-13 07:41:25,004:INFO: - Train metrics: NER f1: 0.811 ; NER accuracy: 0.977 ; NER precision: 0.859 ; loss: 0.068 ; NER recall: 0.801
+2019-03-13 07:41:40,468:INFO: - Eval metrics : Term f1: 0.355 ; NER f1: 0.383 ; NER accuracy: 0.932 ; loss: 0.370 ; Term precision: 0.280 ; Term recall: 0.483 ; Term accuracy: 0.215 ; NER precision: 0.409 ; NER recall: 0.427
+2019-03-13 07:41:41,044:INFO: Epoch 14/100
+2019-03-13 07:44:06,834:INFO: - Train metrics: NER f1: 0.804 ; NER accuracy: 0.977 ; NER precision: 0.844 ; loss: 0.064 ; NER recall: 0.797
+2019-03-13 07:44:22,428:INFO: - Eval metrics : Term f1: 0.364 ; NER f1: 0.382 ; NER accuracy: 0.932 ; loss: 0.366 ; Term precision: 0.287 ; Term recall: 0.497 ; Term accuracy: 0.223 ; NER precision: 0.410 ; NER recall: 0.424
+2019-03-13 07:44:23,817:INFO: Epoch 15/100
+2019-03-13 07:46:49,600:INFO: - Train metrics: NER f1: 0.830 ; NER accuracy: 0.979 ; NER precision: 0.876 ; loss: 0.066 ; NER recall: 0.817
+2019-03-13 07:47:04,949:INFO: - Eval metrics : Term f1: 0.350 ; NER f1: 0.383 ; NER accuracy: 0.932 ; loss: 0.370 ; Term precision: 0.274 ; Term recall: 0.484 ; Term accuracy: 0.212 ; NER precision: 0.409 ; NER recall: 0.427
+2019-03-13 07:47:06,017:INFO: Epoch 16/100
+2019-03-13 07:49:31,808:INFO: - Train metrics: NER f1: 0.840 ; NER accuracy: 0.979 ; NER precision: 0.870 ; loss: 0.066 ; NER recall: 0.839
+2019-03-13 07:49:47,359:INFO: - Eval metrics : Term f1: 0.359 ; NER f1: 0.383 ; NER accuracy: 0.932 ; loss: 0.375 ; Term precision: 0.288 ; Term recall: 0.476 ; Term accuracy: 0.219 ; NER precision: 0.412 ; NER recall: 0.424
+2019-03-13 07:49:47,940:INFO: Epoch 17/100
+2019-03-13 07:52:14,096:INFO: - Train metrics: NER f1: 0.835 ; NER accuracy: 0.979 ; NER precision: 0.865 ; loss: 0.061 ; NER recall: 0.837
+2019-03-13 07:52:29,751:INFO: - Eval metrics : Term f1: 0.353 ; NER f1: 0.387 ; NER accuracy: 0.932 ; loss: 0.372 ; Term precision: 0.279 ; Term recall: 0.482 ; Term accuracy: 0.215 ; NER precision: 0.410 ; NER recall: 0.434
+2019-03-13 07:52:30,332:INFO: Epoch 18/100
+2019-03-13 07:54:57,246:INFO: - Train metrics: NER f1: 0.836 ; NER accuracy: 0.979 ; NER precision: 0.858 ; loss: 0.061 ; NER recall: 0.843
+2019-03-13 07:55:12,720:INFO: - Eval metrics : Term f1: 0.357 ; NER f1: 0.383 ; NER accuracy: 0.931 ; loss: 0.374 ; Term precision: 0.280 ; Term recall: 0.494 ; Term accuracy: 0.218 ; NER precision: 0.404 ; NER recall: 0.431
+2019-03-13 07:55:13,300:INFO: Epoch 19/100
+2019-03-13 07:57:40,188:INFO: - Train metrics: NER f1: 0.833 ; NER accuracy: 0.979 ; NER precision: 0.860 ; loss: 0.060 ; NER recall: 0.838
+2019-03-13 07:57:55,894:INFO: - Eval metrics : Term f1: 0.355 ; NER f1: 0.384 ; NER accuracy: 0.932 ; loss: 0.373 ; Term precision: 0.279 ; Term recall: 0.486 ; Term accuracy: 0.216 ; NER precision: 0.408 ; NER recall: 0.430
+2019-03-13 07:57:57,312:INFO: Epoch 20/100
+2019-03-13 08:00:24,189:INFO: - Train metrics: NER f1: 0.850 ; NER accuracy: 0.982 ; NER precision: 0.872 ; loss: 0.054 ; NER recall: 0.852
+2019-03-13 08:00:39,817:INFO: - Eval metrics : Term f1: 0.353 ; NER f1: 0.381 ; NER accuracy: 0.931 ; loss: 0.387 ; Term precision: 0.275 ; Term recall: 0.492 ; Term accuracy: 0.214 ; NER precision: 0.404 ; NER recall: 0.427
+2019-03-13 08:00:40,498:INFO: Epoch 21/100
+2019-03-13 08:03:06,341:INFO: - Train metrics: NER f1: 0.853 ; NER accuracy: 0.981 ; NER precision: 0.881 ; loss: 0.056 ; NER recall: 0.856
+2019-03-13 08:03:21,990:INFO: - Eval metrics : Term f1: 0.354 ; NER f1: 0.379 ; NER accuracy: 0.931 ; loss: 0.391 ; Term precision: 0.281 ; Term recall: 0.477 ; Term accuracy: 0.215 ; NER precision: 0.404 ; NER recall: 0.422
+2019-03-13 08:03:22,577:INFO: Epoch 22/100
+2019-03-13 08:05:50,237:INFO: - Train metrics: NER f1: 0.854 ; NER accuracy: 0.982 ; NER precision: 0.883 ; loss: 0.053 ; NER recall: 0.854
+2019-03-13 08:06:05,584:INFO: - Eval metrics : Term f1: 0.350 ; NER f1: 0.383 ; NER accuracy: 0.930 ; loss: 0.388 ; Term precision: 0.270 ; Term recall: 0.497 ; Term accuracy: 0.212 ; NER precision: 0.401 ; NER recall: 0.434
+2019-03-13 08:06:06,164:INFO: Epoch 23/100
+2019-03-13 08:08:31,992:INFO: - Train metrics: NER f1: 0.861 ; NER accuracy: 0.982 ; NER precision: 0.880 ; loss: 0.055 ; NER recall: 0.867
+2019-03-13 08:08:47,573:INFO: - Eval metrics : Term f1: 0.351 ; NER f1: 0.385 ; NER accuracy: 0.931 ; loss: 0.394 ; Term precision: 0.276 ; Term recall: 0.483 ; Term accuracy: 0.213 ; NER precision: 0.409 ; NER recall: 0.430
+2019-03-13 08:08:48,252:INFO: Epoch 24/100
+2019-03-13 08:11:14,111:INFO: - Train metrics: NER f1: 0.881 ; NER accuracy: 0.984 ; NER precision: 0.890 ; loss: 0.052 ; NER recall: 0.893
+2019-03-13 08:11:29,393:INFO: - Eval metrics : Term f1: 0.354 ; NER f1: 0.386 ; NER accuracy: 0.932 ; loss: 0.397 ; Term precision: 0.276 ; Term recall: 0.492 ; Term accuracy: 0.215 ; NER precision: 0.412 ; NER recall: 0.431
+2019-03-13 08:11:30,800:INFO: Epoch 25/100
+2019-03-13 08:13:56,714:INFO: - Train metrics: NER f1: 0.863 ; NER accuracy: 0.982 ; NER precision: 0.888 ; loss: 0.051 ; NER recall: 0.863
+2019-03-13 08:14:12,150:INFO: - Eval metrics : Term f1: 0.344 ; NER f1: 0.379 ; NER accuracy: 0.930 ; loss: 0.403 ; Term precision: 0.266 ; Term recall: 0.488 ; Term accuracy: 0.208 ; NER precision: 0.399 ; NER recall: 0.429
+2019-03-13 08:14:13,565:INFO: Epoch 26/100
+2019-03-13 08:16:39,272:INFO: - Train metrics: NER f1: 0.870 ; NER accuracy: 0.984 ; NER precision: 0.890 ; loss: 0.048 ; NER recall: 0.874
+2019-03-13 08:16:54,875:INFO: - Eval metrics : Term f1: 0.345 ; NER f1: 0.378 ; NER accuracy: 0.930 ; loss: 0.404 ; Term precision: 0.266 ; Term recall: 0.488 ; Term accuracy: 0.208 ; NER precision: 0.401 ; NER recall: 0.424
+2019-03-13 08:16:55,559:INFO: Epoch 27/100
+2019-03-13 08:19:21,360:INFO: - Train metrics: NER f1: 0.858 ; NER accuracy: 0.982 ; NER precision: 0.879 ; loss: 0.050 ; NER recall: 0.857
+2019-03-13 08:19:36,954:INFO: - Eval metrics : Term f1: 0.346 ; NER f1: 0.380 ; NER accuracy: 0.931 ; loss: 0.407 ; Term precision: 0.268 ; Term recall: 0.487 ; Term accuracy: 0.209 ; NER precision: 0.402 ; NER recall: 0.428
+2019-03-13 08:19:37,537:INFO: Epoch 28/100
+2019-03-13 08:22:03,248:INFO: - Train metrics: NER f1: 0.878 ; NER accuracy: 0.985 ; NER precision: 0.898 ; loss: 0.048 ; NER recall: 0.880
+2019-03-13 08:22:18,699:INFO: - Eval metrics : Term f1: 0.354 ; NER f1: 0.381 ; NER accuracy: 0.932 ; loss: 0.416 ; Term precision: 0.277 ; Term recall: 0.488 ; Term accuracy: 0.215 ; NER precision: 0.408 ; NER recall: 0.424
+2019-03-13 08:22:19,280:INFO: Epoch 29/100
+2019-03-13 08:24:45,068:INFO: - Train metrics: NER f1: 0.879 ; NER accuracy: 0.984 ; NER precision: 0.898 ; loss: 0.048 ; NER recall: 0.884
+2019-03-13 08:25:00,680:INFO: - Eval metrics : Term f1: 0.345 ; NER f1: 0.382 ; NER accuracy: 0.930 ; loss: 0.408 ; Term precision: 0.263 ; Term recall: 0.498 ; Term accuracy: 0.208 ; NER precision: 0.401 ; NER recall: 0.433
+2019-03-13 08:25:01,364:INFO: Epoch 30/100
+2019-03-13 08:27:27,088:INFO: - Train metrics: NER f1: 0.864 ; NER accuracy: 0.983 ; NER precision: 0.886 ; loss: 0.048 ; NER recall: 0.867
+2019-03-13 08:27:42,724:INFO: - Eval metrics : Term f1: 0.338 ; NER f1: 0.383 ; NER accuracy: 0.929 ; loss: 0.412 ; Term precision: 0.255 ; Term recall: 0.501 ; Term accuracy: 0.203 ; NER precision: 0.395 ; NER recall: 0.438
+2019-03-13 08:27:44,321:INFO: Epoch 31/100
+2019-03-13 08:30:10,069:INFO: - Train metrics: NER f1: 0.866 ; NER accuracy: 0.984 ; NER precision: 0.896 ; loss: 0.048 ; NER recall: 0.861
+2019-03-13 08:30:25,598:INFO: - Eval metrics : Term f1: 0.344 ; NER f1: 0.380 ; NER accuracy: 0.930 ; loss: 0.412 ; Term precision: 0.264 ; Term recall: 0.496 ; Term accuracy: 0.208 ; NER precision: 0.398 ; NER recall: 0.430
+2019-03-13 08:30:26,909:INFO: Epoch 32/100
+2019-03-13 08:32:52,845:INFO: - Train metrics: NER f1: 0.870 ; NER accuracy: 0.984 ; NER precision: 0.904 ; loss: 0.050 ; NER recall: 0.859
+2019-03-13 08:33:08,413:INFO: - Eval metrics : Term f1: 0.349 ; NER f1: 0.381 ; NER accuracy: 0.931 ; loss: 0.424 ; Term precision: 0.270 ; Term recall: 0.491 ; Term accuracy: 0.211 ; NER precision: 0.401 ; NER recall: 0.431
+2019-03-13 08:33:08,997:INFO: Epoch 33/100
+2019-03-13 08:35:34,741:INFO: - Train metrics: NER f1: 0.878 ; NER accuracy: 0.985 ; NER precision: 0.901 ; loss: 0.047 ; NER recall: 0.878
+2019-03-13 08:35:50,102:INFO: - Eval metrics : Term f1: 0.341 ; NER f1: 0.385 ; NER accuracy: 0.929 ; loss: 0.423 ; Term precision: 0.257 ; Term recall: 0.505 ; Term accuracy: 0.205 ; NER precision: 0.398 ; NER recall: 0.441
+2019-03-13 08:35:50,680:INFO: Epoch 34/100
+2019-03-13 08:38:16,475:INFO: - Train metrics: NER f1: 0.873 ; NER accuracy: 0.984 ; NER precision: 0.903 ; loss: 0.047 ; NER recall: 0.870
+2019-03-13 08:38:31,953:INFO: - Eval metrics : Term f1: 0.349 ; NER f1: 0.382 ; NER accuracy: 0.932 ; loss: 0.421 ; Term precision: 0.275 ; Term recall: 0.475 ; Term accuracy: 0.211 ; NER precision: 0.407 ; NER recall: 0.425
+2019-03-13 08:38:32,533:INFO: Epoch 35/100
+2019-03-13 08:40:58,325:INFO: - Train metrics: NER f1: 0.871 ; NER accuracy: 0.984 ; NER precision: 0.899 ; loss: 0.047 ; NER recall: 0.866
+2019-03-13 08:41:13,892:INFO: - Eval metrics : Term f1: 0.349 ; NER f1: 0.382 ; NER accuracy: 0.931 ; loss: 0.424 ; Term precision: 0.272 ; Term recall: 0.487 ; Term accuracy: 0.211 ; NER precision: 0.401 ; NER recall: 0.431
+2019-03-13 08:41:15,488:INFO: Epoch 36/100
+2019-03-13 08:43:41,236:INFO: - Train metrics: NER f1: 0.878 ; NER accuracy: 0.984 ; NER precision: 0.900 ; loss: 0.048 ; NER recall: 0.879
+2019-03-13 08:43:56,680:INFO: - Eval metrics : Term f1: 0.349 ; NER f1: 0.382 ; NER accuracy: 0.931 ; loss: 0.428 ; Term precision: 0.273 ; Term recall: 0.484 ; Term accuracy: 0.212 ; NER precision: 0.403 ; NER recall: 0.429
+2019-03-13 08:43:57,672:INFO: Epoch 37/100
+2019-03-13 08:46:23,454:INFO: - Train metrics: NER f1: 0.882 ; NER accuracy: 0.985 ; NER precision: 0.900 ; loss: 0.046 ; NER recall: 0.886
+2019-03-13 08:46:39,110:INFO: - Eval metrics : Term f1: 0.346 ; NER f1: 0.381 ; NER accuracy: 0.929 ; loss: 0.427 ; Term precision: 0.263 ; Term recall: 0.507 ; Term accuracy: 0.209 ; NER precision: 0.397 ; NER recall: 0.433
+2019-03-13 08:46:39,693:INFO: Epoch 38/100
+2019-03-13 08:49:05,473:INFO: - Train metrics: NER f1: 0.884 ; NER accuracy: 0.986 ; NER precision: 0.899 ; loss: 0.046 ; NER recall: 0.890
+2019-03-13 08:49:21,001:INFO: - Eval metrics : Term f1: 0.348 ; NER f1: 0.380 ; NER accuracy: 0.930 ; loss: 0.425 ; Term precision: 0.270 ; Term recall: 0.490 ; Term accuracy: 0.211 ; NER precision: 0.398 ; NER recall: 0.430
+2019-03-13 08:49:21,584:INFO: Epoch 39/100
+2019-03-13 08:51:47,379:INFO: - Train metrics: NER f1: 0.885 ; NER accuracy: 0.985 ; NER precision: 0.907 ; loss: 0.043 ; NER recall: 0.881
+2019-03-13 08:52:02,804:INFO: - Eval metrics : Term f1: 0.344 ; NER f1: 0.381 ; NER accuracy: 0.930 ; loss: 0.430 ; Term precision: 0.263 ; Term recall: 0.497 ; Term accuracy: 0.208 ; NER precision: 0.398 ; NER recall: 0.432
+2019-03-13 08:52:03,384:INFO: Epoch 40/100
+2019-03-13 08:54:29,091:INFO: - Train metrics: NER f1: 0.883 ; NER accuracy: 0.986 ; NER precision: 0.907 ; loss: 0.045 ; NER recall: 0.884
+2019-03-13 08:54:44,672:INFO: - Eval metrics : Term f1: 0.348 ; NER f1: 0.383 ; NER accuracy: 0.931 ; loss: 0.434 ; Term precision: 0.269 ; Term recall: 0.494 ; Term accuracy: 0.211 ; NER precision: 0.403 ; NER recall: 0.432
+2019-03-13 08:54:46,219:INFO: Epoch 41/100
+2019-03-13 08:57:11,957:INFO: - Train metrics: NER f1: 0.895 ; NER accuracy: 0.987 ; NER precision: 0.912 ; loss: 0.041 ; NER recall: 0.895
+2019-03-13 08:57:27,628:INFO: - Eval metrics : Term f1: 0.338 ; NER f1: 0.380 ; NER accuracy: 0.929 ; loss: 0.435 ; Term precision: 0.254 ; Term recall: 0.503 ; Term accuracy: 0.203 ; NER precision: 0.393 ; NER recall: 0.435
+2019-03-13 08:57:28,697:INFO: Epoch 42/100
+2019-03-13 08:59:54,466:INFO: - Train metrics: NER f1: 0.890 ; NER accuracy: 0.986 ; NER precision: 0.899 ; loss: 0.041 ; NER recall: 0.901
+2019-03-13 09:00:09,987:INFO: - Eval metrics : Term f1: 0.341 ; NER f1: 0.384 ; NER accuracy: 0.930 ; loss: 0.431 ; Term precision: 0.259 ; Term recall: 0.500 ; Term accuracy: 0.206 ; NER precision: 0.401 ; NER recall: 0.437
+2019-03-13 09:00:10,569:INFO: Epoch 43/100
+2019-03-13 09:02:36,371:INFO: - Train metrics: NER f1: 0.899 ; NER accuracy: 0.987 ; NER precision: 0.909 ; loss: 0.038 ; NER recall: 0.908
+2019-03-13 09:02:51,851:INFO: - Eval metrics : Term f1: 0.346 ; NER f1: 0.377 ; NER accuracy: 0.931 ; loss: 0.442 ; Term precision: 0.272 ; Term recall: 0.475 ; Term accuracy: 0.209 ; NER precision: 0.402 ; NER recall: 0.420
+2019-03-13 09:02:52,426:INFO: Epoch 44/100
+2019-03-13 09:05:18,162:INFO: - Train metrics: NER f1: 0.885 ; NER accuracy: 0.986 ; NER precision: 0.900 ; loss: 0.042 ; NER recall: 0.890
+2019-03-13 09:05:33,471:INFO: - Eval metrics : Term f1: 0.344 ; NER f1: 0.379 ; NER accuracy: 0.930 ; loss: 0.428 ; Term precision: 0.266 ; Term recall: 0.487 ; Term accuracy: 0.208 ; NER precision: 0.399 ; NER recall: 0.426
+2019-03-13 09:05:34,047:INFO: Epoch 45/100
+2019-03-13 09:07:59,919:INFO: - Train metrics: NER f1: 0.894 ; NER accuracy: 0.988 ; NER precision: 0.914 ; loss: 0.041 ; NER recall: 0.894
+2019-03-13 09:08:15,435:INFO: - Eval metrics : Term f1: 0.348 ; NER f1: 0.379 ; NER accuracy: 0.930 ; loss: 0.425 ; Term precision: 0.272 ; Term recall: 0.483 ; Term accuracy: 0.210 ; NER precision: 0.401 ; NER recall: 0.426
+2019-03-13 09:08:17,165:INFO: Epoch 46/100
+2019-03-13 09:10:42,936:INFO: - Train metrics: NER f1: 0.896 ; NER accuracy: 0.987 ; NER precision: 0.919 ; loss: 0.042 ; NER recall: 0.891
+2019-03-13 09:10:58,478:INFO: - Eval metrics : Term f1: 0.340 ; NER f1: 0.379 ; NER accuracy: 0.929 ; loss: 0.437 ; Term precision: 0.258 ; Term recall: 0.502 ; Term accuracy: 0.205 ; NER precision: 0.395 ; NER recall: 0.432
+2019-03-13 09:11:00,000:INFO: Epoch 47/100
+2019-03-13 09:13:25,760:INFO: - Train metrics: NER f1: 0.891 ; NER accuracy: 0.986 ; NER precision: 0.900 ; loss: 0.041 ; NER recall: 0.900
+2019-03-13 09:13:41,345:INFO: - Eval metrics : Term f1: 0.335 ; NER f1: 0.378 ; NER accuracy: 0.929 ; loss: 0.451 ; Term precision: 0.250 ; Term recall: 0.508 ; Term accuracy: 0.201 ; NER precision: 0.393 ; NER recall: 0.431
+2019-03-13 09:13:41,927:INFO: Epoch 48/100
+2019-03-13 09:16:07,773:INFO: - Train metrics: NER f1: 0.897 ; NER accuracy: 0.987 ; NER precision: 0.919 ; loss: 0.041 ; NER recall: 0.893
+2019-03-13 09:16:23,376:INFO: - Eval metrics : Term f1: 0.347 ; NER f1: 0.382 ; NER accuracy: 0.931 ; loss: 0.427 ; Term precision: 0.268 ; Term recall: 0.493 ; Term accuracy: 0.210 ; NER precision: 0.401 ; NER recall: 0.431
+2019-03-13 09:16:23,959:INFO: Epoch 49/100
+2019-03-13 09:18:49,814:INFO: - Train metrics: NER f1: 0.887 ; NER accuracy: 0.986 ; NER precision: 0.912 ; loss: 0.042 ; NER recall: 0.887
+2019-03-13 09:19:05,423:INFO: - Eval metrics : Term f1: 0.350 ; NER f1: 0.379 ; NER accuracy: 0.930 ; loss: 0.440 ; Term precision: 0.272 ; Term recall: 0.488 ; Term accuracy: 0.212 ; NER precision: 0.398 ; NER recall: 0.429
+2019-03-13 09:19:06,108:INFO: Epoch 50/100
+2019-03-13 09:21:31,939:INFO: - Train metrics: NER f1: 0.893 ; NER accuracy: 0.986 ; NER precision: 0.912 ; loss: 0.038 ; NER recall: 0.894
+2019-03-13 09:21:47,616:INFO: - Eval metrics : Term f1: 0.348 ; NER f1: 0.379 ; NER accuracy: 0.930 ; loss: 0.436 ; Term precision: 0.268 ; Term recall: 0.494 ; Term accuracy: 0.210 ; NER precision: 0.399 ; NER recall: 0.427
+2019-03-13 09:21:49,245:INFO: Epoch 51/100
+2019-03-13 09:24:15,098:INFO: - Train metrics: NER f1: 0.892 ; NER accuracy: 0.986 ; NER precision: 0.920 ; loss: 0.040 ; NER recall: 0.883
+2019-03-13 09:24:30,641:INFO: - Eval metrics : Term f1: 0.348 ; NER f1: 0.381 ; NER accuracy: 0.930 ; loss: 0.439 ; Term precision: 0.268 ; Term recall: 0.494 ; Term accuracy: 0.210 ; NER precision: 0.401 ; NER recall: 0.429
+2019-03-13 09:24:31,709:INFO: Epoch 52/100
+2019-03-13 09:26:57,539:INFO: - Train metrics: NER f1: 0.891 ; NER accuracy: 0.986 ; NER precision: 0.918 ; loss: 0.040 ; NER recall: 0.885
+2019-03-13 09:27:12,978:INFO: - Eval metrics : Term f1: 0.347 ; NER f1: 0.380 ; NER accuracy: 0.931 ; loss: 0.444 ; Term precision: 0.272 ; Term recall: 0.480 ; Term accuracy: 0.210 ; NER precision: 0.402 ; NER recall: 0.426
+2019-03-13 09:27:13,557:INFO: Epoch 53/100
+2019-03-13 09:29:39,268:INFO: - Train metrics: NER f1: 0.900 ; NER accuracy: 0.987 ; NER precision: 0.928 ; loss: 0.037 ; NER recall: 0.890
+2019-03-13 09:29:54,841:INFO: - Eval metrics : Term f1: 0.341 ; NER f1: 0.382 ; NER accuracy: 0.929 ; loss: 0.434 ; Term precision: 0.260 ; Term recall: 0.497 ; Term accuracy: 0.206 ; NER precision: 0.397 ; NER recall: 0.437
+2019-03-13 09:29:55,425:INFO: Epoch 54/100
+2019-03-13 09:32:21,263:INFO: - Train metrics: NER f1: 0.882 ; NER accuracy: 0.985 ; NER precision: 0.911 ; loss: 0.044 ; NER recall: 0.877
+2019-03-13 09:32:36,834:INFO: - Eval metrics : Term f1: 0.351 ; NER f1: 0.379 ; NER accuracy: 0.931 ; loss: 0.451 ; Term precision: 0.275 ; Term recall: 0.485 ; Term accuracy: 0.213 ; NER precision: 0.402 ; NER recall: 0.426
+2019-03-13 09:32:37,416:INFO: Epoch 55/100
+2019-03-13 09:35:03,159:INFO: - Train metrics: NER f1: 0.904 ; NER accuracy: 0.988 ; NER precision: 0.916 ; loss: 0.041 ; NER recall: 0.907
+2019-03-13 09:35:18,799:INFO: - Eval metrics : Term f1: 0.345 ; NER f1: 0.380 ; NER accuracy: 0.931 ; loss: 0.441 ; Term precision: 0.270 ; Term recall: 0.477 ; Term accuracy: 0.208 ; NER precision: 0.402 ; NER recall: 0.426
+2019-03-13 09:35:20,404:INFO: Epoch 56/100
+2019-03-13 09:37:46,227:INFO: - Train metrics: NER f1: 0.903 ; NER accuracy: 0.988 ; NER precision: 0.924 ; loss: 0.038 ; NER recall: 0.902
+2019-03-13 09:38:01,675:INFO: - Eval metrics : Term f1: 0.340 ; NER f1: 0.384 ; NER accuracy: 0.929 ; loss: 0.444 ; Term precision: 0.258 ; Term recall: 0.502 ; Term accuracy: 0.205 ; NER precision: 0.396 ; NER recall: 0.439
+2019-03-13 09:38:02,881:INFO: Epoch 57/100
+2019-03-13 09:40:28,706:INFO: - Train metrics: NER f1: 0.905 ; NER accuracy: 0.988 ; NER precision: 0.929 ; loss: 0.039 ; NER recall: 0.898
+2019-03-13 09:40:44,267:INFO: - Eval metrics : Term f1: 0.340 ; NER f1: 0.381 ; NER accuracy: 0.931 ; loss: 0.442 ; Term precision: 0.263 ; Term recall: 0.482 ; Term accuracy: 0.205 ; NER precision: 0.401 ; NER recall: 0.429
+2019-03-13 09:40:44,949:INFO: Epoch 58/100
+2019-03-13 09:43:10,823:INFO: - Train metrics: NER f1: 0.908 ; NER accuracy: 0.988 ; NER precision: 0.927 ; loss: 0.036 ; NER recall: 0.904
+2019-03-13 09:43:26,493:INFO: - Eval metrics : Term f1: 0.340 ; NER f1: 0.378 ; NER accuracy: 0.930 ; loss: 0.444 ; Term precision: 0.260 ; Term recall: 0.491 ; Term accuracy: 0.205 ; NER precision: 0.397 ; NER recall: 0.426
+2019-03-13 09:43:27,561:INFO: Epoch 59/100
+2019-03-13 09:45:53,323:INFO: - Train metrics: NER f1: 0.905 ; NER accuracy: 0.988 ; NER precision: 0.920 ; loss: 0.038 ; NER recall: 0.905
+2019-03-13 09:46:08,545:INFO: - Eval metrics : Term f1: 0.344 ; NER f1: 0.384 ; NER accuracy: 0.930 ; loss: 0.440 ; Term precision: 0.262 ; Term recall: 0.502 ; Term accuracy: 0.208 ; NER precision: 0.399 ; NER recall: 0.436
+2019-03-13 09:46:09,125:INFO: Epoch 60/100
+2019-03-13 09:48:34,969:INFO: - Train metrics: NER f1: 0.888 ; NER accuracy: 0.987 ; NER precision: 0.906 ; loss: 0.039 ; NER recall: 0.889
+2019-03-13 09:48:50,622:INFO: - Eval metrics : Term f1: 0.342 ; NER f1: 0.383 ; NER accuracy: 0.929 ; loss: 0.448 ; Term precision: 0.260 ; Term recall: 0.497 ; Term accuracy: 0.206 ; NER precision: 0.397 ; NER recall: 0.436
+2019-03-13 09:48:51,204:INFO: Epoch 61/100
+2019-03-13 09:51:17,025:INFO: - Train metrics: NER f1: 0.907 ; NER accuracy: 0.989 ; NER precision: 0.922 ; loss: 0.036 ; NER recall: 0.905
+2019-03-13 09:51:32,660:INFO: - Eval metrics : Term f1: 0.339 ; NER f1: 0.379 ; NER accuracy: 0.930 ; loss: 0.447 ; Term precision: 0.260 ; Term recall: 0.490 ; Term accuracy: 0.204 ; NER precision: 0.396 ; NER recall: 0.430
+2019-03-13 09:51:33,241:INFO: Epoch 62/100
+2019-03-13 09:53:59,050:INFO: - Train metrics: NER f1: 0.905 ; NER accuracy: 0.988 ; NER precision: 0.925 ; loss: 0.037 ; NER recall: 0.902
+2019-03-13 09:54:14,620:INFO: - Eval metrics : Term f1: 0.346 ; NER f1: 0.384 ; NER accuracy: 0.930 ; loss: 0.453 ; Term precision: 0.264 ; Term recall: 0.499 ; Term accuracy: 0.209 ; NER precision: 0.402 ; NER recall: 0.433
+2019-03-13 09:54:16,308:INFO: Epoch 63/100
+2019-03-13 09:56:42,101:INFO: - Train metrics: NER f1: 0.899 ; NER accuracy: 0.987 ; NER precision: 0.919 ; loss: 0.038 ; NER recall: 0.898
+2019-03-13 09:56:57,707:INFO: - Eval metrics : Term f1: 0.343 ; NER f1: 0.384 ; NER accuracy: 0.930 ; loss: 0.454 ; Term precision: 0.261 ; Term recall: 0.499 ; Term accuracy: 0.207 ; NER precision: 0.399 ; NER recall: 0.437
+2019-03-13 09:56:58,777:INFO: Epoch 64/100
+2019-03-13 09:59:24,673:INFO: - Train metrics: NER f1: 0.920 ; NER accuracy: 0.989 ; NER precision: 0.932 ; loss: 0.034 ; NER recall: 0.923
+2019-03-13 09:59:40,294:INFO: - Eval metrics : Term f1: 0.349 ; NER f1: 0.381 ; NER accuracy: 0.931 ; loss: 0.457 ; Term precision: 0.269 ; Term recall: 0.496 ; Term accuracy: 0.211 ; NER precision: 0.399 ; NER recall: 0.430
+2019-03-13 09:59:40,877:INFO: Epoch 65/100
+2019-03-13 10:02:06,594:INFO: - Train metrics: NER f1: 0.908 ; NER accuracy: 0.988 ; NER precision: 0.916 ; loss: 0.037 ; NER recall: 0.918
+2019-03-13 10:02:22,137:INFO: - Eval metrics : Term f1: 0.351 ; NER f1: 0.382 ; NER accuracy: 0.932 ; loss: 0.466 ; Term precision: 0.276 ; Term recall: 0.481 ; Term accuracy: 0.213 ; NER precision: 0.406 ; NER recall: 0.425
+2019-03-13 10:02:22,719:INFO: Epoch 66/100
+2019-03-13 10:04:48,506:INFO: - Train metrics: NER f1: 0.901 ; NER accuracy: 0.988 ; NER precision: 0.919 ; loss: 0.039 ; NER recall: 0.899
+2019-03-13 10:05:04,122:INFO: - Eval metrics : Term f1: 0.341 ; NER f1: 0.378 ; NER accuracy: 0.930 ; loss: 0.453 ; Term precision: 0.261 ; Term recall: 0.491 ; Term accuracy: 0.206 ; NER precision: 0.396 ; NER recall: 0.428
+2019-03-13 10:05:04,705:INFO: Epoch 67/100
+2019-03-13 10:07:30,453:INFO: - Train metrics: NER f1: 0.918 ; NER accuracy: 0.989 ; NER precision: 0.924 ; loss: 0.036 ; NER recall: 0.930
+2019-03-13 10:07:46,090:INFO: - Eval metrics : Term f1: 0.344 ; NER f1: 0.383 ; NER accuracy: 0.930 ; loss: 0.457 ; Term precision: 0.263 ; Term recall: 0.497 ; Term accuracy: 0.208 ; NER precision: 0.399 ; NER recall: 0.436
+2019-03-13 10:07:47,809:INFO: Epoch 68/100
+2019-03-13 10:10:13,670:INFO: - Train metrics: NER f1: 0.915 ; NER accuracy: 0.989 ; NER precision: 0.931 ; loss: 0.036 ; NER recall: 0.914
+2019-03-13 10:10:29,103:INFO: - Eval metrics : Term f1: 0.344 ; NER f1: 0.383 ; NER accuracy: 0.930 ; loss: 0.464 ; Term precision: 0.265 ; Term recall: 0.491 ; Term accuracy: 0.208 ; NER precision: 0.400 ; NER recall: 0.433
+2019-03-13 10:10:30,600:INFO: Epoch 69/100
+2019-03-13 10:12:56,466:INFO: - Train metrics: NER f1: 0.912 ; NER accuracy: 0.989 ; NER precision: 0.933 ; loss: 0.034 ; NER recall: 0.905
+2019-03-13 10:13:11,878:INFO: - Eval metrics : Term f1: 0.342 ; NER f1: 0.380 ; NER accuracy: 0.930 ; loss: 0.462 ; Term precision: 0.261 ; Term recall: 0.495 ; Term accuracy: 0.206 ; NER precision: 0.397 ; NER recall: 0.431
+2019-03-13 10:13:12,458:INFO: Epoch 70/100
+2019-03-13 10:15:38,344:INFO: - Train metrics: NER f1: 0.907 ; NER accuracy: 0.989 ; NER precision: 0.925 ; loss: 0.037 ; NER recall: 0.903
+2019-03-13 10:15:53,957:INFO: - Eval metrics : Term f1: 0.342 ; NER f1: 0.381 ; NER accuracy: 0.930 ; loss: 0.458 ; Term precision: 0.261 ; Term recall: 0.494 ; Term accuracy: 0.206 ; NER precision: 0.397 ; NER recall: 0.432
+2019-03-13 10:15:54,539:INFO: Epoch 71/100
+2019-03-13 10:18:20,332:INFO: - Train metrics: NER f1: 0.916 ; NER accuracy: 0.989 ; NER precision: 0.925 ; loss: 0.032 ; NER recall: 0.921
+2019-03-13 10:18:35,824:INFO: - Eval metrics : Term f1: 0.334 ; NER f1: 0.382 ; NER accuracy: 0.929 ; loss: 0.464 ; Term precision: 0.251 ; Term recall: 0.501 ; Term accuracy: 0.201 ; NER precision: 0.393 ; NER recall: 0.438
+2019-03-13 10:18:36,508:INFO: Epoch 72/100
+2019-03-13 10:21:02,289:INFO: - Train metrics: NER f1: 0.913 ; NER accuracy: 0.989 ; NER precision: 0.927 ; loss: 0.033 ; NER recall: 0.917
+2019-03-13 10:21:17,958:INFO: - Eval metrics : Term f1: 0.336 ; NER f1: 0.379 ; NER accuracy: 0.929 ; loss: 0.464 ; Term precision: 0.253 ; Term recall: 0.501 ; Term accuracy: 0.202 ; NER precision: 0.390 ; NER recall: 0.434
+2019-03-13 10:21:19,678:INFO: Epoch 73/100
+2019-03-13 10:23:45,454:INFO: - Train metrics: NER f1: 0.914 ; NER accuracy: 0.989 ; NER precision: 0.927 ; loss: 0.035 ; NER recall: 0.918
+2019-03-13 10:24:00,949:INFO: - Eval metrics : Term f1: 0.332 ; NER f1: 0.382 ; NER accuracy: 0.928 ; loss: 0.467 ; Term precision: 0.248 ; Term recall: 0.504 ; Term accuracy: 0.199 ; NER precision: 0.391 ; NER recall: 0.441
+2019-03-13 10:24:02,268:INFO: Epoch 74/100
+2019-03-13 10:26:28,080:INFO: - Train metrics: NER f1: 0.919 ; NER accuracy: 0.990 ; NER precision: 0.936 ; loss: 0.032 ; NER recall: 0.921
+2019-03-13 10:26:43,408:INFO: - Eval metrics : Term f1: 0.340 ; NER f1: 0.383 ; NER accuracy: 0.930 ; loss: 0.464 ; Term precision: 0.260 ; Term recall: 0.491 ; Term accuracy: 0.205 ; NER precision: 0.399 ; NER recall: 0.435
+2019-03-13 10:26:43,989:INFO: Epoch 75/100
+2019-03-13 10:29:09,862:INFO: - Train metrics: NER f1: 0.911 ; NER accuracy: 0.989 ; NER precision: 0.924 ; loss: 0.032 ; NER recall: 0.914
+2019-03-13 10:29:25,274:INFO: - Eval metrics : Term f1: 0.342 ; NER f1: 0.380 ; NER accuracy: 0.930 ; loss: 0.467 ; Term precision: 0.261 ; Term recall: 0.497 ; Term accuracy: 0.206 ; NER precision: 0.397 ; NER recall: 0.429
+2019-03-13 10:29:25,856:INFO: Epoch 76/100
+2019-03-13 10:31:51,711:INFO: - Train metrics: NER f1: 0.922 ; NER accuracy: 0.990 ; NER precision: 0.936 ; loss: 0.032 ; NER recall: 0.918
+2019-03-13 10:32:07,289:INFO: - Eval metrics : Term f1: 0.337 ; NER f1: 0.384 ; NER accuracy: 0.930 ; loss: 0.465 ; Term precision: 0.256 ; Term recall: 0.493 ; Term accuracy: 0.203 ; NER precision: 0.399 ; NER recall: 0.437
+2019-03-13 10:32:07,872:INFO: Epoch 77/100
+2019-03-13 10:34:33,623:INFO: - Train metrics: NER f1: 0.907 ; NER accuracy: 0.988 ; NER precision: 0.925 ; loss: 0.036 ; NER recall: 0.906
+2019-03-13 10:34:48,930:INFO: - Eval metrics : Term f1: 0.340 ; NER f1: 0.382 ; NER accuracy: 0.930 ; loss: 0.471 ; Term precision: 0.257 ; Term recall: 0.502 ; Term accuracy: 0.205 ; NER precision: 0.398 ; NER recall: 0.430
+2019-03-13 10:34:50,644:INFO: Epoch 78/100
+2019-03-13 10:37:16,496:INFO: - Train metrics: NER f1: 0.910 ; NER accuracy: 0.989 ; NER precision: 0.921 ; loss: 0.035 ; NER recall: 0.917
+2019-03-13 10:37:31,665:INFO: - Eval metrics : Term f1: 0.330 ; NER f1: 0.379 ; NER accuracy: 0.929 ; loss: 0.463 ; Term precision: 0.248 ; Term recall: 0.492 ; Term accuracy: 0.198 ; NER precision: 0.394 ; NER recall: 0.431
+2019-03-13 10:37:32,733:INFO: Epoch 79/100
+2019-03-13 10:39:58,553:INFO: - Train metrics: NER f1: 0.916 ; NER accuracy: 0.989 ; NER precision: 0.932 ; loss: 0.036 ; NER recall: 0.918
+2019-03-13 10:40:13,992:INFO: - Eval metrics : Term f1: 0.340 ; NER f1: 0.381 ; NER accuracy: 0.930 ; loss: 0.472 ; Term precision: 0.260 ; Term recall: 0.491 ; Term accuracy: 0.205 ; NER precision: 0.397 ; NER recall: 0.430
+2019-03-13 10:40:14,577:INFO: Epoch 80/100
+2019-03-13 10:42:40,365:INFO: - Train metrics: NER f1: 0.912 ; NER accuracy: 0.989 ; NER precision: 0.916 ; loss: 0.034 ; NER recall: 0.922
+2019-03-13 10:42:55,789:INFO: - Eval metrics : Term f1: 0.338 ; NER f1: 0.380 ; NER accuracy: 0.930 ; loss: 0.475 ; Term precision: 0.260 ; Term recall: 0.482 ; Term accuracy: 0.203 ; NER precision: 0.397 ; NER recall: 0.429
+2019-03-13 10:42:56,470:INFO: Epoch 81/100
+2019-03-13 10:45:22,241:INFO: - Train metrics: NER f1: 0.905 ; NER accuracy: 0.988 ; NER precision: 0.922 ; loss: 0.036 ; NER recall: 0.906
+2019-03-13 10:45:37,500:INFO: - Eval metrics : Term f1: 0.334 ; NER f1: 0.377 ; NER accuracy: 0.928 ; loss: 0.475 ; Term precision: 0.252 ; Term recall: 0.494 ; Term accuracy: 0.200 ; NER precision: 0.390 ; NER recall: 0.431
+2019-03-13 10:45:38,673:INFO: Epoch 82/100
+2019-03-13 10:48:04,398:INFO: - Train metrics: NER f1: 0.919 ; NER accuracy: 0.990 ; NER precision: 0.939 ; loss: 0.029 ; NER recall: 0.916
+2019-03-13 10:48:19,617:INFO: - Eval metrics : Term f1: 0.338 ; NER f1: 0.381 ; NER accuracy: 0.930 ; loss: 0.473 ; Term precision: 0.259 ; Term recall: 0.484 ; Term accuracy: 0.203 ; NER precision: 0.397 ; NER recall: 0.431
+2019-03-13 10:48:20,298:INFO: Epoch 83/100
+2019-03-13 10:50:46,078:INFO: - Train metrics: NER f1: 0.915 ; NER accuracy: 0.989 ; NER precision: 0.931 ; loss: 0.033 ; NER recall: 0.913
+2019-03-13 10:51:01,622:INFO: - Eval metrics : Term f1: 0.331 ; NER f1: 0.379 ; NER accuracy: 0.929 ; loss: 0.476 ; Term precision: 0.249 ; Term recall: 0.491 ; Term accuracy: 0.198 ; NER precision: 0.392 ; NER recall: 0.433
+2019-03-13 10:51:02,207:INFO: Epoch 84/100
+2019-03-13 10:53:28,024:INFO: - Train metrics: NER f1: 0.908 ; NER accuracy: 0.988 ; NER precision: 0.914 ; loss: 0.031 ; NER recall: 0.915
+2019-03-13 10:53:43,746:INFO: - Eval metrics : Term f1: 0.340 ; NER f1: 0.379 ; NER accuracy: 0.930 ; loss: 0.479 ; Term precision: 0.261 ; Term recall: 0.487 ; Term accuracy: 0.205 ; NER precision: 0.397 ; NER recall: 0.428
+2019-03-13 10:53:44,329:INFO: Epoch 85/100
+2019-03-13 10:56:10,103:INFO: - Train metrics: NER f1: 0.919 ; NER accuracy: 0.990 ; NER precision: 0.933 ; loss: 0.031 ; NER recall: 0.921
+2019-03-13 10:56:25,385:INFO: - Eval metrics : Term f1: 0.336 ; NER f1: 0.380 ; NER accuracy: 0.930 ; loss: 0.473 ; Term precision: 0.257 ; Term recall: 0.486 ; Term accuracy: 0.202 ; NER precision: 0.395 ; NER recall: 0.431
+2019-03-13 10:56:27,098:INFO: Epoch 86/100
+2019-03-13 10:58:52,876:INFO: - Train metrics: NER f1: 0.917 ; NER accuracy: 0.990 ; NER precision: 0.942 ; loss: 0.029 ; NER recall: 0.910
+2019-03-13 10:59:08,468:INFO: - Eval metrics : Term f1: 0.342 ; NER f1: 0.379 ; NER accuracy: 0.931 ; loss: 0.479 ; Term precision: 0.265 ; Term recall: 0.483 ; Term accuracy: 0.206 ; NER precision: 0.399 ; NER recall: 0.426
+2019-03-13 10:59:09,688:INFO: Epoch 87/100
+2019-03-13 11:01:35,388:INFO: - Train metrics: NER f1: 0.913 ; NER accuracy: 0.989 ; NER precision: 0.930 ; loss: 0.030 ; NER recall: 0.910
+2019-03-13 11:01:50,747:INFO: - Eval metrics : Term f1: 0.338 ; NER f1: 0.381 ; NER accuracy: 0.929 ; loss: 0.478 ; Term precision: 0.259 ; Term recall: 0.487 ; Term accuracy: 0.203 ; NER precision: 0.395 ; NER recall: 0.434
+2019-03-13 11:01:51,426:INFO: Epoch 88/100
+2019-03-13 11:04:17,206:INFO: - Train metrics: NER f1: 0.924 ; NER accuracy: 0.990 ; NER precision: 0.938 ; loss: 0.031 ; NER recall: 0.923
+2019-03-13 11:04:32,634:INFO: - Eval metrics : Term f1: 0.333 ; NER f1: 0.379 ; NER accuracy: 0.928 ; loss: 0.482 ; Term precision: 0.250 ; Term recall: 0.499 ; Term accuracy: 0.200 ; NER precision: 0.390 ; NER recall: 0.435
+2019-03-13 11:04:33,213:INFO: Epoch 89/100
+2019-03-13 11:06:58,896:INFO: - Train metrics: NER f1: 0.907 ; NER accuracy: 0.988 ; NER precision: 0.924 ; loss: 0.034 ; NER recall: 0.904
+2019-03-13 11:07:14,241:INFO: - Eval metrics : Term f1: 0.339 ; NER f1: 0.377 ; NER accuracy: 0.930 ; loss: 0.482 ; Term precision: 0.261 ; Term recall: 0.482 ; Term accuracy: 0.204 ; NER precision: 0.397 ; NER recall: 0.424
+2019-03-13 11:07:14,819:INFO: Epoch 90/100
+2019-03-13 11:09:40,513:INFO: - Train metrics: NER f1: 0.913 ; NER accuracy: 0.989 ; NER precision: 0.929 ; loss: 0.030 ; NER recall: 0.909
+2019-03-13 11:09:56,042:INFO: - Eval metrics : Term f1: 0.336 ; NER f1: 0.380 ; NER accuracy: 0.929 ; loss: 0.478 ; Term precision: 0.254 ; Term recall: 0.498 ; Term accuracy: 0.202 ; NER precision: 0.393 ; NER recall: 0.435
+2019-03-13 11:09:56,724:INFO: Epoch 91/100
+2019-03-13 11:12:22,491:INFO: - Train metrics: NER f1: 0.919 ; NER accuracy: 0.990 ; NER precision: 0.921 ; loss: 0.031 ; NER recall: 0.934
+2019-03-13 11:12:37,940:INFO: - Eval metrics : Term f1: 0.338 ; NER f1: 0.377 ; NER accuracy: 0.929 ; loss: 0.484 ; Term precision: 0.257 ; Term recall: 0.493 ; Term accuracy: 0.204 ; NER precision: 0.392 ; NER recall: 0.427
+2019-03-13 11:12:39,656:INFO: Epoch 92/100
+2019-03-13 11:15:05,450:INFO: - Train metrics: NER f1: 0.908 ; NER accuracy: 0.988 ; NER precision: 0.917 ; loss: 0.038 ; NER recall: 0.914
+2019-03-13 11:15:20,991:INFO: - Eval metrics : Term f1: 0.338 ; NER f1: 0.379 ; NER accuracy: 0.929 ; loss: 0.478 ; Term precision: 0.259 ; Term recall: 0.486 ; Term accuracy: 0.203 ; NER precision: 0.394 ; NER recall: 0.430
+2019-03-13 11:15:21,573:INFO: Epoch 93/100
+2019-03-13 11:17:47,304:INFO: - Train metrics: NER f1: 0.916 ; NER accuracy: 0.990 ; NER precision: 0.934 ; loss: 0.031 ; NER recall: 0.912
+2019-03-13 11:18:02,856:INFO: - Eval metrics : Term f1: 0.341 ; NER f1: 0.379 ; NER accuracy: 0.930 ; loss: 0.478 ; Term precision: 0.262 ; Term recall: 0.486 ; Term accuracy: 0.205 ; NER precision: 0.399 ; NER recall: 0.425
+2019-03-13 11:18:03,440:INFO: Epoch 94/100
+2019-03-13 11:20:29,266:INFO: - Train metrics: NER f1: 0.910 ; NER accuracy: 0.989 ; NER precision: 0.918 ; loss: 0.033 ; NER recall: 0.918
+2019-03-13 11:20:44,577:INFO: - Eval metrics : Term f1: 0.336 ; NER f1: 0.377 ; NER accuracy: 0.930 ; loss: 0.484 ; Term precision: 0.257 ; Term recall: 0.484 ; Term accuracy: 0.202 ; NER precision: 0.397 ; NER recall: 0.422
+2019-03-13 11:20:46,256:INFO: Epoch 95/100
+2019-03-13 11:23:11,977:INFO: - Train metrics: NER f1: 0.921 ; NER accuracy: 0.990 ; NER precision: 0.935 ; loss: 0.032 ; NER recall: 0.920
+2019-03-13 11:23:27,487:INFO: - Eval metrics : Term f1: 0.343 ; NER f1: 0.381 ; NER accuracy: 0.930 ; loss: 0.479 ; Term precision: 0.267 ; Term recall: 0.481 ; Term accuracy: 0.207 ; NER precision: 0.401 ; NER recall: 0.428
+2019-03-13 11:23:28,798:INFO: Epoch 96/100
+2019-03-13 11:25:54,630:INFO: - Train metrics: NER f1: 0.915 ; NER accuracy: 0.989 ; NER precision: 0.927 ; loss: 0.031 ; NER recall: 0.920
+2019-03-13 11:26:10,265:INFO: - Eval metrics : Term f1: 0.341 ; NER f1: 0.375 ; NER accuracy: 0.931 ; loss: 0.485 ; Term precision: 0.265 ; Term recall: 0.477 ; Term accuracy: 0.206 ; NER precision: 0.397 ; NER recall: 0.419
+2019-03-13 11:26:10,946:INFO: Epoch 97/100
+2019-03-13 11:28:36,754:INFO: - Train metrics: NER f1: 0.918 ; NER accuracy: 0.990 ; NER precision: 0.942 ; loss: 0.032 ; NER recall: 0.911
+2019-03-13 11:28:52,528:INFO: - Eval metrics : Term f1: 0.339 ; NER f1: 0.377 ; NER accuracy: 0.929 ; loss: 0.483 ; Term precision: 0.260 ; Term recall: 0.487 ; Term accuracy: 0.204 ; NER precision: 0.394 ; NER recall: 0.427
+2019-03-13 11:28:53,109:INFO: Epoch 98/100
+2019-03-13 11:31:18,881:INFO: - Train metrics: NER f1: 0.928 ; NER accuracy: 0.991 ; NER precision: 0.939 ; loss: 0.029 ; NER recall: 0.931
+2019-03-13 11:31:34,482:INFO: - Eval metrics : Term f1: 0.337 ; NER f1: 0.379 ; NER accuracy: 0.929 ; loss: 0.479 ; Term precision: 0.255 ; Term recall: 0.496 ; Term accuracy: 0.203 ; NER precision: 0.395 ; NER recall: 0.430
+2019-03-13 11:31:35,063:INFO: Epoch 99/100
+2019-03-13 11:34:00,964:INFO: - Train metrics: NER f1: 0.919 ; NER accuracy: 0.990 ; NER precision: 0.927 ; loss: 0.031 ; NER recall: 0.924
+2019-03-13 11:34:16,323:INFO: - Eval metrics : Term f1: 0.345 ; NER f1: 0.379 ; NER accuracy: 0.931 ; loss: 0.487 ; Term precision: 0.267 ; Term recall: 0.488 ; Term accuracy: 0.208 ; NER precision: 0.398 ; NER recall: 0.424
+2019-03-13 11:34:17,008:INFO: Epoch 100/100
+2019-03-13 11:36:42,729:INFO: - Train metrics: NER f1: 0.914 ; NER accuracy: 0.989 ; NER precision: 0.928 ; loss: 0.031 ; NER recall: 0.917
+2019-03-13 11:36:58,375:INFO: - Eval metrics : Term f1: 0.339 ; NER f1: 0.380 ; NER accuracy: 0.930 ; loss: 0.492 ; Term precision: 0.259 ; Term recall: 0.491 ; Term accuracy: 0.204 ; NER precision: 0.396 ; NER recall: 0.430

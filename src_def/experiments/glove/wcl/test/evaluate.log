@@ -1,0 +1,8 @@
+2019-03-14 23:30:30,193:INFO: Creating the dataset...
+2019-03-14 23:30:30,488:INFO: - done.
+2019-03-14 23:30:34,580:INFO: Starting evaluation
+2019-03-14 23:30:36,401:INFO: - Eval metrics : accuracy: 0.906 ; precision: 0.142 ; f1score: 0.100 ; loss: 0.636 ; recall: 0.094
+2019-03-14 23:32:08,531:INFO: Creating the dataset...
+2019-03-14 23:32:08,824:INFO: - done.
+2019-03-14 23:32:12,918:INFO: Starting evaluation
+2019-03-14 23:32:14,702:INFO: - Eval metrics : recall: 0.119 ; accuracy: 0.892 ; f1score: 0.117 ; precision: 0.147 ; loss: 0.868
