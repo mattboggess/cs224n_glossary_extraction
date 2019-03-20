@@ -4,7 +4,7 @@ import os
 import json
 
 idataDir = "../data"
-odataDir = "../data/ner_data"
+odataDir = "../data/ner_fixed_data"
 textbooks = ("open_stax_microbiology",
              "open_stax_anatomy_physiology",
              "open_stax_astronomy",
@@ -38,10 +38,10 @@ small_indices = [98, 108, 90, 91, 201, 196, 197, 34, 46, 47]
 # load in and accumulate the data
 for book in textbooks:
     print ("Reading book %s" %(book))
-    sfname = idataDir + "/textbooks_extracted/" + book + "_sentences.txt"
-    lfname = idataDir + "/textbooks_extracted/" + book + "_sentence_tags.txt"
-    cfname = idataDir + "/textbooks_extracted/" + book + "_key_term_counts.json"
-    tfname = idataDir + "/textbooks_extracted/" + book + "_key_terms.txt"
+    sfname = idataDir + "/textbooks_extracted_copy/" + book + "_sentences.txt"
+    lfname = idataDir + "/textbooks_extracted_copy/" + book + "_sentence_tags.txt"
+    cfname = idataDir + "/textbooks_extracted_copy/" + book + "_key_term_counts.json"
+    tfname = idataDir + "/textbooks_extracted_copy/" + book + "_key_terms.txt"
 
     if book == 'life_biology':
         split = 'test'
@@ -79,6 +79,9 @@ for book in textbooks:
             if re.search("^$", term):
                 continue
             elif counts[term] > 0:
+                if counts[term] > 500:
+                    print(term)
+                    print(counts[term])
                 num_terms += 1
                 data[split]['terms'].append(term)
             else:
@@ -93,7 +96,7 @@ small_size = 20
 for x in ("full", "small"):
     for y in ("train", "val", "test"):
         if not os.path.exists(odataDir + "/" + x):
-            os.makedirs(dataDir + "/" + x + "/" + y)
+            os.makedirs(odataDir + "/" + x + "/" + y)
         elif not os.path.exists(odataDir + "/" + x + "/" + y):
             os.mkdir(odataDir + "/" + x + "/" + y)
 

@@ -1,0 +1,10 @@
+communicable, 0.000
+deoxyribonucleic acid ; dna, 0.000
+disease, 0.000
+fungi, 0.000
+horizontal gene transfer, 0.000
+leprosy, 0.000
+phylogeny, 0.000
+plague, 0.000
+ribonucleic acid ; rna, 0.000
+world health organization ; who, 0.000

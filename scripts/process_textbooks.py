@@ -79,10 +79,15 @@ def extract_key_terms(soup, pattern_info):
         if len(term) <= 2:
             term = term[0].strip()
         else:
-            term = term[0] + term[2] + '; ' + \
-                   term[1] + term[2]
+            if len((term[1] + term[2]).strip()) < 3:
+                print(term[1] + term[2])
+                term = term[0] + term[2]
+                print(term)
+            else:
+                term = term[0] + term[2] + '; ' + \
+                       term[1] + term[2]
 
-        new_terms.append(term)
+        new_terms.append(term.strip())
 
     new_terms = [term for term in new_terms if len(term) > 1]
 
@@ -97,7 +102,10 @@ def extract_key_terms_life(input_dir):
         term = terms.iloc[i, 0]
         acronym = terms.iloc[i, 2]
         if type(acronym) == str:
-            term = term + ';' + acronym[1:-1]
+            if acronym.strip() != '' and len(acronym[1:-1].strip()) > 2:
+                term = term + ';' + acronym[1:-1]
+            else:
+                print(acronym)
         new_terms.append(term)
 
     return new_terms
@@ -137,10 +145,11 @@ def tag_corpus(sentences, key_terms):
             # iterate through all representations of a term
             terms = kt.lower().split(';')
             for term in terms:
-                term = word_tokenize(term)
-                sentence_tags, term_count = tag_sentence(sentence, term,
-                                                         sentence_tags)
-                term_counts[kt] += term_count
+                if term != '':
+                    term = word_tokenize(term)
+                    sentence_tags, term_count = tag_sentence(sentence, term,
+                                                             sentence_tags)
+                    term_counts[kt] += term_count
 
         corpus_tags.append(sentence_tags)
 
@@ -174,7 +183,7 @@ if __name__ == "__main__":
 
         # load html for processing
         input_dir = '../data/textbooks_html'
-        output_dir = '../data/textbooks_extracted'
+        output_dir = '../data/textbooks_extracted_copy'
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
