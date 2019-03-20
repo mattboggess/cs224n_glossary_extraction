@@ -55,7 +55,7 @@ if __name__ == "__main__":
     #hyper_params['learning_rate'] = [1e-4, 1e-3, 1e-2]
     #hyper_params['batch_size'] = [32, 64, 128, 256, 512, 1024, 2048]
     #hyper_params['defm_dropout_rate'] = [0.6,0.7,0.8,0.9]
-    hyper_params['defm_cnn_kernels'] = [3,4,5,6,7,8,9]
+    hyper_params['defm_cnn_kernels'] = [3,4,5]
 
     for k,v in hyper_params.items():
         for x in v:

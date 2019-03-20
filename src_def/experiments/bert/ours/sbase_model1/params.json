@@ -1,0 +1,23 @@
+{   
+    "learning_rate": 1e-5,
+    "batch_size": 8,
+    "num_epochs": 5,
+    "embed_types": ["bert"],
+    "bert_type": "bert-base-cased",
+    "model_type": "sbert",
+
+    "use_cls": "1", 
+    "fixed_sent_length": 0,
+    "max_max_sent_length": 180,
+    "defm_embed_size": 300,
+    "defm_cnn_num_filters": 100,
+    "defm_cnn_kernel": 3,
+    "defm_pool_kernel": 4,
+    "defm_pool_stride": 4,
+    "defm_lstm_hidden_dim": 100,
+    "defm_dcsn_threshold": 0.5,
+    "defm_dropout_rate": 0.9,
+
+    "save_summary_steps": 100
+}
+

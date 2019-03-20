@@ -1,0 +1,21 @@
+{
+    "num_epochs": 2,
+    "defm_lstm_hidden_dim": 100,
+    "defm_dropout_rate": 0.5,
+    "save_summary_steps": 100,
+    "fixed_sent_length": 0,
+    "defm_dcsn_threshold": 0.5,
+    "learning_rate": 1e-06,
+    "defm_pool_kernel": 4,
+    "defm_cnn_kernels": 3,
+    "defm_embed_size": 300,
+    "embed_types": [
+        "bert"
+    ],
+    "defm_cnn_num_filters": 100,
+    "defm_pool_stride": 4,
+    "defm_cnn_kernel": 3,
+    "batch_size": 8,
+    "bert_type": "bert-base-cased",
+    "model_type": "bert"
+}

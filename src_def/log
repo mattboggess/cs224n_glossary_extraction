@@ -1,0 +1,12 @@
+Better speed can be achieved with apex installed from https://www.github.com/nvidia/apex.
+- Using bert embeddings
+- Current epoch f1 score = 0.2213362417191792, best f1 score = 0.0
+Checkpoint Directory exists! 
+- Current epoch f1 score = 0.24414283406042978, best f1 score = 0.2213362417191792
+Checkpoint Directory exists! 
+- Current epoch f1 score = 0.24492648246889642, best f1 score = 0.24414283406042978
+Checkpoint Directory exists! 
+- Current epoch f1 score = 0.2806084527848949, best f1 score = 0.24492648246889642
+Checkpoint Directory exists! 
+- Current epoch f1 score = 0.26568912586847626, best f1 score = 0.2806084527848949
+Checkpoint Directory exists! 
