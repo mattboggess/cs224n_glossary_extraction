@@ -1,4 +1,4 @@
-"""Defines the neural network, losss function and metrics"""
+"""Defines the neural network and loss function"""
 
 import numpy as np
 import torch
@@ -12,10 +12,6 @@ class HoveyMa(nn.Module):
     """
 
     def __init__(self, params):
-        """
-        Args:
-            params: (Params) contains vocab_size, embedding_dim, lstm_hidden_dim
-        """
         super(HoveyMa, self).__init__()
 
         # word embedding
@@ -52,19 +48,6 @@ class HoveyMa(nn.Module):
 
     def forward(self, batch):
         """
-        This function defines how we use the components of our network to operate on an input batch.
-
-        Args:
-            s: (Variable) contains a batch of sentences, of dimension batch_size x seq_len, where seq_len is
-               the length of the longest sentence in the batch. For sentences shorter than seq_len, the remaining
-               tokens are PADding tokens. Each row is a sentence with each element corresponding to the index of
-               the token in the vocab.
-
-        Returns:
-            out: (Variable) dimension batch_size*seq_len x num_tags with the log probabilities of tokens for each token
-                 of each sentence.
-
-        Note: the dimensions after each step are provided
         """
 
         # word embeddings
@@ -111,6 +94,9 @@ class HoveyMa(nn.Module):
 
 
 class BertNER(nn.Module):
+    """
+    Wrapper around huggingface PyTorch implementation of BERT for sequence labeling (LINK).
+    """
 
     def __init__(self, params):
         super(BertNER, self).__init__()

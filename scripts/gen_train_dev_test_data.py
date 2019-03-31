@@ -38,10 +38,10 @@ small_indices = [98, 108, 90, 91, 201, 196, 197, 34, 46, 47]
 # load in and accumulate the data
 for book in textbooks:
     print ("Reading book %s" %(book))
-    sfname = idataDir + "/textbooks_extracted_copy/" + book + "_sentences.txt"
-    lfname = idataDir + "/textbooks_extracted_copy/" + book + "_sentence_tags.txt"
-    cfname = idataDir + "/textbooks_extracted_copy/" + book + "_key_term_counts.json"
-    tfname = idataDir + "/textbooks_extracted_copy/" + book + "_key_terms.txt"
+    sfname = idataDir + "/textbooks_extracted/" + book + "_sentences.txt"
+    lfname = idataDir + "/textbooks_extracted/" + book + "_sentence_tags.txt"
+    cfname = idataDir + "/textbooks_extracted/" + book + "_key_term_counts.json"
+    tfname = idataDir + "/textbooks_extracted/" + book + "_key_terms.txt"
 
     if book == 'life_biology':
         split = 'test'

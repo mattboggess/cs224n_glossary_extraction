@@ -89,12 +89,16 @@ def evaluate(model, loss_fn, data_iterator, metrics, params, num_steps, terms,
 
 def get_candidate_terms(outputs, data, terms, data_loader):
     """ Extracts all candidate terms for the given outputs.
+
+    Candidate terms are any term/phrase tagged at least once by the model.
+    Also returns list of probabilities for each tag of each term.
     """
 
     predicted_labels = np.argmax(outputs, axis=1)
     probs = np.exp(np.max(outputs, axis=1))
     data = [word.lower() for sent in data for word in sent]
 
+    # iteratively find singleton tags (S) or phrase tags (BI*E)
     i = 0
     while i < len(data):
         label = predicted_labels[i]

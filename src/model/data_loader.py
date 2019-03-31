@@ -225,11 +225,14 @@ class DataLoader(object):
         for sent in sents:
             bert_sent = []
             bert_mask = []
+            # special BERT classifier and sentence separator tokens
             sent = ['[CLS]'] + sent + ['[SEP]']
             for token in sent:
                 bert_tokens = self.bert_tokenizer.tokenize(token)
                 bert_tokenids = self.bert_tokenizer.convert_tokens_to_ids(bert_tokens)
                 bert_sent += bert_tokenids
+
+                # add a -1 to any tokens that do not correspond to an original token in the sentence
                 if token == '[CLS]' or token == '[SEP]':
                     bert_mask += [-1]
                 else:
@@ -288,8 +291,9 @@ class DataLoader(object):
 
     def data_iterator(self, data, params, shuffle=False):
         """
-        Returns a generator that yields batches of data with labels. Batch size is params.batch_size. Expires after one
-        pass over the data.
+        Returns a generator that yields batches of data with labels. Batches of data are
+        dictionaries that hold all the different embedding representations of the data specified in
+        params. Batch size is params.batch_size. Expires after one pass over the data.
 
         Args:
             data: (dict) contains data which has keys 'data', 'labels' and 'size'
@@ -297,7 +301,7 @@ class DataLoader(object):
             shuffle: (bool) whether the data should be shuffled
 
         Yields:
-            batch: (dictionary) dimension batch_size x seq_len with the sentence data
+            batch: (dictionary) mapping from embedding types to embedding indices input tensors
 
         """
 

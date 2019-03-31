@@ -183,7 +183,7 @@ if __name__ == "__main__":
 
         # load html for processing
         input_dir = '../data/textbooks_html'
-        output_dir = '../data/textbooks_extracted_copy'
+        output_dir = '../data/textbooks_extracted'
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
