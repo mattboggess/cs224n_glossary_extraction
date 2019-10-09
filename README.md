@@ -2,7 +2,7 @@
 
 This repository hosts code for a class project completed for Stanford's Spring 2019 CS224N: Deep Learning for Natural Language Processing class by Matt Boggess (mattboggess) and Manish Singh (msingh9). The goal of the project was to build NLP deep learning models to automatically extract key terms and their definitions (glossaries) from textbooks as part of the larger [Stanford Inquire Research Project](http://web.stanford.edu/~vinayc/intelligent-life/).
 
-A report giving an overview of the project and results can be found [here](LINK). "final report submitted commit" is the commit tag corresponding to the state of the code that produced the results for this report.
+A report giving an overview of the project and results can be found [here](http://web.stanford.edu/class/cs224n/reports/custom/15811430.pdf). "final report submitted commit" is the commit tag corresponding to the state of the code that produced the results for this report.
 
 ## Repo Overview
 
